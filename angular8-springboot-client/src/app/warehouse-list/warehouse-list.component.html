@@ -1,0 +1,40 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Warehouse List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Airport</th>
+        <th>Seaport</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let warehouse of warehouses | async">
+        <td>{{warehouse.id}}</td>
+        <td>{{warehouse.name}}</td>
+        <td>{{warehouse.latitude}}</td>
+        <td>{{warehouse.longitude}}</td>
+        <td>{{warehouse.airport}}</td>
+        <td>{{warehouse.seaport}}</td>
+        <td>
+          <button (click)="deleteWarehouse(warehouse.id)" class="btn btn-danger">Delete</button>
+          <!--
+          <button (click)="employeeDetails(employee.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          <button (click)="updateEmployee(employee.id)" class="btn btn-warning" style="margin-left: 10px">Update</button>
+          -->
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

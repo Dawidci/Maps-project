@@ -1,0 +1,40 @@
+<h2>Create Warehouse</h2>
+
+<hr>
+
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name: </label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="warehouse.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="latitude">Latitude: </label>
+      <input type="text" class="form-control" id="latitude" required [(ngModel)]="warehouse.latitude" name="latitude">
+    </div>
+
+    <div class="form-group">
+      <label for="longitude">Longitude: </label>
+      <input type="text" class="form-control" id="longitude" required [(ngModel)]="warehouse.longitude" name="longitude">
+    </div>
+
+    <div class="form-group">
+      <label for="airport">Airport: </label>
+      <input type="text" class="form-control" id="airport" required [(ngModel)]="warehouse.airport" name="airport">
+    </div>
+
+    <div class="form-group">
+      <label for="seaport">Seaport: </label>
+      <input type="text" class="form-control" id="seaport" required [(ngModel)]="warehouse.seaport" name="seaport">
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+
+<!--
+<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+</div>
+-->
