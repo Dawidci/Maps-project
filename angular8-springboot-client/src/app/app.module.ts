@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
@@ -34,6 +34,7 @@ import { MapComponent } from './map/map.component';
     LeafletModule.forRoot(),
     AgmCoreModule.forRoot({apiKey: 'AIzaSyA25YA8zBa8qru6v78MZy43KwZtsSQNo9A'}),
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

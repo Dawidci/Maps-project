@@ -2,11 +2,17 @@
 
 <hr>
 
+{{diagnostic}}
+
 <div [hidden]="submitted" style="width: 400px;">
   <form (ngSubmit)="onSubmit()">
+
     <div class="form-group">
       <label for="name">Name: </label>
       <input type="text" class="form-control" id="name" required [(ngModel)]="warehouse.name" name="name">
+      <span *ngIf="name.invalid && name.errors.required">
+        Name is required.
+      </span>
     </div>
 
     <div class="form-group">
