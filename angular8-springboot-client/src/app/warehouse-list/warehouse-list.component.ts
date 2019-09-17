@@ -60,10 +60,10 @@ export class WarehouseListComponent implements OnInit {
   }
   */
 
-  /*
-  updateEmployee(id: number) {
-    this.router.navigate(['update', id]);
+
+  updateWarehouse(id: number) {
+    this.router.navigate(['warehouses/update', id]);
   }
-  */
+
 }
 

@@ -14,6 +14,7 @@ import { UpdateEmployeeComponent } from './update-employee/update-employee.compo
 import { WarehouseListComponent } from './warehouse-list/warehouse-list.component';
 import { WarehouseCreateComponent } from './warehouse-create/warehouse-create.component';
 import { MapComponent } from './map/map.component';
+import { WarehouseUpdateComponent } from './warehouse-update/warehouse-update.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MapComponent } from './map/map.component';
     WarehouseListComponent,
     WarehouseCreateComponent,
     MapComponent,
+    WarehouseUpdateComponent,
   ],
   imports: [
     BrowserModule,

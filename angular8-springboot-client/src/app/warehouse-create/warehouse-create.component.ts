@@ -2,7 +2,6 @@ import { WarehouseService } from '../warehouse.service';
 import { Warehouse } from '../warehouse';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-warehouse-create',
@@ -43,5 +42,4 @@ export class WarehouseCreateComponent implements OnInit {
     this.router.navigate(['/warehouses']);
   }
 
-  get diagnostic() { return JSON.stringify(this.warehouse); }
 }
