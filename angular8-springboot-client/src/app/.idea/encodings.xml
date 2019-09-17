@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app-routing.module.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app.module.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/employee-list/employee-list.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/employee-list/employee-list.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-create/warehouse-create.component.html" charset="UTF-8" />

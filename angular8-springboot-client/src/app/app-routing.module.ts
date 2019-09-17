@@ -8,6 +8,7 @@ import { WarehouseListComponent } from "./warehouse-list/warehouse-list.componen
 import { WarehouseCreateComponent } from "./warehouse-create/warehouse-create.component";
 import { MapComponent } from "./map/map.component";
 import { WarehouseUpdateComponent } from "./warehouse-update/warehouse-update.component";
+import {CreateComponent} from "./create/create.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'employees', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'warehouses', component: WarehouseListComponent },
   { path: 'warehouses/add', component: WarehouseCreateComponent },
   { path: 'map', component: MapComponent },
-  { path: 'warehouses/update/:id', component: WarehouseUpdateComponent}
+  { path: 'warehouses/update/:id', component: WarehouseUpdateComponent },
+  { path: 'create', component: CreateComponent }
 ];
 
 @NgModule({

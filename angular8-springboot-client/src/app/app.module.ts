@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +13,7 @@ import { WarehouseListComponent } from './warehouse-list/warehouse-list.componen
 import { WarehouseCreateComponent } from './warehouse-create/warehouse-create.component';
 import { MapComponent } from './map/map.component';
 import { WarehouseUpdateComponent } from './warehouse-update/warehouse-update.component';
+import { CreateComponent } from './create/create.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +26,7 @@ import { WarehouseUpdateComponent } from './warehouse-update/warehouse-update.co
     WarehouseCreateComponent,
     MapComponent,
     WarehouseUpdateComponent,
+    CreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +34,6 @@ import { WarehouseUpdateComponent } from './warehouse-update/warehouse-update.co
     FormsModule,
     HttpClientModule,
     LeafletModule.forRoot(),
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyA25YA8zBa8qru6v78MZy43KwZtsSQNo9A'}),
     FormsModule,
     ReactiveFormsModule
   ],
