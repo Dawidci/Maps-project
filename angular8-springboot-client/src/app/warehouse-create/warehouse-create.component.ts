@@ -1,7 +1,8 @@
-import { WarehouseService } from '../warehouse.service';
-import { Warehouse } from '../warehouse';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Warehouse } from "../warehouse";
+import { WarehouseService } from "../warehouse.service";
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-warehouse-create',
@@ -13,8 +14,17 @@ export class WarehouseCreateComponent implements OnInit {
   warehouse: Warehouse = new Warehouse();
   submitted = false;
 
+  warehouseForm = this.fb.group({
+    name: ['', Validators.required],
+    latitude: ['', [Validators.required, Validators.pattern("^[-]?[1-8]?[0-9][.]?[0-9]*$")]],
+    longitude: ['', [Validators.required, Validators.pattern("^[-]?[1-8]?[0-9][.]?[0-9]*$")]],
+    airport: ['', Validators.required],
+    seaport: ['', Validators.required]
+  });
+
   constructor(private warehouseService: WarehouseService,
-              private router: Router) {
+              private router: Router,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
@@ -28,7 +38,7 @@ export class WarehouseCreateComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.save();
-    alert('New warehouse is probably added (or not)');
+    alert('New warehouse added');
   }
 
   save() {
