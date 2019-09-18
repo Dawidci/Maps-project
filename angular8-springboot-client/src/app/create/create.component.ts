@@ -11,9 +11,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class CreateComponent implements OnInit {
 
-  profileForm = this.fb.group({
-    firstName: [''],
-    lastName: ['']
+  warehouseForm = this.fb.group({
+    name: ['', Validators.required],
+    latitude: ['', Validators.required],
+    longitude: ['', Validators.required],
+    airport: ['', Validators.required],
+    seaport: ['', Validators.required]
   });
 
   warehouse: Warehouse = new Warehouse();
@@ -27,10 +30,6 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  onLubmit() {
-    console.warn(this.profileForm.value);
-  }
-
   newWarehouse(): void {
     this.submitted = false;
     this.warehouse = new Warehouse();
@@ -39,7 +38,7 @@ export class CreateComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.save();
-    alert('New warehouse is probably added (or not)');
+    alert('New warehouse added');
   }
 
   save() {
