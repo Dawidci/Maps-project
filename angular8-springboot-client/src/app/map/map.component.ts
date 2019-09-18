@@ -2,8 +2,7 @@ import { Observable, of } from "rxjs";
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { Warehouse } from '../warehouse';
-import {WarehouseService} from "../warehouse.service";
-
+import { WarehouseService } from "../warehouse.service";
 
 @Component({
   selector: 'app-map',
@@ -38,5 +37,11 @@ export class MapComponent implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
+
+    this.map.on('click', this.onMapClick);
+  }
+
+  onMapClick(e) {
+    alert("You clicked the map at " + e.latlng);
   }
 }
