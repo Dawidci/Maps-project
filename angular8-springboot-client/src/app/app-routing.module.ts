@@ -9,18 +9,22 @@ import { WarehouseCreateComponent } from "./warehouse-create/warehouse-create.co
 import { MapComponent } from "./map/map.component";
 import { WarehouseUpdateComponent } from "./warehouse-update/warehouse-update.component";
 import {CreateComponent} from "./create/create.component";
+import {RouteCreateComponent} from "./route-create/route-create.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'employees', pathMatch: 'full' },
+  { path: '', redirectTo: 'warehouses', pathMatch: 'full' },
   { path: 'employees', component: EmployeeListComponent },
   { path: 'addEmp', component: CreateEmployeeComponent },
   { path: 'details/:id', component: EmployeeDetailsComponent },
   { path: 'update/:id', component: UpdateEmployeeComponent },
+  { path: 'map', component: MapComponent },
+  { path: 'create', component: CreateComponent },
+
   { path: 'warehouses', component: WarehouseListComponent },
   { path: 'warehouses/add', component: WarehouseCreateComponent },
-  { path: 'map', component: MapComponent },
   { path: 'warehouses/update/:id', component: WarehouseUpdateComponent },
-  { path: 'create', component: CreateComponent }
+
+  { path: 'routes/add', component: RouteCreateComponent }
 ];
 
 @NgModule({

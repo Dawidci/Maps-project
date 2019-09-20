@@ -1,0 +1,31 @@
+<h2>Create Route</h2>
+
+<hr>
+
+<div [hidden]="submitted" style="width: 400px;">
+  <form [formGroup]="routeForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="name">Name: </label>
+      <input type="text" formControlName="name" [(ngModel)]="route.name" class="form-control" id="name">
+    </div>
+
+    <div class="form-group">
+      <label for="id_first_warehouse">First Warehouse: </label>
+      <select formControlName="id_first_warehouse" [(ngModel)]="route.id_first_warehouse" class="form-control" id="id_first_warehouse">
+        <option></option>
+        <option *ngFor="let warehouse of warehouses | async" [ngValue]="warehouse.id">{{warehouse.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="id_last_warehouse">Last Warehouse: </label>
+      <select formControlName="id_last_warehouse" [(ngModel)]="route.id_last_warehouse" class="form-control" id="id_last_warehouse">
+        <option></option>
+        <option *ngFor="let warehouse of warehouses | async" [ngValue]="warehouse.id">{{warehouse.name}}</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="!routeForm.valid" class="btn btn-success">Submit</button>
+  </form>
+</div>

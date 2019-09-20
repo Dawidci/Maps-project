@@ -14,6 +14,7 @@ import { WarehouseCreateComponent } from './warehouse-create/warehouse-create.co
 import { MapComponent } from './map/map.component';
 import { WarehouseUpdateComponent } from './warehouse-update/warehouse-update.component';
 import { CreateComponent } from './create/create.component';
+import { RouteCreateComponent } from './route-create/route-create.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CreateComponent } from './create/create.component';
     MapComponent,
     WarehouseUpdateComponent,
     CreateComponent,
+    RouteCreateComponent,
   ],
   imports: [
     BrowserModule,
