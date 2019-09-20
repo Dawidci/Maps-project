@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Route } from "../route";
 import { RouteService } from "../route.service";
 import { WarehouseService } from "../warehouse.service";
+import { DestinationService } from "../destination.service";
 import { Warehouse } from "../warehouse";
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -26,6 +27,7 @@ export class RouteCreateComponent implements OnInit {
 
   constructor(private routeService: RouteService,
               private warehouseService: WarehouseService,
+              private destinationService: DestinationService,
               private router: Router,
               private fb: FormBuilder) {
   }
@@ -41,7 +43,7 @@ export class RouteCreateComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.save();
-    alert('New route added');
+    alert('New route and destinations added');
   }
 
   save() {
@@ -60,6 +62,10 @@ export class RouteCreateComponent implements OnInit {
     let id_last_warehouse = group.get('id_last_warehouse').value;
 
     return id_first_warehouse !== id_last_warehouse ? null : { notSame: true }
+  }
+
+  print() {
+    alert("You clicked button!");
   }
 
 }

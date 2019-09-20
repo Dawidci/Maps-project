@@ -26,6 +26,10 @@
       </select>
     </div>
 
+    <div class="form-group">
+      <button (click)="print()" type="button" [disabled]="!routeForm.valid" class="btn btn-primary">Add new warehouse</button>
+    </div>
+
     <button type="submit" [disabled]="!routeForm.valid" class="btn btn-success">Submit</button>
   </form>
 </div>
