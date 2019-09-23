@@ -1,0 +1,41 @@
+<div class="panel panel-primary">
+
+  <div class="panel-heading">
+    <h2>Route List</h2>
+  </div>
+
+  <div class="panel-body">
+    <table class="table table-striped">
+
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>ID First Warehouse</th>
+        <th>ID Last Warehouse</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let route of routes | async">
+        <td>{{route.id}}</td>
+        <td>{{route.name}}</td>
+        <td>{{route.id_first_warehouse}}</td>
+        <td>{{route.id_last_warehouse}}</td>
+        <td>
+          <button (click)="deleteRoute(route.id)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
+          <button (click)="routeDetails(route.id)" class="btn btn-info" style="margin-left: 5px">Details</button>
+          <!--
+          <button (click)="updateWarehouse(warehouse.id)" class="btn btn-warning" style="margin-left: 5px">Update</button>
+          -->
+          <!--
+          <button (click)="updateEmployee(employee.id)" class="btn btn-warning" style="margin-left: 10px">Update</button>
+          -->
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

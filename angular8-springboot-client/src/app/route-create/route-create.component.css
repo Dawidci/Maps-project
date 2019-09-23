@@ -5,3 +5,8 @@
 .ng-invalid:not(form)  {
   border-left: 5px solid #a94442; /* red */
 }
+
+#map {
+  height: 400px;
+  width: 100%;
+}

@@ -40,6 +40,15 @@ public class RouteController {
         return ResponseEntity.ok().body(route);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Route> getRouteByName(@PathVariable(value = "name") String name)
+            throws ResourceNotFoundException {
+        Route route = routeRepository
+                .findByName(name);
+
+        return ResponseEntity.ok().body(route);
+    }
+
     @PostMapping("")
     public Route createRoute(@Valid @RequestBody Route route) {
         return routeRepository.save(route);

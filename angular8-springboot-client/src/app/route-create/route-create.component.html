@@ -26,8 +26,22 @@
       </select>
     </div>
 
+    <hr>
+
+    <div class="form-group" *ngFor = "let destination of dest, let index = index">
+      <label>New Destination: </label>
+      <select formControlName="destination" [(ngModel)]="dest[index].id_warehouse" class="form-control">
+        <option></option>
+        <option *ngFor="let warehouse of warehouses | async" [ngValue]="warehouse.id">{{warehouse.name}}</option>
+      </select>
+    </div>
+
+    <div *ngFor = "let destination of dest, let index = index">
+      {{index}} || {{dest[index].order}} || {{dest[index].id_warehouse}}
+    </div>
+
     <div class="form-group">
-      <button (click)="print()" type="button" [disabled]="!routeForm.valid" class="btn btn-primary">Add new warehouse</button>
+      <button (click)="addNewDestination()" type="button" [disabled]="!routeForm.valid" class="btn btn-primary">Add new destination</button>
     </div>
 
     <button type="submit" [disabled]="!routeForm.valid" class="btn btn-success">Submit</button>
