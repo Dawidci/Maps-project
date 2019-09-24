@@ -16,7 +16,7 @@ export class RouteService {
   }
 
   getRouteByName(name: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${name}`);
+    return this.http.get(`${this.baseUrl}/name/${name}`);
   }
 
   createRoute(warehouse: Object): Observable<Object> {

@@ -43,8 +43,8 @@ export class RouteDetailsComponent implements OnInit {
 
     this.routeService.getRoute(this.id)
       .subscribe(data => {
-        console.log(data)
-        this.route0 = data
+        console.log(data);
+        this.route0 = data;
         this.id_first = this.route0.id_first_warehouse;
         this.id_last = this.route0.id_last_warehouse;
       }, error => console.log(error));

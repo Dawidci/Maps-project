@@ -17,6 +17,7 @@ import { CreateComponent } from './create/create.component';
 import { RouteCreateComponent } from './route-create/route-create.component';
 import { RouteListComponent } from './route-list/route-list.component';
 import { RouteDetailsComponent } from './route-details/route-details.component';
+import { DestinationsCreateComponent } from './destinations-create/destinations-create.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { RouteDetailsComponent } from './route-details/route-details.component';
     RouteCreateComponent,
     RouteListComponent,
     RouteDetailsComponent,
+    DestinationsCreateComponent,
   ],
   imports: [
     BrowserModule,

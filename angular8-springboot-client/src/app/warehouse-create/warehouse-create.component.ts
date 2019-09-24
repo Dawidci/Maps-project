@@ -45,7 +45,6 @@ export class WarehouseCreateComponent implements OnInit {
       [-90, -180],
       [90, 180]
     ]);
-
   }
 
   onSubmit() {

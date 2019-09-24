@@ -8,10 +8,11 @@ import { WarehouseListComponent } from "./warehouse-list/warehouse-list.componen
 import { WarehouseCreateComponent } from "./warehouse-create/warehouse-create.component";
 import { MapComponent } from "./map/map.component";
 import { WarehouseUpdateComponent } from "./warehouse-update/warehouse-update.component";
-import {CreateComponent} from "./create/create.component";
-import {RouteCreateComponent} from "./route-create/route-create.component";
-import {RouteListComponent} from "./route-list/route-list.component";
-import {RouteDetailsComponent} from "./route-details/route-details.component";
+import { CreateComponent } from "./create/create.component";
+import { RouteCreateComponent } from "./route-create/route-create.component";
+import { RouteListComponent } from "./route-list/route-list.component";
+import { RouteDetailsComponent } from "./route-details/route-details.component";
+import { DestinationsCreateComponent } from "./destinations-create/destinations-create.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'warehouses', pathMatch: 'full' },
@@ -28,7 +29,9 @@ const routes: Routes = [
 
   { path: 'routes/add', component: RouteCreateComponent },
   { path: 'routes/list', component: RouteListComponent },
-  { path: 'routes/details/:id', component: RouteDetailsComponent }
+  { path: 'routes/details/:id', component: RouteDetailsComponent },
+
+  { path: 'destinations/create/route/:id', component: DestinationsCreateComponent }
 ];
 
 @NgModule({

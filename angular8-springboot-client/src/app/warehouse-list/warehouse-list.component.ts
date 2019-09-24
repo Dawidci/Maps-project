@@ -20,7 +20,14 @@ export class WarehouseListComponent implements OnInit {
 
   ngOnInit() {
     this.reloadData();
+    this.loadMap();
+  }
 
+  reloadData() {
+    this.warehouses = this.warehouseService.getWarehousesList();
+  }
+
+  loadMap() {
     this.map = L.map('map').setView([30, 0], 2);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -38,10 +45,6 @@ export class WarehouseListComponent implements OnInit {
           "Airport: " + warehouse.seaport.toString() + "<br>");
       })
     });
-  }
-
-  reloadData() {
-    this.warehouses = this.warehouseService.getWarehousesList();
   }
 
   deleteWarehouse(id: number) {

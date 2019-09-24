@@ -1,0 +1,21 @@
+<h2>Route Details</h2>
+
+<hr/>
+
+<div *ngIf="route0">
+
+  <div>
+    <label><b>Name: </b></label> {{route0.name}}
+  </div>
+  <div>
+    <label><b>First Warehouse: </b></label> {{route0.id_first_warehouse}}
+  </div>
+  <div>
+    <label><b>Last Warehouse: </b></label> {{route0.id_last_warehouse}}
+  </div>
+
+</div>
+
+<br>
+<button (click)="list()" class="btn btn-primary">Back to Route List</button><br>
+
