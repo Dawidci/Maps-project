@@ -15,14 +15,11 @@ export class WarehouseCreateComponent implements OnInit {
   warehouse: Warehouse = new Warehouse();
   submitted = false;
   map: any;
-  string: string;
-  latitude: number;
-  longitude: number;
 
   warehouseForm = this.fb.group({
     name: ['', Validators.required],
-    latitude: ['', [Validators.required, Validators.pattern("^[-]?[1-8]?[0-9]([.][0-9]+)?$")]],
-    longitude: ['', [Validators.required, Validators.pattern("^([-]?)(([1-9]?[0-9])|([1][0-7][0-9]))([.][0-9]+)?$")]], //180
+    latitude: [{value: '', disabled: true}, [Validators.required, Validators.pattern("^[-]?[1-8]?[0-9]([.][0-9]+)?$")]],
+    longitude: [{value: '', disabled: true}, [Validators.required, Validators.pattern("^([-]?)(([1-9]?[0-9])|([1][0-7][0-9]))([.][0-9]+)?$")]], //180
     airport: ['', Validators.required],
     seaport: ['', Validators.required]
   });
@@ -33,27 +30,29 @@ export class WarehouseCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.latitude = 0;
     this.initializeMap();
-    this.map.on('click', this.onMapClick);
+    this.map.on('click', this.onMapClick.bind(this));
   }
 
   initializeMap() {
-    this.map = L.map('map').setView([30, 0], 2);
+    this.map = L.map('map', {minZoom: 3}).setView([45, 60], 3);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-  }
 
-  newWarehouse(): void {
-    this.submitted = false;
-    this.warehouse = new Warehouse();
+    this.map.bounds = [],
+    this.map.setMaxBounds([
+      [-90, -180],
+      [90, 180]
+    ]);
+
   }
 
   onSubmit() {
     this.submitted = true;
     this.save();
     alert('New warehouse added');
+
   }
 
   save() {
@@ -68,20 +67,7 @@ export class WarehouseCreateComponent implements OnInit {
   }
 
   onMapClick(e) {
-    //alert("You clicked the map at " + e.latlng);
-    this.string = e.latlng.toString();
-    this.string = this.string.replace("LatLng(", "");
-    this.string = this.string.replace(")", "");
-    this.latitude = parseFloat(this.string.replace(/[,]\s\d*[.]\d*/g, ""));
-    this.longitude = parseFloat(this.string.replace(/\d*[.]\d*[,]\s/g, ""));
-    alert("Latitude: " + this.latitude + "\n" +
-          "Longitude: " + this.longitude);
-
-/*
-    this.popup
-      .setLatLng(51.4, 1.02)
-      .setContent("You clicked the map at " + e.latlng.toString())
-      .openOn(this.map);
- */
+    this.warehouse.latitude = Math.round(e.latlng.lat * 100) / 100;
+    this.warehouse.longitude = Math.round(e.latlng.lng * 100) / 100;
   }
 }

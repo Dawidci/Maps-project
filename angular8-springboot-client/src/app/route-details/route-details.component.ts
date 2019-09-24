@@ -19,6 +19,8 @@ export class RouteDetailsComponent implements OnInit {
   id: number;
   route0: Route;
   firstWarehouse: Warehouse;
+  firstLatitude: number;
+  firstLongitude: number;
   lastWarehouse: Warehouse;
   id_first: number;
   id_last: number;
@@ -39,19 +41,20 @@ export class RouteDetailsComponent implements OnInit {
 
     this.id = this.route.snapshot.params['id'];
 
-    this.id_first = 32;
-    this.id_last = 33;
-
     this.routeService.getRoute(this.id)
       .subscribe(data => {
         console.log(data)
-        this.route0 = data;
+        this.route0 = data
+        this.id_first = this.route0.id_first_warehouse;
+        this.id_last = this.route0.id_last_warehouse;
       }, error => console.log(error));
 
     this.warehouseService.getWarehouse(this.id_first)
       .subscribe(data => {
         console.log(data);
         this.firstWarehouse = data;
+        this.firstLatitude = this.firstWarehouse.latitude;
+        this.firstLongitude = this.firstWarehouse.longitude;
       }, error => console.log(error));
 
     this.warehouseService.getWarehouse(this.id_last)
@@ -69,9 +72,8 @@ export class RouteDetailsComponent implements OnInit {
 
     const route = L.Routing.control({
       waypoints: [
-        L.latLng(40.5663651,-75.6032277),
-        L.latLng(40.00195, -76.073299),
-        L.latLng(42.3673945,-83.0750408)
+        L.latLng(53, 34),
+        L.latLng(55, 44),
       ]
     }).addTo(this.map);
 
