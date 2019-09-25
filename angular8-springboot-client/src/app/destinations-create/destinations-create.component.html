@@ -1,5 +1,8 @@
 <h2>Route Details</h2>
 
+<div id="map">
+</div>
+
 <hr/>
 
 <div *ngIf="route0">
@@ -8,14 +11,45 @@
     <label><b>Name: </b></label> {{route0.name}}
   </div>
   <div>
-    <label><b>First Warehouse: </b></label> {{route0.id_first_warehouse}}
+    <label><b>First Warehouse: </b></label> {{firstWarehouse.id}}
   </div>
   <div>
-    <label><b>Last Warehouse: </b></label> {{route0.id_last_warehouse}}
+    <label><b>Last Warehouse: </b></label> {{lastWarehouse.id}}
   </div>
 
 </div>
 
-<br>
-<button (click)="list()" class="btn btn-primary">Back to Route List</button><br>
+<div [hidden]="submitted" style="width: 400px;">
+  <form [formGroup]="destinationForm" (ngSubmit)="onSubmit()">
 
+    <div class="form-group">
+      <label for="firstDestination">First Destination: </label>
+      <input type="text" formControlName="firstDestination" [(ngModel)]="firstWarehouse.name" class="form-control" id="firstDestination">
+    </div>
+
+    <div class="form-group">
+      <label for="lastDestination">Last Destination: </label>
+      <input type="text" formControlName="lastDestination" [(ngModel)]="lastWarehouse.name" class="form-control" id="lastDestination">
+    </div>
+
+    <div class="form-group">
+      <button (click)="addNewDestination()" type="button" [disabled]="!routeForm.valid" class="btn btn-primary">Add new destination</button>
+    </div>
+
+    <div class="form-group" *ngFor = "let new of newDestinations, let index = index">
+      <label>New Destination: </label>
+      <br>ID: {{destinations[index+2].id_warehouse}}
+      <select formControlName="newDestination" [(ngModel)]="destinations[index+2].id_warehouse" class="form-control">
+        <option></option>
+        <option *ngFor="let warehouse of warehouses | async" [ngValue]="warehouse.id">{{warehouse.name}}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+
+Sprawdzenie:
+<div *ngFor="let dest of destinations, let index = index">
+  ID: {{destinations[index].id}}, ID_Route: {{destinations[index].id_route}}, ID_Warehouse: {{destinations[index].id_warehouse}}, Order: {{destinations[index].order}} <br>
+</div>
