@@ -32,8 +32,7 @@ export class RouteDetailsComponent implements OnInit {
               private routeService: RouteService,
               private warehouseService: WarehouseService) { }
 
-  ngOnInit() {
-    this.loadMap();
+  async ngOnInit() {
 
     this.route0 = new Route();
     this.firstWarehouse = new Warehouse();
@@ -41,27 +40,30 @@ export class RouteDetailsComponent implements OnInit {
 
     this.id = this.route.snapshot.params['id'];
 
-    this.routeService.getRoute(this.id)
+    await this.routeService.getRoute(this.id)
       .subscribe(data => {
         console.log(data);
         this.route0 = data;
-        this.id_first = this.route0.id_first_warehouse;
-        this.id_last = this.route0.id_last_warehouse;
+
+        this.warehouseService.getWarehouse(this.route0.id_first_warehouse)
+          .subscribe(first => {
+            console.log(first);
+            this.firstWarehouse = first;
+          }, error => console.log(error));
+
+        this.warehouseService.getWarehouse(this.route0.id_last_warehouse)
+          .subscribe(last => {
+            console.log(last);
+            this.lastWarehouse = last;
+          }, error => console.log(error));
       }, error => console.log(error));
 
-    this.warehouseService.getWarehouse(this.id_first)
-      .subscribe(data => {
-        console.log(data);
-        this.firstWarehouse = data;
-        this.firstLatitude = this.firstWarehouse.latitude;
-        this.firstLongitude = this.firstWarehouse.longitude;
-      }, error => console.log(error));
+    await this.delay(500);
+    this.loadMap();
+  }
 
-    this.warehouseService.getWarehouse(this.id_last)
-      .subscribe(data => {
-        console.log(data);
-        this.lastWarehouse = data;
-      }, error => console.log(error));
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
   loadMap() {
@@ -72,8 +74,8 @@ export class RouteDetailsComponent implements OnInit {
 
     const route = L.Routing.control({
       waypoints: [
-        L.latLng(53, 34),
-        L.latLng(55, 44),
+        L.latLng(this.firstWarehouse.latitude, this.firstWarehouse.longitude),
+        L.latLng(this.lastWarehouse.latitude, this.lastWarehouse.longitude),
       ]
     }).addTo(this.map);
 
@@ -81,7 +83,9 @@ export class RouteDetailsComponent implements OnInit {
       var routes = e.routes;
       var summary = routes[0].summary;
       // alert distance and time in km and minutes
-      alert('Total distance is ' + summary.totalDistance / 1000 + ' km and total time is ' + Math.round(summary.totalTime % 3600 / 60) + ' minutes');
+      alert('Total distance is ' + summary.totalDistance / 1000 + ' km.' + '\n' +
+            'Total time is ' + Math.round(summary.totalTime / 3600) + ' hours ' +
+            'and ' + Math.round(summary.totalTime % 3600 / 60) + ' minutes.');
     });
   }
 
