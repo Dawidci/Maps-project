@@ -23,10 +23,10 @@ export class RouteDetailsComponent implements OnInit {
   route0: Route;
   firstWarehouse: Warehouse;
   lastWarehouse: Warehouse;
-  //warehouses: Warehouse[] = [];
-  warehouses: Observable<Warehouse[]>;
-  destinations: Observable<Destination[]>;
-  length: number;
+  warehouses: Warehouse[] = [];
+  destinations: Destination[] = [];
+  latlngArray: any[] = [];
+  leafletRoute: any;
   map: any;
 
   constructor(private route: ActivatedRoute,
@@ -50,13 +50,14 @@ export class RouteDetailsComponent implements OnInit {
         console.log(data);
         this.route0 = data;
 
-        /*
-        this.destinationService.getDestinatonsByRoute(this.route0.id)
-          .subscribe(dest => {
-            console.log(dest);
-            this.destinations = dest;
-          }, error => console.log(error));
-         */
+        for(let i = 0; i < this.destinations.length; i++) {
+          console.log(this.destinations[i].id_warehouse);
+          this.warehouseService.getWarehouse(this.destinations[i].id_warehouse)
+            .subscribe(warehouse => {
+              console.log(warehouse);
+              this.warehouses[i] = warehouse;
+            });
+        }
 
         this.warehouseService.getWarehouse(this.route0.id_first_warehouse)
           .subscribe(first => {
@@ -78,7 +79,12 @@ export class RouteDetailsComponent implements OnInit {
   }
 
   reloadData() {
-    this.destinations = this.destinationService.getDestinatonsByRoute(this.id);
+    this.destinationService.getDestinatonsByRoute(this.id)
+      .subscribe(data => {
+        console.log(data);
+        this.destinations = data;
+        this.destinations.sort((a,b) => a.order - b.order);
+      });
   }
 
   delay(ms: number) {
@@ -91,14 +97,18 @@ export class RouteDetailsComponent implements OnInit {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
-    const route = L.Routing.control({
-      waypoints: [
-        L.latLng(this.firstWarehouse.latitude, this.firstWarehouse.longitude),
-        L.latLng(this.lastWarehouse.latitude, this.lastWarehouse.longitude),
-      ]
+    for (let i = 0; i < this.warehouses.length; i++) {
+      let ltln = L.latLng(this.warehouses[i].latitude, this.warehouses[i].longitude);
+      console.log("LTLN: " + ltln);
+      this.latlngArray.push(ltln);
+    }
+
+    this.leafletRoute = L.Routing.control({
+      waypoints: this.latlngArray,
+      show: false
     }).addTo(this.map);
 
-    route.on('routesfound', function(e) {
+    this.leafletRoute.on('routesfound', function(e) {
       let routes = e.routes;
       let summary = routes[0].summary;
       // alert distance and time in km and minutes

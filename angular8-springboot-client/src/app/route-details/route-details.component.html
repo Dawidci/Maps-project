@@ -11,16 +11,40 @@
     <label><b>Name: </b></label> {{route0.name}}
   </div>
   <div>
-    <label><b>First Warehouse: </b></label> {{route0.id_first_warehouse}}
+    <label><b>First Warehouse: </b></label> {{warehouses[0].name}}
   </div>
-  <div>
-    <label><b>Last Warehouse: </b></label> {{route0.id_last_warehouse}}
+</div>
+
+<br>
+
+<div class="panel panel-primary">
+
+  <div class="panel-heading">
+    <h2>Warehouse List</h2>
   </div>
-  <div>
-    <label><b>First Warehouse coordinates: </b></label> {{firstWarehouse.latitude}}, {{firstWarehouse.longitude}}
-  </div>
-  <div>
-    <label><b>Last Warehouse coordinates: </b></label> {{lastWarehouse.latitude}}, {{lastWarehouse.longitude}}
+
+  <div class="panel-body">
+    <table class="table table-striped">
+
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let warehouse of warehouses">
+        <td>{{warehouse.id}}</td>
+        <td>{{warehouse.name}}</td>
+        <td>{{warehouse.latitude}}</td>
+        <td>{{warehouse.longitude}}</td>
+      </tr>
+      </tbody>
+
+    </table>
   </div>
 </div>
 
@@ -45,7 +69,7 @@
       </thead>
 
       <tbody>
-      <tr *ngFor="let destination of destinations | async">
+      <tr *ngFor="let destination of destinations">
         <td>{{destination.id}}</td>
         <td>{{destination.id_route}}</td>
         <td>{{destination.id_warehouse}}</td>
@@ -57,39 +81,4 @@
   </div>
 </div>
 
-<br>
-<button (click)="list()" class="btn btn-primary">Back to Route List</button><br>
-
-<div class="panel panel-primary">
-
-  <div class="panel-heading">
-    <h2>Warehouse List</h2>
-  </div>
-
-  <div class="panel-body">
-    <table class="table table-striped">
-
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr *ngFor="let warehouse of warehouses | async">
-        <td>{{warehouse.id}}</td>
-        <td>{{warehouse.name}}</td>
-        <td>{{warehouse.latitude}}</td>
-        <td>{{warehouse.longitude}}</td>
-      </tr>
-      </tbody>
-
-    </table>
-  </div>
-</div>
-
-<br>
 <button (click)="list()" class="btn btn-primary">Back to Route List</button><br>
