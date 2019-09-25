@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/app.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app.module.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/create/create.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/destination.service.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/destinations-create/destinations-create.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/destinations-create/destinations-create.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/employee-list/employee-list.component.html" charset="UTF-8" />

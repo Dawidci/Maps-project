@@ -15,6 +15,10 @@ export class DestinationService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
+  getDestinatonsByRoute(id_route: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/route/${id_route}`);
+  }
+
   createDestination(warehouse: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}`, warehouse);
   }

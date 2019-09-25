@@ -11,7 +11,7 @@ public class Destination {
     private long id;
 
     @Column(name = "id_route", nullable = false)
-    private long id_route;
+    private long idRoute;
 
     @Column(name = "id_warehouse", nullable = false)
     private long id_warehouse;
@@ -22,7 +22,7 @@ public class Destination {
     public Destination() {}
 
     public Destination(long id_route, long id_warehouse, long order) {
-        this.id_route = id_route;
+        this.idRoute = id_route;
         this.id_warehouse = id_warehouse;
         this.order = order;
     }
@@ -36,11 +36,11 @@ public class Destination {
     }
 
     public long getId_route() {
-        return id_route;
+        return idRoute;
     }
 
     public void setId_route(long id_route) {
-        this.id_route = id_route;
+        this.idRoute = id_route;
     }
 
     public long getId_warehouse() {
@@ -63,7 +63,7 @@ public class Destination {
     public String toString() {
         return "Destination{" +
                 "id=" + id +
-                ", id_route=" + id_route +
+                ", id_route=" + idRoute +
                 ", id_warehouse=" + id_warehouse +
                 ", order=" + order +
                 '}';

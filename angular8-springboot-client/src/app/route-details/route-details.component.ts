@@ -1,10 +1,13 @@
+import { Observable } from "rxjs";
 import { Component, OnInit } from '@angular/core';
 import { Route } from '../route';
 import { RouteService } from '../route.service';
 import { RouteListComponent } from '../route-list/route-list.component';
 import { Router, ActivatedRoute } from '@angular/router';
-import {Warehouse} from "../warehouse";
-import {WarehouseService} from "../warehouse.service";
+import { Warehouse } from "../warehouse";
+import { WarehouseService } from "../warehouse.service";
+import { Destination } from "../destination";
+import { DestinationService } from "../destination.service";
 
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -19,18 +22,15 @@ export class RouteDetailsComponent implements OnInit {
   id: number;
   route0: Route;
   firstWarehouse: Warehouse;
-  firstLatitude: number;
-  firstLongitude: number;
   lastWarehouse: Warehouse;
-  id_first: number;
-  id_last: number;
-  name: string;
+  destinations: Observable<Destination[]>;
   map: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private routeService: RouteService,
-              private warehouseService: WarehouseService) { }
+              private warehouseService: WarehouseService,
+              private destinationService: DestinationService) { }
 
   async ngOnInit() {
 
@@ -39,6 +39,8 @@ export class RouteDetailsComponent implements OnInit {
     this.lastWarehouse = new Warehouse();
 
     this.id = this.route.snapshot.params['id'];
+
+    this.reloadData();
 
     await this.routeService.getRoute(this.id)
       .subscribe(data => {
@@ -62,6 +64,10 @@ export class RouteDetailsComponent implements OnInit {
     this.loadMap();
   }
 
+  reloadData() {
+    this.destinations = this.destinationService.getDestinatonsByRoute(this.id);
+  }
+
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
@@ -80,10 +86,10 @@ export class RouteDetailsComponent implements OnInit {
     }).addTo(this.map);
 
     route.on('routesfound', function(e) {
-      var routes = e.routes;
-      var summary = routes[0].summary;
+      let routes = e.routes;
+      let summary = routes[0].summary;
       // alert distance and time in km and minutes
-      alert('Total distance is ' + summary.totalDistance / 1000 + ' km.' + '\n' +
+      alert('Total distance is ' + Math.round(summary.totalDistance / 1000) + ' km.' + '\n' +
             'Total time is ' + Math.round(summary.totalTime / 3600) + ' hours ' +
             'and ' + Math.round(summary.totalTime % 3600 / 60) + ' minutes.');
     });

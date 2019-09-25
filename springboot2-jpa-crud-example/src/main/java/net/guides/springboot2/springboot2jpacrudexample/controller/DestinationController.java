@@ -2,6 +2,7 @@ package net.guides.springboot2.springboot2jpacrudexample.controller;
 
 import net.guides.springboot2.springboot2jpacrudexample.exception.ResourceNotFoundException;
 import net.guides.springboot2.springboot2jpacrudexample.model.Destination;
+import net.guides.springboot2.springboot2jpacrudexample.model.Route;
 import net.guides.springboot2.springboot2jpacrudexample.repository.DestinationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,15 @@ public class DestinationController {
                 .orElseThrow(() -> new ResourceNotFoundException("Destination not found for this id :: " + id));
 
         return ResponseEntity.ok().body(destination);
+    }
+
+    @GetMapping("/route/{idRoute}")
+    public List<Destination> getRouteByName(@PathVariable(value = "idRoute") int idRoute)
+            throws ResourceNotFoundException {
+        List<Destination> destinations = destinationRepository
+                .findByIdRoute(idRoute);
+
+        return destinations;
     }
 
     @PostMapping("")

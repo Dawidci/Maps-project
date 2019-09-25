@@ -25,4 +25,38 @@
 </div>
 
 <br>
+
+<div class="panel panel-primary">
+
+  <div class="panel-heading">
+    <h2>Destination List</h2>
+  </div>
+
+  <div class="panel-body">
+    <table class="table table-striped">
+
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Route ID</th>
+        <th>Warehouse ID</th>
+        <th>Order</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let destination of destinations | async">
+        <td>{{destination.id}}</td>
+        <td>{{destination.id_route}}</td>
+        <td>{{destination.id_warehouse}}</td>
+        <td>{{destination.order}}</td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+<br>
 <button (click)="list()" class="btn btn-primary">Back to Route List</button><br>
+
