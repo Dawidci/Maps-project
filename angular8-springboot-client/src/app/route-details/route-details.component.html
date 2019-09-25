@@ -60,3 +60,36 @@
 <br>
 <button (click)="list()" class="btn btn-primary">Back to Route List</button><br>
 
+<div class="panel panel-primary">
+
+  <div class="panel-heading">
+    <h2>Warehouse List</h2>
+  </div>
+
+  <div class="panel-body">
+    <table class="table table-striped">
+
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let warehouse of warehouses | async">
+        <td>{{warehouse.id}}</td>
+        <td>{{warehouse.name}}</td>
+        <td>{{warehouse.latitude}}</td>
+        <td>{{warehouse.longitude}}</td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+<br>
+<button (click)="list()" class="btn btn-primary">Back to Route List</button><br>

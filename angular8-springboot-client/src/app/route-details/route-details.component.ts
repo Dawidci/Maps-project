@@ -23,7 +23,10 @@ export class RouteDetailsComponent implements OnInit {
   route0: Route;
   firstWarehouse: Warehouse;
   lastWarehouse: Warehouse;
+  //warehouses: Warehouse[] = [];
+  warehouses: Observable<Warehouse[]>;
   destinations: Observable<Destination[]>;
+  length: number;
   map: any;
 
   constructor(private route: ActivatedRoute,
@@ -40,12 +43,20 @@ export class RouteDetailsComponent implements OnInit {
 
     this.id = this.route.snapshot.params['id'];
 
-    this.reloadData();
+    await this.reloadData();
 
     await this.routeService.getRoute(this.id)
       .subscribe(data => {
         console.log(data);
         this.route0 = data;
+
+        /*
+        this.destinationService.getDestinatonsByRoute(this.route0.id)
+          .subscribe(dest => {
+            console.log(dest);
+            this.destinations = dest;
+          }, error => console.log(error));
+         */
 
         this.warehouseService.getWarehouse(this.route0.id_first_warehouse)
           .subscribe(first => {
@@ -58,7 +69,9 @@ export class RouteDetailsComponent implements OnInit {
             console.log(last);
             this.lastWarehouse = last;
           }, error => console.log(error));
+
       }, error => console.log(error));
+
 
     await this.delay(500);
     this.loadMap();
