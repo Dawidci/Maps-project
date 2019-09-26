@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Warehouse } from "../warehouse";
 import { WarehouseService } from "../warehouse.service";
 import { Router, ActivatedRoute } from '@angular/router';
+import { MapService } from "../map.service";
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-warehouse-update',
@@ -14,8 +16,19 @@ export class WarehouseUpdateComponent implements OnInit {
   warehouse: Warehouse;
   submitted = false;
 
-  constructor(private route: ActivatedRoute, private router: Router,
-              private warehouseService: WarehouseService) { }
+  warehouseForm = this.fb.group({
+    name: ['', Validators.required],
+    latitude: [{value: '', disabled: true}, [Validators.required, Validators.pattern("^[-]?[1-8]?[0-9]([.][0-9]+)?$")]],
+    longitude: [{value: '', disabled: true}, [Validators.required, Validators.pattern("^([-]?)(([1-9]?[0-9])|([1][0-7][0-9]))([.][0-9]+)?$")]], //180
+    airport: ['', Validators.required],
+    seaport: ['', Validators.required]
+  });
+
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private warehouseService: WarehouseService,
+              private mapService: MapService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
     this.warehouse = new Warehouse();
@@ -26,6 +39,9 @@ export class WarehouseUpdateComponent implements OnInit {
         console.log(data)
         this.warehouse = data;
       }, error => console.log(error));
+
+    this.mapService.initializeMap();
+    this.mapService.map.on('click', this.onMapClick.bind(this));
   }
 
   onSubmit() {
@@ -42,5 +58,10 @@ export class WarehouseUpdateComponent implements OnInit {
 
   gotoList() {
     this.router.navigate(['/warehouses']);
+  }
+
+  onMapClick(e) {
+    this.warehouse.latitude = Math.round(e.latlng.lat * 100) / 100;
+    this.warehouse.longitude = Math.round(e.latlng.lng * 100) / 100;
   }
 }

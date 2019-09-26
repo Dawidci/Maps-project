@@ -6,17 +6,9 @@
 <hr/>
 
 <div *ngIf="route0">
-
   <div>
     <label><b>Name: </b></label> {{route0.name}}
   </div>
-  <div>
-    <label><b>First Warehouse: </b></label> {{firstWarehouse.id}}
-  </div>
-  <div>
-    <label><b>Last Warehouse: </b></label> {{lastWarehouse.id}}
-  </div>
-
 </div>
 
 <div [hidden]="submitted" style="width: 400px;">
@@ -49,6 +41,7 @@
   </form>
 </div>
 
+<!--
 <div *ngFor="let dest of destinations, let index = index">
   ID: {{destinations[index].id}}, ID_Route: {{destinations[index].id_route}}, ID_Warehouse: {{destinations[index].id_warehouse}}, Order: {{destinations[index].order}} <br>
 </div>
@@ -58,4 +51,5 @@
 <div *ngFor="let war of wars, let index = index">
   Warehouse: {{wars[index].id}}, Name: {{wars[index].name}}, Latitude: {{wars[index].latitude}}, Longitude: {{wars[index].longitude}}
 </div>
+-->
 

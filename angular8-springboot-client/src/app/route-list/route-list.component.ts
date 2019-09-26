@@ -3,7 +3,6 @@ import { Observable } from "rxjs";
 import { RouteService } from "../route.service";
 import { Route } from "../route";
 import { Router } from '@angular/router';
-import * as L from 'leaflet';
 
 @Component({
   selector: 'app-route-list',
@@ -13,7 +12,6 @@ import * as L from 'leaflet';
 export class RouteListComponent implements OnInit {
 
   routes: Observable<Route[]>;
-  map: any;
 
   constructor(private routeService: RouteService,
               private router: Router) {}
@@ -40,13 +38,10 @@ export class RouteListComponent implements OnInit {
     this.router.navigate(['/routes/details', id]);
   }
 
-
 /*
   updateRoute(id: number) {
     this.router.navigate(['warehouses/update', id]);
   }
-
  */
-
 }
 

@@ -9,9 +9,7 @@ import { Warehouse } from "../warehouse";
 import { WarehouseService } from "../warehouse.service";
 import { Destination } from "../destination";
 import { DestinationService } from "../destination.service";
-
-import * as L from 'leaflet';
-import 'leaflet-routing-machine';
+import { MapService} from "../map.service";
 
 @Component({
   selector: 'app-destinations-create',
@@ -32,7 +30,6 @@ export class DestinationsCreateComponent implements OnInit {
   newDestinations: number[] = [];
   count = 2;
   submitted = false;
-  leafletRoute: any[] = [];
   distance: number[][] = [];
   order: number[] = [];
 
@@ -47,17 +44,22 @@ export class DestinationsCreateComponent implements OnInit {
               private routeService: RouteService,
               private warehouseService: WarehouseService,
               private destinationService: DestinationService,
-              private fb: FormBuilder) { }
+              private mapService: MapService,
+              private fb: FormBuilder) {}
 
   async ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
     this.route0 = new Route();
 
+    this.mapService.loadWarehouses();
     this.reloadData();
-    this.loadMap();
+    this.mapService.initializeMap();
+    this.mapService.showWarehouses();
+    await this.loadRoute();
+  }
 
-    this.id = this.route.snapshot.params['id'];
-
-    await this.routeService.getRoute(this.id)
+  loadRoute() {
+    this.routeService.getRoute(this.id)
       .subscribe(data => {
         console.log(data);
         this.route0 = data;
@@ -79,27 +81,7 @@ export class DestinationsCreateComponent implements OnInit {
   }
 
   reloadData() {
-    this.warehouses = this.warehouseService.getWarehousesList();
-  }
-
-  loadMap() {
-    this.map = L.map('map').setView([30, 0], 2);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map);
-
-    this.warehouses.subscribe(elements => {
-      elements.forEach((warehouse : any) => {
-        console.log(warehouse.name);
-        let marker = new L.Marker([warehouse.latitude, warehouse.longitude]).addTo(this.map);
-        marker.bindPopup("ID: " + warehouse.id.toString() + "<br>" +
-          "Name: " + warehouse.name + "<br>" +
-          "Latitude: " + warehouse.latitude.toString() + "<br>" +
-          "Longitude: " + warehouse.longitude.toString() + "<br>" +
-          "Seaport: " + warehouse.airport.toString() + "<br>" +
-          "Airport: " + warehouse.seaport.toString() + "<br>");
-      })
-    });
+    this.warehouses = this.mapService.warehouses;
   }
 
   addNewDestination() {
@@ -111,7 +93,6 @@ export class DestinationsCreateComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.save();
-    alert('New route and destinations added');
   }
 
   async save() {
@@ -119,15 +100,17 @@ export class DestinationsCreateComponent implements OnInit {
     await this.delay(100);
     await this.computeDistance();
     await this.computeOrder();
+    await this.createDestinations();
+    this.gotoList();
+  }
 
+  async createDestinations() {
     for(let i = 0; i < this.destinations.length; i++) {
       await this.destinationService.createDestination(this.destinations[i])
         .subscribe(data => {
           console.log(data);
         }, error => console.log(error));
     }
-
-    this.gotoList();
   }
 
   computeDistance() {

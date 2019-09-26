@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WarehouseListComponent } from "./warehouse-list/warehouse-list.component";
 import { WarehouseCreateComponent } from "./warehouse-create/warehouse-create.component";
-import { MapComponent } from "./map/map.component";
 import { WarehouseUpdateComponent } from "./warehouse-update/warehouse-update.component";
 import { RouteCreateComponent } from "./route-create/route-create.component";
 import { RouteListComponent } from "./route-list/route-list.component";
@@ -11,7 +10,6 @@ import { DestinationsCreateComponent } from "./destinations-create/destinations-
 
 const routes: Routes = [
   { path: '', redirectTo: 'warehouses', pathMatch: 'full' },
-  { path: 'map', component: MapComponent },
 
   { path: 'warehouses', component: WarehouseListComponent },
   { path: 'warehouses/add', component: WarehouseCreateComponent },

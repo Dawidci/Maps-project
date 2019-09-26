@@ -4,7 +4,6 @@ import { MapService } from "../map.service";
 import { Warehouse } from "../warehouse";
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
-import * as L from 'leaflet';
 
 @Component({
   selector: 'app-warehouse-list',
@@ -21,28 +20,14 @@ export class WarehouseListComponent implements OnInit {
               private router: Router) {}
 
   ngOnInit() {
+    this.mapService.loadWarehouses();
     this.reloadData();
     this.mapService.initializeMap();
-    this.loadMap();
+    this.mapService.showWarehouses();
   }
 
   reloadData() {
-    this.warehouses = this.warehouseService.getWarehousesList();
-  }
-
-  loadMap() {
-    this.warehouses.subscribe(elements => {
-      elements.forEach((warehouse : any) => {
-        console.log(warehouse.name);
-        let marker = new L.Marker([warehouse.latitude, warehouse.longitude]).addTo(this.mapService.map);
-        marker.bindPopup("ID: " + warehouse.id.toString() + "<br>" +
-          "Name: " + warehouse.name + "<br>" +
-          "Latitude: " + warehouse.latitude.toString() + "<br>" +
-          "Longitude: " + warehouse.longitude.toString() + "<br>" +
-          "Seaport: " + warehouse.airport.toString() + "<br>" +
-          "Airport: " + warehouse.seaport.toString() + "<br>");
-      })
-    });
+    this.warehouses = this.mapService.warehouses;
   }
 
   deleteWarehouse(id: number) {
@@ -51,13 +36,11 @@ export class WarehouseListComponent implements OnInit {
         data => {
           console.log(data);
           this.reloadData();
-        },
-        error => console.log(error));
+        },error => console.log(error));
   }
 
   updateWarehouse(id: number) {
     this.router.navigate(['warehouses/update', id]);
   }
-
 }
 
