@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Warehouse } from "../warehouse";
 import { WarehouseService } from "../warehouse.service";
+import { MapService} from "../map.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import * as L from 'leaflet';
 
 @Component({
   selector: 'app-warehouse-create',
@@ -14,7 +14,6 @@ export class WarehouseCreateComponent implements OnInit {
 
   warehouse: Warehouse = new Warehouse();
   submitted = false;
-  map: any;
 
   warehouseForm = this.fb.group({
     name: ['', Validators.required],
@@ -25,33 +24,19 @@ export class WarehouseCreateComponent implements OnInit {
   });
 
   constructor(private warehouseService: WarehouseService,
+              private mapService: MapService,
               private router: Router,
               private fb: FormBuilder) {
   }
 
   ngOnInit() {
-    this.initializeMap();
-    this.map.on('click', this.onMapClick.bind(this));
-  }
-
-  initializeMap() {
-    this.map = L.map('map', {minZoom: 3}).setView([45, 60], 3);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map);
-
-    this.map.bounds = [],
-    this.map.setMaxBounds([
-      [-90, -180],
-      [90, 180]
-    ]);
+    this.mapService.initializeMap();
+    this.mapService.map.on('click', this.onMapClick.bind(this));
   }
 
   onSubmit() {
     this.submitted = true;
     this.save();
-    alert('New warehouse added');
-
   }
 
   save() {

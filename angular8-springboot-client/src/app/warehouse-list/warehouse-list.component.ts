@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
 import { WarehouseService } from "../warehouse.service";
+import { MapService } from "../map.service";
 import { Warehouse } from "../warehouse";
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
@@ -16,10 +17,12 @@ export class WarehouseListComponent implements OnInit {
   map: any;
 
   constructor(private warehouseService: WarehouseService,
+              private mapService: MapService,
               private router: Router) {}
 
   ngOnInit() {
     this.reloadData();
+    this.mapService.initializeMap();
     this.loadMap();
   }
 
@@ -28,15 +31,10 @@ export class WarehouseListComponent implements OnInit {
   }
 
   loadMap() {
-    this.map = L.map('map').setView([30, 0], 2);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map);
-
     this.warehouses.subscribe(elements => {
       elements.forEach((warehouse : any) => {
         console.log(warehouse.name);
-        let marker = new L.Marker([warehouse.latitude, warehouse.longitude]).addTo(this.map);
+        let marker = new L.Marker([warehouse.latitude, warehouse.longitude]).addTo(this.mapService.map);
         marker.bindPopup("ID: " + warehouse.id.toString() + "<br>" +
           "Name: " + warehouse.name + "<br>" +
           "Latitude: " + warehouse.latitude.toString() + "<br>" +
@@ -56,13 +54,6 @@ export class WarehouseListComponent implements OnInit {
         },
         error => console.log(error));
   }
-
-  /*
-  employeeDetails(id: number){
-    this.router.navigate(['details', id]);
-  }
-  */
-
 
   updateWarehouse(id: number) {
     this.router.navigate(['warehouses/update', id]);
