@@ -74,8 +74,12 @@ export class RouteDetailsComponent implements OnInit {
       }, error => console.log(error));
 
 
-    await this.delay(500);
+    await this.delay(1000);
     this.loadMap();
+  }
+
+  loadWarehouses() {
+
   }
 
   reloadData() {

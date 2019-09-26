@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8db15ed5-43e2-4a13-bc4b-0cadc9930cd4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../Inżynierka/_Analysis.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Inżynierka/_Analysis.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Inżynierka/~$nalysis.docx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-details/route-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/route-details/route-details.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/destinations-create/destinations-create.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/destinations-create/destinations-create.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/destinations-create/destinations-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/destinations-create/destinations-create.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/route-details/route-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-details/route-details.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,7 +41,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -78,6 +81,7 @@
       <workItem from="1569305888333" duration="19891000" />
       <workItem from="1569389676704" duration="22423000" />
       <workItem from="1569429516629" duration="5073000" />
+      <workItem from="1569482265069" duration="16426000" />
     </task>
     <servers />
   </component>

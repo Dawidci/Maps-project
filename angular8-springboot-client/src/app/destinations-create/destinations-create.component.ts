@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Route } from '../route';
 import { RouteService } from '../route.service';
-import { RouteListComponent } from '../route-list/route-list.component';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Warehouse } from "../warehouse";
 import { WarehouseService } from "../warehouse.service";
+import { Destination } from "../destination";
 import { DestinationService } from "../destination.service";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
-import {Destination} from "../destination";
 
 @Component({
   selector: 'app-destinations-create',
@@ -26,11 +26,15 @@ export class DestinationsCreateComponent implements OnInit {
   destinations: Destination[] = [];
   firstWarehouse: Warehouse;
   lastWarehouse: Warehouse;
+  wars: Warehouse[] = [];
   name: string;
   map: any;
   newDestinations: number[] = [];
   count = 2;
   submitted = false;
+  leafletRoute: any[] = [];
+  distance: number[][] = [];
+  order: number[] = [];
 
   destinationForm = this.fb.group({
     firstDestination: [{value: '', disabled: true}, Validators.required],
@@ -74,10 +78,6 @@ export class DestinationsCreateComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  list(){
-    this.router.navigate(['routes/list']);
-  }
-
   reloadData() {
     this.warehouses = this.warehouseService.getWarehousesList();
   }
@@ -104,7 +104,6 @@ export class DestinationsCreateComponent implements OnInit {
 
   addNewDestination() {
     this.count++;
-    alert("You clicked button!");
     this.destinations.push({id: this.count, id_route: this.id, id_warehouse: 0, order: this.count});
     this.newDestinations.push(this.count);
   }
@@ -116,12 +115,78 @@ export class DestinationsCreateComponent implements OnInit {
   }
 
   async save() {
+    await this.loadWarehouses();
+    await this.delay(100);
+    await this.computeDistance();
+    await this.computeOrder();
+
     for(let i = 0; i < this.destinations.length; i++) {
       await this.destinationService.createDestination(this.destinations[i])
-        .subscribe(data => console.log(data), error => console.log(error));
+        .subscribe(data => {
+          console.log(data);
+        }, error => console.log(error));
     }
 
     this.gotoList();
+  }
+
+  computeDistance() {
+    for(let i = 0; i < this.wars.length; i++) {
+      this.distance[i] = [];
+      for(let j = 0; j < this.wars.length; j++) {
+        if(i != j) {
+          let lat = Math.abs(this.wars[i].latitude - this.wars[j].latitude);
+          let long = Math.abs(this.wars[i].longitude - this.wars[j].longitude);
+
+          lat *= lat;
+          long *= long;
+
+          this.distance[i][j] = Math.sqrt(lat + long);
+        }
+      }
+    }
+  }
+
+  computeOrder() {
+    let start = 0;
+    let dist = 1000;
+    let newStart = 0;
+
+    for(let i = 0; i < this.wars.length; i++) {
+      this.order.push(start);
+
+      for(let j = 0; j < this.wars.length; j++) {
+        delete this.distance[j][start];
+      }
+
+      for(let j = 0; j < this.wars.length; j++) {
+        if(this.distance[start][j] < dist) {
+          dist = this.distance[start][j];
+          newStart = j;
+        }
+      }
+
+      start = newStart;
+      dist = 1000;
+    }
+
+    for(let i = 0; i < this.order.length; i++) {
+      this.destinations[i].order = this.order[i] + 1;
+    }
+  }
+
+  loadWarehouses() {
+    for(let i = 0; i < this.destinations.length; i++) {
+      this.warehouseService.getWarehouse(this.destinations[i].id_warehouse)
+        .subscribe(warehouse => {
+          console.log(warehouse);
+          this.wars[i] = warehouse;
+        });
+    }
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
   gotoList() {
