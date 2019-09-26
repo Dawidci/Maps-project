@@ -2,35 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8db15ed5-43e2-4a13-bc4b-0cadc9930cd4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create-employee/create-employee.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create-employee/create-employee.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create-employee/create-employee.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create-employee/create-employee.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/create.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/create.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/create.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/create.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-details/employee-details.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-details/employee-details.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-details/employee-details.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-details/employee-details.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-list/employee-list.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-list/employee-list.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-list/employee-list.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-list/employee-list.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/update-employee/update-employee.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/update-employee/update-employee.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/update-employee/update-employee.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/update-employee/update-employee.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../springboot2-jpa-crud-example/src/main/java/net/guides/springboot2/springboot2jpacrudexample/controller/EmployeeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../springboot2-jpa-crud-example/src/main/java/net/guides/springboot2/springboot2jpacrudexample/controller/GameController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../springboot2-jpa-crud-example/src/main/java/net/guides/springboot2/springboot2jpacrudexample/model/Employee.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../springboot2-jpa-crud-example/src/main/java/net/guides/springboot2/springboot2jpacrudexample/model/Game.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../springboot2-jpa-crud-example/src/main/java/net/guides/springboot2/springboot2jpacrudexample/repository/EmployeeRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../springboot2-jpa-crud-example/src/main/java/net/guides/springboot2/springboot2jpacrudexample/repository/GameRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Inżynierka/~$nalysis.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee.ts" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +79,7 @@
       <workItem from="1569305888333" duration="19891000" />
       <workItem from="1569389676704" duration="22423000" />
       <workItem from="1569429516629" duration="5073000" />
-      <workItem from="1569482265069" duration="17617000" />
+      <workItem from="1569482265069" duration="18024000" />
     </task>
     <servers />
   </component>
