@@ -4,16 +4,11 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CreateEmployeeComponent } from './create-employee/create-employee.component';
-import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 import { WarehouseListComponent } from './warehouse-list/warehouse-list.component';
 import { WarehouseCreateComponent } from './warehouse-create/warehouse-create.component';
 import { MapComponent } from './map/map.component';
 import { WarehouseUpdateComponent } from './warehouse-update/warehouse-update.component';
-import { CreateComponent } from './create/create.component';
 import { RouteCreateComponent } from './route-create/route-create.component';
 import { RouteListComponent } from './route-list/route-list.component';
 import { RouteDetailsComponent } from './route-details/route-details.component';
@@ -22,15 +17,10 @@ import { DestinationsCreateComponent } from './destinations-create/destinations-
 @NgModule({
   declarations: [
     AppComponent,
-    CreateEmployeeComponent,
-    EmployeeDetailsComponent,
-    EmployeeListComponent,
-    UpdateEmployeeComponent,
     WarehouseListComponent,
     WarehouseCreateComponent,
     MapComponent,
     WarehouseUpdateComponent,
-    CreateComponent,
     RouteCreateComponent,
     RouteListComponent,
     RouteDetailsComponent,
