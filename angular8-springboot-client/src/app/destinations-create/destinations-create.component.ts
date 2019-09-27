@@ -25,13 +25,10 @@ export class DestinationsCreateComponent implements OnInit {
   firstWarehouse: Warehouse;
   lastWarehouse: Warehouse;
   wars: Warehouse[] = [];
-  name: string;
-  map: any;
   newDestinations: number[] = [];
   count = 2;
   submitted = false;
   distance: number[][] = [];
-  order: number[] = [];
 
   destinationForm = this.fb.group({
     firstDestination: [{value: '', disabled: true}, Validators.required],
@@ -117,25 +114,42 @@ export class DestinationsCreateComponent implements OnInit {
       this.distance[i] = [];
       for(let j = 0; j < this.wars.length; j++) {
         if(i != j) {
-          let lat = Math.abs(this.wars[i].latitude - this.wars[j].latitude);
-          let long = Math.abs(this.wars[i].longitude - this.wars[j].longitude);
-
-          lat *= lat;
-          long *= long;
-
-          this.distance[i][j] = Math.sqrt(lat + long);
+          this.distance[i][j] = this.distanceBetweenCoordinates(this.wars[i].latitude,
+            this.wars[i].longitude, this.wars[j].latitude, this.wars[j].longitude);
         }
       }
     }
   }
 
+  degreesToRadians(degrees) {
+    return degrees * Math.PI / 180;
+  }
+
+  distanceBetweenCoordinates(lat1, lon1, lat2, lon2) {
+    let earthRadiusKm = 6371;
+
+    let dLat = this.degreesToRadians(lat2 - lat1);
+    let dLon = this.degreesToRadians(lon2 - lon1);
+
+    lat1 = this.degreesToRadians(lat1);
+    lat2 = this.degreesToRadians(lat2);
+
+    let a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    return earthRadiusKm * c;
+  }
+
   computeOrder() {
     let start = 0;
-    let dist = 1000;
+    let dist = 10000000;
     let newStart = 0;
+    let count = 1;
 
     for(let i = 0; i < this.wars.length; i++) {
-      this.order.push(start);
+      console.log("START: " + start + ", WAR: " + this.wars[start].id);
+      this.destinations[start].order = count;
 
       for(let j = 0; j < this.wars.length; j++) {
         delete this.distance[j][start];
@@ -149,11 +163,8 @@ export class DestinationsCreateComponent implements OnInit {
       }
 
       start = newStart;
-      dist = 1000;
-    }
-
-    for(let i = 0; i < this.order.length; i++) {
-      this.destinations[i].order = this.order[i] + 1;
+      dist = 10000000;
+      count++;
     }
   }
 

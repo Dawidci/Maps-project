@@ -73,7 +73,7 @@ export class RouteDetailsComponent implements OnInit {
 
   async loadMap() {
     await this.mapsService.loadCoordinatesArray(this.warehouses, this.latlngArray);
-    this.mapsService.showRoute(this.latlngArray);
+    await this.mapsService.showRoute(this.latlngArray);
     await this.showRouteDetailsAlert();
   }
 
