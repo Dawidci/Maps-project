@@ -44,14 +44,14 @@ export class DestinationsCreateComponent implements OnInit {
               private mapService: MapService,
               private fb: FormBuilder) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.route0 = new Route();
 
     this.reloadData();
     this.mapService.initializeMap();
     this.mapService.showWarehouses();
-    await this.loadRoute();
+    this.loadRoute();
   }
 
   loadRoute() {
