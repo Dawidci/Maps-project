@@ -32,48 +32,17 @@
         <th>Name</th>
         <th>Latitude</th>
         <th>Longitude</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr *ngFor="let warehouse of warehouses">
-        <td>{{warehouse.id}}</td>
-        <td>{{warehouse.name}}</td>
-        <td>{{warehouse.latitude}}</td>
-        <td>{{warehouse.longitude}}</td>
-      </tr>
-      </tbody>
-
-    </table>
-  </div>
-</div>
-
-<br>
-
-<div class="panel panel-primary">
-
-  <div class="panel-heading">
-    <h2>Destination List</h2>
-  </div>
-
-  <div class="panel-body">
-    <table class="table table-striped">
-
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Route ID</th>
-        <th>Warehouse ID</th>
         <th>Order</th>
       </tr>
       </thead>
 
       <tbody>
-      <tr *ngFor="let destination of destinations">
-        <td>{{destination.id}}</td>
-        <td>{{destination.id_route}}</td>
-        <td>{{destination.id_warehouse}}</td>
-        <td>{{destination.order}}</td>
+      <tr *ngFor="let warehouse of warehouses, let index = index">
+        <td>{{warehouse.id}}</td>
+        <td>{{warehouse.name}}</td>
+        <td>{{warehouse.latitude}}</td>
+        <td>{{warehouse.longitude}}</td>
+        <td>{{destinations[index].order}}</td>
       </tr>
       </tbody>
 
