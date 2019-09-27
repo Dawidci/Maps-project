@@ -34,7 +34,7 @@ export class RouteDetailsComponent implements OnInit {
     await this.reloadData();
     await this.loadRoute();
     await this.delay(1000);
-    this.mapsService.initializeMap();
+    await this.mapsService.initializeMap();
     this.loadMap();
   }
 
@@ -71,10 +71,10 @@ export class RouteDetailsComponent implements OnInit {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
-  loadMap() {
-    this.mapsService.loadCoordinatesArray(this.warehouses, this.latlngArray);
+  async loadMap() {
+    await this.mapsService.loadCoordinatesArray(this.warehouses, this.latlngArray);
     this.mapsService.showRoute(this.latlngArray);
-    this.showRouteDetailsAlert();
+    await this.showRouteDetailsAlert();
   }
 
   showRouteDetailsAlert() {

@@ -4,17 +4,15 @@
     <file url="file://$PROJECT_DIR$/app-routing.module.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app.module.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/create/create.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/destination.service.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/destinations-create/destinations-create.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/destinations-create/destinations-create.component.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/employee-list/employee-list.component.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/employee-list/employee-list.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route-create/route-create.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route-details/route-details.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route-list/route-list.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route.service.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-create/warehouse-create.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warehouse-list/warehouse-list.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-update/warehouse-update.component.html" charset="UTF-8" />
   </component>
 </project>

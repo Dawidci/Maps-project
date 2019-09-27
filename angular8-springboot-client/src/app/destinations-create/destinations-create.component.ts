@@ -51,7 +51,6 @@ export class DestinationsCreateComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.route0 = new Route();
 
-    this.mapService.loadWarehouses();
     this.reloadData();
     this.mapService.initializeMap();
     this.mapService.showWarehouses();
@@ -81,7 +80,7 @@ export class DestinationsCreateComponent implements OnInit {
   }
 
   reloadData() {
-    this.warehouses = this.mapService.warehouses;
+    this.warehouses = this.mapService.loadWarehouses();
   }
 
   addNewDestination() {

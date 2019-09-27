@@ -20,14 +20,13 @@ export class WarehouseListComponent implements OnInit {
               private router: Router) {}
 
   ngOnInit() {
-    this.mapService.loadWarehouses();
     this.reloadData();
     this.mapService.initializeMap();
     this.mapService.showWarehouses();
   }
 
   reloadData() {
-    this.warehouses = this.mapService.warehouses;
+    this.warehouses = this.mapService.loadWarehouses();
   }
 
   deleteWarehouse(id: number) {

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import * as L from 'leaflet';
 import {Warehouse} from "./warehouse";
 import { Observable } from "rxjs";
 import {WarehouseService} from "./warehouse.service";
+
+import * as L from 'leaflet';
+import "leaflet-routing-machine";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class MapService {
   constructor(private warehouseService: WarehouseService) { }
 
   loadWarehouses() {
-    this.warehouses = this.warehouseService.getWarehousesList();
+    return this.warehouses = this.warehouseService.getWarehousesList();
   }
 
   initializeMap() {

@@ -30,18 +30,20 @@ export class WarehouseUpdateComponent implements OnInit {
               private mapService: MapService,
               private fb: FormBuilder) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.warehouse = new Warehouse();
     this.id = this.route.snapshot.params['id'];
+    this.getWarehouse();
+    this.mapService.initializeMap();
+    this.mapService.map.on('click', this.onMapClick.bind(this));
+  }
 
+  getWarehouse() {
     this.warehouseService.getWarehouse(this.id)
       .subscribe(data => {
         console.log(data)
         this.warehouse = data;
       }, error => console.log(error));
-
-    this.mapService.initializeMap();
-    this.mapService.map.on('click', this.onMapClick.bind(this));
   }
 
   onSubmit() {
