@@ -33,8 +33,7 @@ export class RouteDetailsComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     await this.reloadData();
     await this.loadRoute();
-    await this.delay(1000);
-    await this.mapsService.initializeMap();
+    await this.delay(100);
     this.loadMap();
   }
 
@@ -44,6 +43,7 @@ export class RouteDetailsComponent implements OnInit {
         console.log(data);
         this.destinations = data;
         this.destinations.sort((a,b) => a.order - b.order);
+        console.log("RELOAD DATA");
       });
   }
 
@@ -53,6 +53,7 @@ export class RouteDetailsComponent implements OnInit {
         console.log(data);
         this.route0 = data;
         this.loadWarehouses();
+        console.log("LOAD ROUTE");
       }, error => console.log(error));
   }
 
@@ -63,6 +64,7 @@ export class RouteDetailsComponent implements OnInit {
         .subscribe(warehouse => {
           console.log(warehouse);
           this.warehouses[i] = warehouse;
+          console.log("LOAD ROUTE - LOAD WAREHOUSES");
         });
     }
   }
@@ -72,6 +74,7 @@ export class RouteDetailsComponent implements OnInit {
   }
 
   async loadMap() {
+    await this.mapsService.initializeMap();
     await this.mapsService.loadCoordinatesArray(this.warehouses, this.latlngArray);
     await this.mapsService.showRoute(this.latlngArray);
     await this.showRouteDetailsAlert();
@@ -85,6 +88,7 @@ export class RouteDetailsComponent implements OnInit {
         'Total time is ' + Math.round(summary.totalTime / 3600) + ' hours ' +
         'and ' + Math.round(summary.totalTime % 3600 / 60) + ' minutes.');
     });
+    console.log("LOAD MAP - SHOW ALERT");
   }
 
   list(){

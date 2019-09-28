@@ -32,6 +32,7 @@ export class MapService {
         [-90, -180],
         [90, 180]
       ]);
+    console.log("LOAD MAP - INITIALIZE MAP");
   }
 
   showWarehouses() {
@@ -54,6 +55,7 @@ export class MapService {
       waypoints: latlngArray,
       show: false
     }).addTo(this.map);
+    console.log("LOAD MAP - SHOW ROUTE");
   }
 
   loadCoordinatesArray(warehouses, latlngArray) {
@@ -61,5 +63,6 @@ export class MapService {
       let ltln = L.latLng(warehouses[i].latitude, warehouses[i].longitude);
       latlngArray.push(ltln);
     }
+    console.log("LOAD MAP - LOAD COORDINATES");
   }
 }
