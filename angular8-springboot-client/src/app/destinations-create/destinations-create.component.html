@@ -20,18 +20,13 @@
     </div>
 
     <div class="form-group">
-      <label for="lastDestination">Last Destination: </label>
-      <input type="text" formControlName="lastDestination" [(ngModel)]="lastWarehouse.name" class="form-control" id="lastDestination">
-    </div>
-
-    <div class="form-group">
       <button (click)="addNewDestination()" type="button" [disabled]="!routeForm.valid" class="btn btn-primary">Add new destination</button>
     </div>
 
     <div class="form-group" *ngFor = "let new of newDestinations, let index = index">
       <label>New Destination: </label>
-      <br>ID: {{destinations[index+2].id_warehouse}}
-      <select formControlName="newDestination" [(ngModel)]="destinations[index+2].id_warehouse" class="form-control">
+      <br>ID: {{destinations[index+1].id_warehouse}}
+      <select formControlName="newDestination" [(ngModel)]="destinations[index+1].id_warehouse" class="form-control">
         <option></option>
         <option *ngFor="let warehouse of warehouses | async" [ngValue]="warehouse.id">{{warehouse.name}}</option>
       </select>
@@ -40,16 +35,3 @@
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>
-
-<!--
-<div *ngFor="let dest of destinations, let index = index">
-  ID: {{destinations[index].id}}, ID_Route: {{destinations[index].id_route}}, ID_Warehouse: {{destinations[index].id_warehouse}}, Order: {{destinations[index].order}} <br>
-</div>
-
-<br>
-
-<div *ngFor="let war of wars, let index = index">
-  Warehouse: {{wars[index].id}}, Name: {{wars[index].name}}, Latitude: {{wars[index].latitude}}, Longitude: {{wars[index].longitude}}
-</div>
--->
-

@@ -23,16 +23,14 @@ export class DestinationsCreateComponent implements OnInit {
   warehouses: Observable<Warehouse[]>;
   destinations: Destination[] = [];
   firstWarehouse: Warehouse;
-  lastWarehouse: Warehouse;
   wars: Warehouse[] = [];
   newDestinations: number[] = [];
-  count = 2;
+  count = 1;
   submitted = false;
   distance: number[][] = [];
 
   destinationForm = this.fb.group({
     firstDestination: [{value: '', disabled: true}, Validators.required],
-    lastDestination: [{value: '', disabled: true}, Validators.required],
     newDestination: ['', Validators.required]
   });
 
@@ -60,19 +58,13 @@ export class DestinationsCreateComponent implements OnInit {
         console.log(data);
         this.route0 = data;
         this.destinations.push({id:1, id_route: this.id, id_warehouse: this.route0.id_first_warehouse, order: 1});
-        this.destinations.push({id:2, id_route: this.id, id_warehouse: this.route0.id_last_warehouse, order: 2});
 
         this.warehouseService.getWarehouse(this.route0.id_first_warehouse)
           .subscribe(first => {
             console.log(first);
             this.firstWarehouse = first;
-          })
+          }, error => console.log(error))
 
-        this.warehouseService.getWarehouse(this.route0.id_last_warehouse)
-          .subscribe(last => {
-            console.log(last);
-            this.lastWarehouse = last;
-          })
       }, error => console.log(error));
   }
 

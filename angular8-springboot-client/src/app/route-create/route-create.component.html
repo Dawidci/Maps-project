@@ -21,14 +21,6 @@
       </select>
     </div>
 
-    <div class="form-group">
-      <label for="id_last_warehouse">Last Warehouse: </label>
-      <select formControlName="id_last_warehouse" [(ngModel)]="route.id_last_warehouse" class="form-control" id="id_last_warehouse">
-        <option></option>
-        <option *ngFor="let warehouse of warehouses | async" [ngValue]="warehouse.id">{{warehouse.name}}</option>
-      </select>
-    </div>
-
     <button type="submit" [disabled]="!routeForm.valid" class="btn btn-success">Submit</button>
   </form>
 </div>

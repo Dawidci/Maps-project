@@ -30,8 +30,7 @@ export class RouteListComponent implements OnInit {
         data => {
           console.log(data);
           this.reloadData();
-        },
-        error => console.log(error));
+        },error => console.log(error));
   }
 
   routeDetails(id: number){
