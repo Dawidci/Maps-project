@@ -22,6 +22,11 @@ public class Route {
         this.name = name;
     }
 
+    public Route(String name, long id_first_warehouse) {
+        this.name = name;
+        this.id_first_warehouse = id_first_warehouse;
+    }
+
     public long getId() {
         return id;
     }
