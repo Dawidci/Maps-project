@@ -24,11 +24,6 @@ public class WarehouseController {
         return warehouseRepository.findAll();
     }
 
-    @GetMapping("test")
-    public String test() {
-        return "TEST";
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Warehouse> getWarehouseById(@PathVariable(value = "id") Long id)
             throws ResourceNotFoundException {

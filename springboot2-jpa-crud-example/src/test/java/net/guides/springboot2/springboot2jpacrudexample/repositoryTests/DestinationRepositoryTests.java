@@ -1,7 +1,6 @@
-package net.guides.springboot2.springboot2jpacrudexample;
+package net.guides.springboot2.springboot2jpacrudexample.repositoryTests;
 
 import net.guides.springboot2.springboot2jpacrudexample.model.Destination;
-import net.guides.springboot2.springboot2jpacrudexample.model.Route;
 import net.guides.springboot2.springboot2jpacrudexample.repository.DestinationRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,7 +15,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class DestinationTests  {
+public class DestinationRepositoryTests {
 
     @Autowired
     private TestEntityManager entityManager;
