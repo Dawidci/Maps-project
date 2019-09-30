@@ -1,5 +1,6 @@
 package net.guides.springboot2.springboot2jpacrudexample.controllerTests;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.guides.springboot2.springboot2jpacrudexample.controller.RouteController;
 import net.guides.springboot2.springboot2jpacrudexample.controller.WarehouseController;
 import net.guides.springboot2.springboot2jpacrudexample.model.Route;
@@ -18,7 +19,7 @@ import java.util.List;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,6 +44,50 @@ public class RouteControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].name").value(route.getName()));
+    }
 
+    @Test
+    public void createRoute() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        Route route = new Route("Route", 1);
+        String jsonString = mapper.writeValueAsString(route);
+
+        mvc.perform(post("/routes")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonString))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void deleteRoute() throws Exception {
+        mvc.perform(delete("/routes/0")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateRoute() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        Route route = new Route("Route", 1);
+        String jsonString = mapper.writeValueAsString(route);
+
+        mvc.perform(put("/routes/0")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonString))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getRouteById() throws Exception {
+        mvc.perform(get("/routes/0")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getRouteByName() throws Exception {
+        mvc.perform(get("/routes/name/nazwa_trasy")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }

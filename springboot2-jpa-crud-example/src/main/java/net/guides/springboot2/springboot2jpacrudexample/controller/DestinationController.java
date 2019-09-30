@@ -26,11 +26,6 @@ public class DestinationController {
         return destinationRepository.findAll();
     }
 
-    @GetMapping("test")
-    public String test() {
-        return "TEST";
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Destination> getDestinationById(@PathVariable(value = "id") Long id)
             throws ResourceNotFoundException {
@@ -42,7 +37,7 @@ public class DestinationController {
     }
 
     @GetMapping("/route/{idRoute}")
-    public List<Destination> getRouteByName(@PathVariable(value = "idRoute") int idRoute)
+    public List<Destination> getDestinationsByRouteName(@PathVariable(value = "idRoute") int idRoute)
             throws ResourceNotFoundException {
         List<Destination> destinations = destinationRepository
                 .findByIdRoute(idRoute);
