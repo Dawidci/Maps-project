@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8db15ed5-43e2-4a13-bc4b-0cadc9930cd4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/destination.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/destination.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/destinations-create/destinations-create.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/destinations-create/destinations-create.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/map.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-create/route-create.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-create/route-create.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-details/route-details.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-details/route-details.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-list/route-list.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-list/route-list.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse-create/warehouse-create.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-create/warehouse-create.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse-list/warehouse-list.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-list/warehouse-list.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse-update/warehouse-update.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-update/warehouse-update.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse.service.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route-details/route-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-details/route-details.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route-list/route-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/route-list/route-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route-list/route-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-list/route-list.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +83,9 @@
       <workItem from="1569566682039" duration="23518000" />
       <workItem from="1569679790218" duration="4691000" />
       <workItem from="1569742678495" duration="1840000" />
-      <workItem from="1569912320107" duration="5126000" />
+      <workItem from="1569912320107" duration="5776000" />
+      <workItem from="1569930554776" duration="939000" />
+      <workItem from="1570004141840" duration="1735000" />
     </task>
     <servers />
   </component>

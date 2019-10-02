@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 import { RouteService } from "../route.service";
+import { WarehouseService } from "../warehouse.service";
 import { Route } from "../route";
 import { Router } from '@angular/router';
 
@@ -11,9 +12,11 @@ import { Router } from '@angular/router';
 })
 export class RouteListComponent implements OnInit {
 
-  routes: Observable<Route[]>;
+  routes: Route[] = [];
+  warehouseNames: string[] = [];
 
   constructor(private routeService: RouteService,
+              private warehouseService: WarehouseService,
               private router: Router) {}
 
   ngOnInit() {
@@ -21,7 +24,25 @@ export class RouteListComponent implements OnInit {
   }
 
   reloadData() {
-    this.routes = this.routeService.getRoutesList();
+    this.loadRoutes();
+  }
+
+  loadRoutes() {
+    this.routeService.getRoutesList()
+      .subscribe(data => {
+        console.log(data);
+        this.routes = data;
+        this.loadWarehouseNames();
+      }, error => console.log(error));
+  }
+
+  loadWarehouseNames() {
+    for(let i = 0; i < this.routes.length; i++) {
+      this.warehouseService.getWarehouse(this.routes[i].id_first_warehouse)
+        .subscribe(warehouse => {
+          this.warehouseNames[i] = warehouse.name;
+        }, error => console.log(error));
+    }
   }
 
   deleteRoute(id: number) {

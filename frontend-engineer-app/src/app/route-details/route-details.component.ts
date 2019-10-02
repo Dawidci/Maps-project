@@ -33,7 +33,7 @@ export class RouteDetailsComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     await this.reloadData();
     await this.loadRoute();
-    await this.delay(100);
+    await this.delay(250);
     this.loadMap();
   }
 

@@ -12,15 +12,17 @@
         <th>ID</th>
         <th>Name</th>
         <th>ID First Warehouse</th>
+        <th>Warehouse Name</th>
         <th>Actions</th>
       </tr>
       </thead>
 
       <tbody>
-      <tr *ngFor="let route of routes | async">
+      <tr *ngFor="let route of routes, let index = index">
         <td>{{route.id}}</td>
         <td>{{route.name}}</td>
         <td>{{route.id_first_warehouse}}</td>
+        <td>{{warehouseNames[index]}}</td>
         <td>
           <button (click)="deleteRoute(route.id)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
           <button (click)="routeDetails(route.id)" class="btn btn-info" style="margin-left: 5px">Details</button>
