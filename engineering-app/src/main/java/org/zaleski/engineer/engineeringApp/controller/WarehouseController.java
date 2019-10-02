@@ -25,10 +25,8 @@ public class WarehouseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Warehouse> getWarehouseById(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
-        Warehouse warehouse = warehouseRepository
-                .findById(id)
+    public ResponseEntity<Warehouse> getWarehouseById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
+        Warehouse warehouse = warehouseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Warehouse not found for this id :: " + id));
 
         return ResponseEntity.ok().body(warehouse);
@@ -53,16 +51,13 @@ public class WarehouseController {
         warehouse.setSeaport(warehouseDetails.isSeaport());
 
         final Warehouse updatedWarehouse = warehouseRepository.save(warehouse);
-
         return ResponseEntity.ok(updatedWarehouse);
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteWarehouse(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
+    public Map<String, Boolean> deleteWarehouse(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
 
-        Warehouse warehouse = warehouseRepository
-                .findById(id)
+        Warehouse warehouse = warehouseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Warehouse not found for this id :: " + id));
 
         warehouseRepository.delete(warehouse);

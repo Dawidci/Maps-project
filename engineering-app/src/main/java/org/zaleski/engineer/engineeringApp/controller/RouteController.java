@@ -25,27 +25,17 @@ public class RouteController {
         return routeRepository.findAll();
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "TEST";
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<Route> getRouteById(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
-        Route route = routeRepository
-                .findById(id)
+    public ResponseEntity<Route> getRouteById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
+        Route route = routeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Route not found for this id :: " + id));
 
         return ResponseEntity.ok().body(route);
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<Route> getRouteByName(@PathVariable(value = "name") String name)
-            throws ResourceNotFoundException {
-        Route route = routeRepository
-                .findByName(name);
-
+    public ResponseEntity<Route> getRouteByName(@PathVariable(value = "name") String name) {
+        Route route = routeRepository.findByName(name);
         return ResponseEntity.ok().body(route);
     }
 
@@ -55,25 +45,20 @@ public class RouteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Route> updateRoute(@PathVariable(value = "id") Long id,
-                                                     @Valid @RequestBody Route routeDetails)
+    public ResponseEntity<Route> updateRoute(@PathVariable(value = "id") Long id, @Valid @RequestBody Route routeDetails)
             throws ResourceNotFoundException {
         Route route = routeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Route not found for this id :: " + id));
 
         route.setName(routeDetails.getName());
-
         final Route updatedRoute = routeRepository.save(route);
-
         return ResponseEntity.ok(updatedRoute);
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteRoute(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
+    public Map<String, Boolean> deleteRoute(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
 
-        Route route = routeRepository
-                .findById(id)
+        Route route = routeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Route not found for this id :: " + id));
 
         routeRepository.delete(route);

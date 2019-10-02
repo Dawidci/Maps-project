@@ -26,10 +26,8 @@ public class ResourceTypeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResourceType> getResourceTypeById(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
-        ResourceType resourceType = resourceTypeRepository
-                .findById(id)
+    public ResponseEntity<ResourceType> getResourceTypeById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
+        ResourceType resourceType = resourceTypeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Resource Type not found for this id :: " + id));
 
         return ResponseEntity.ok().body(resourceType);
@@ -54,11 +52,9 @@ public class ResourceTypeController {
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteResourceType(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
+    public Map<String, Boolean> deleteResourceType(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
 
-        ResourceType resourceType = resourceTypeRepository
-                .findById(id)
+        ResourceType resourceType = resourceTypeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Route not found for this id :: " + id));
 
         resourceTypeRepository.delete(resourceType);

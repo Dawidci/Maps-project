@@ -26,21 +26,16 @@ public class DestinationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Destination> getDestinationById(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
-        Destination destination = destinationRepository
-                .findById(id)
+    public ResponseEntity<Destination> getDestinationById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
+        Destination destination = destinationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Destination not found for this id :: " + id));
 
         return ResponseEntity.ok().body(destination);
     }
 
     @GetMapping("/route/{idRoute}")
-    public List<Destination> getDestinationsByRouteName(@PathVariable(value = "idRoute") int idRoute)
-            throws ResourceNotFoundException {
-        List<Destination> destinations = destinationRepository
-                .findByIdRoute(idRoute);
-
+    public List<Destination> getDestinationsByRouteName(@PathVariable(value = "idRoute") int idRoute) {
+        List<Destination> destinations = destinationRepository.findByIdRoute(idRoute);
         return destinations;
     }
 
@@ -61,16 +56,13 @@ public class DestinationController {
         destination.setOrder(destinationDetails.getOrder());
 
         final Destination updatedDestination = destinationRepository.save(destination);
-
         return ResponseEntity.ok(updatedDestination);
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteDestination(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
+    public Map<String, Boolean> deleteDestination(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
 
-        Destination destination = destinationRepository
-                .findById(id)
+        Destination destination = destinationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Destination not found for this id :: " + id));
 
         destinationRepository.delete(destination);
