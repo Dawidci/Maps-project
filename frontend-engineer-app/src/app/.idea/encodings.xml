@@ -2,12 +2,17 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app-routing.module.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app.module.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/destination.service.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/destinations-create/destinations-create.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/destinations-create/destinations-create.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/map.service.spec.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resource-type-create/resource-type-create.component.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resource-type-list/resource-type-list.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resource-type-update/resource-type-update.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resource-type.service.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route-create/route-create.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route-create/route-create.component.spec.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route-details/route-details.component.html" charset="UTF-8" />

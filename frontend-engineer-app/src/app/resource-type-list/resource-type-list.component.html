@@ -1,0 +1,30 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Resource Type List</h2>
+  </div>
+
+  <div class="panel-body">
+    <table class="table table-striped">
+
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let resourceType of resourceTypes | async">
+        <td>{{resourceType.id}}</td>
+        <td>{{resourceType.name}}</td>
+        <td>
+          <button (click)="deleteResourceType(resourceType.id)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
+          <button (click)="updateResourceType(resourceType.id)" class="btn btn-warning" style="margin-left: 5px">Update</button>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

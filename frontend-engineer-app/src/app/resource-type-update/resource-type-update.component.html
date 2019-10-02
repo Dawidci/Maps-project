@@ -1,0 +1,15 @@
+<h2>Update Resource Type</h2>
+
+<hr>
+
+<div [hidden]="submitted" style="width: 400px;">
+  <form [formGroup]="resourceTypeForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="name">Name: </label>
+      <input type="text" formControlName="name" [(ngModel)]="resourceType.name" class="form-control" id="name">
+    </div>
+
+    <button type="submit" [disabled]="!resourceTypeForm.valid" class="btn btn-success">Submit</button>
+  </form>
+</div>

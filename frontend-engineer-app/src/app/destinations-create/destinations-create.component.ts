@@ -31,7 +31,7 @@ export class DestinationsCreateComponent implements OnInit {
 
   destinationForm = this.fb.group({
     firstDestination: [{value: '', disabled: true}, Validators.required],
-    newDestination: ['', Validators.required]
+    newDestination: ['']
   });
 
   constructor(private route: ActivatedRoute,
@@ -85,7 +85,7 @@ export class DestinationsCreateComponent implements OnInit {
 
   async save() {
     await this.loadWarehouses();
-    await this.delay(100);
+    await this.delay(250);
     await this.computeDistance();
     await this.computeOrder();
     await this.createDestinations();

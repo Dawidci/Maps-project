@@ -12,6 +12,9 @@ import { RouteCreateComponent } from './route-create/route-create.component';
 import { RouteListComponent } from './route-list/route-list.component';
 import { RouteDetailsComponent } from './route-details/route-details.component';
 import { DestinationsCreateComponent } from './destinations-create/destinations-create.component';
+import { ResourceTypeCreateComponent } from './resource-type-create/resource-type-create.component';
+import { ResourceTypeListComponent } from './resource-type-list/resource-type-list.component';
+import { ResourceTypeUpdateComponent } from './resource-type-update/resource-type-update.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { DestinationsCreateComponent } from './destinations-create/destinations-
     RouteListComponent,
     RouteDetailsComponent,
     DestinationsCreateComponent,
+    ResourceTypeCreateComponent,
+    ResourceTypeListComponent,
+    ResourceTypeUpdateComponent,
   ],
   imports: [
     BrowserModule,

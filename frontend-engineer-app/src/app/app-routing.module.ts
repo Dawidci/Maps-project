@@ -7,6 +7,9 @@ import { RouteCreateComponent } from "./route-create/route-create.component";
 import { RouteListComponent } from "./route-list/route-list.component";
 import { RouteDetailsComponent } from "./route-details/route-details.component";
 import { DestinationsCreateComponent } from "./destinations-create/destinations-create.component";
+import {ResourceTypeCreateComponent} from "./resource-type-create/resource-type-create.component";
+import {ResourceTypeListComponent} from "./resource-type-list/resource-type-list.component";
+import {ResourceTypeUpdateComponent} from "./resource-type-update/resource-type-update.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'warehouses', pathMatch: 'full' },
@@ -19,7 +22,11 @@ const routes: Routes = [
   { path: 'routes/list', component: RouteListComponent },
   { path: 'routes/details/:id', component: RouteDetailsComponent },
 
-  { path: 'destinations/create/route/:id', component: DestinationsCreateComponent }
+  { path: 'resource-types', component: ResourceTypeListComponent },
+  { path: 'resource-types/add', component: ResourceTypeCreateComponent },
+  { path: 'resource-types/update/:id', component: ResourceTypeUpdateComponent },
+
+  { path: 'destinations/create/route/:id', component: DestinationsCreateComponent },
 ];
 
 @NgModule({
