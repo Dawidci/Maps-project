@@ -7,6 +7,9 @@ import { WarehouseService } from "../warehouse.service";
 import { Destination } from "../destination";
 import { DestinationService } from "../destination.service";
 import { MapService} from "../map.service";
+import {Resource} from "../resource";
+import {ResourceService} from "../resource.service";
+import {ResourceTypeService} from "../resource-type.service";
 
 @Component({
   selector: 'app-warehouse-details',
@@ -17,12 +20,16 @@ export class WarehouseDetailsComponent implements OnInit {
 
   id: number;
   warehouse: Warehouse;
+  resources: Resource[] = [];
+  resourceNames: string[] =[];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private routeService: RouteService,
               private warehouseService: WarehouseService,
               private mapsService: MapService,
+              private resourceService: ResourceService,
+              private resourceTypeService: ResourceTypeService,
               private destinationService: DestinationService) { }
 
   async ngOnInit() {
@@ -39,6 +46,22 @@ export class WarehouseDetailsComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.warehouse = data;
+
+        this.resourceService.getResourcesByIdWarehouse(this.id)
+          .subscribe(resources => {
+            console.log(resources);
+            this.resources = resources;
+
+            for(let i = 0; i < this.resources.length; i++) {
+              this.resourceTypeService.getResourceType(this.resources[i].idResourceType)
+                .subscribe(resourceType => {
+                  console.log(resourceType);
+                  this.resourceNames[i] = resourceType;
+                }, error => console.log(error));
+            }
+
+          }, error => console.log(error));
+
       }, error => console.log(error));
   }
 

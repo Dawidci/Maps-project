@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8db15ed5-43e2-4a13-bc4b-0cadc9930cd4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/map.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-details/route-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/route-details/route-details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-details/route-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-details/route-details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse-list/warehouse-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-list/warehouse-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse-list/warehouse-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-list/warehouse-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource-type-list/resource-type-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/resource-type-list/resource-type-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource-type-list/resource-type-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/resource-type-list/resource-type-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/resource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehouse-details/warehouse-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-details/warehouse-details.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warehouse-details/warehouse-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-details/warehouse-details.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +88,7 @@
       <workItem from="1569912320107" duration="5776000" />
       <workItem from="1569930554776" duration="939000" />
       <workItem from="1570004141840" duration="15317000" />
-      <workItem from="1570086283909" duration="5217000" />
+      <workItem from="1570086283909" duration="8643000" />
     </task>
     <servers />
   </component>

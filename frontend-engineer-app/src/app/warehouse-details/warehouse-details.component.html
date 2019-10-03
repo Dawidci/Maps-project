@@ -23,11 +23,10 @@
 
 <br>
 
-<!--
 <div class="panel panel-primary">
 
   <div class="panel-heading">
-    <h2>Warehouse List</h2>
+    <h2>Resources List</h2>
   </div>
 
   <div class="panel-body">
@@ -36,20 +35,18 @@
       <thead>
       <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
-        <th>Order</th>
+        <th>ID Resource Type</th>
+        <th>Resource Name</th>
+        <th>Quantity</th>
       </tr>
       </thead>
 
       <tbody>
-      <tr *ngFor="let warehouse of warehouses, let index = index">
-        <td>{{warehouse.id}}</td>
-        <td>{{warehouse.name}}</td>
-        <td>{{warehouse.latitude}}</td>
-        <td>{{warehouse.longitude}}</td>
-        <td>{{destinations[index].order}}</td>
+      <tr *ngFor="let resource of resources, let index = index">
+        <td>{{resource.id}}</td>
+        <td>{{resource.idResourceType}}</td>
+        <td>{{resourceNames[index].name}}</td>
+        <td>{{resource.quantity}}</td>
       </tr>
       </tbody>
 
@@ -58,4 +55,3 @@
 </div>
 
 <button (click)="list()" class="btn btn-primary">Back to Route List</button><br>
--->

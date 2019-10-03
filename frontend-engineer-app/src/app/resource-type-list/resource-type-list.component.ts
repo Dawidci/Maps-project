@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 import { ResourceType } from "../resource-type";
 import { ResourceTypeService } from "../resource-type.service";
+import {ResourceService} from "../resource.service";
 
 @Component({
   selector: 'app-resource-type-list',
@@ -12,9 +13,11 @@ import { ResourceTypeService } from "../resource-type.service";
 export class ResourceTypeListComponent implements OnInit {
 
   resourceTypes: Observable<ResourceType[]>;
-  map: any;
+  resourceTypeQuantity: number[] = [];
+  types: ResourceType[] = [];
 
   constructor(private resourceTypeService: ResourceTypeService,
+              private resourceService: ResourceService,
               private router: Router) {}
 
   ngOnInit() {
@@ -22,7 +25,26 @@ export class ResourceTypeListComponent implements OnInit {
   }
 
   reloadData() {
-    this.resourceTypes = this.resourceTypeService.getResourceTypesList();
+   this.resourceTypes = this.resourceTypeService.getResourceTypesList();
+
+    this.resourceTypeService.getResourceTypesList()
+      .subscribe(resourceTypes => {
+        console.log(resourceTypes);
+        this.types = resourceTypes;
+
+        for(let i = 0; i < this.types.length; i++) {
+          this.resourceService.getResourcesByIdResourceType(this.types[i].id)
+            .subscribe(resources => {
+              console.log(resources);
+              this.resourceTypeQuantity[i] = 0;
+
+              for(let j = 0; j < resources.length; j++) {
+                this.resourceTypeQuantity[i] += resources[j].quantity;
+              }
+            }, error => console.log(error));
+        }
+
+      }, error => console.log(error));
   }
 
   deleteResourceType(id: number) {

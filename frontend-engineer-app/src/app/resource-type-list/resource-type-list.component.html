@@ -10,14 +10,16 @@
       <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Quantity</th>
         <th>Actions</th>
       </tr>
       </thead>
 
       <tbody>
-      <tr *ngFor="let resourceType of resourceTypes | async">
+      <tr *ngFor="let resourceType of resourceTypes | async, let index = index">
         <td>{{resourceType.id}}</td>
         <td>{{resourceType.name}}</td>
+        <td>{{resourceTypeQuantity[index]}}</td>
         <td>
           <button (click)="deleteResourceType(resourceType.id)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
           <button (click)="updateResourceType(resourceType.id)" class="btn btn-warning" style="margin-left: 5px">Update</button>

@@ -1,6 +1,6 @@
 export class Resource {
   id: number;
-  id_resource_type: number;
-  id_warehouse: number;
+  idResourceType: number;
+  idWarehouse: number;
   quantity: number;
 }
