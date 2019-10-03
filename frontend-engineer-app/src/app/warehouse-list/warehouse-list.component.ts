@@ -41,5 +41,9 @@ export class WarehouseListComponent implements OnInit {
   updateWarehouse(id: number) {
     this.router.navigate(['warehouses/update', id]);
   }
+
+  warehouseDetails(id: number) {
+    this.router.navigate(['warehouses/details', id]);
+  }
 }
 

@@ -91,7 +91,7 @@ export class RouteDetailsComponent implements OnInit {
     console.log("LOAD MAP - SHOW ALERT");
   }
 
-  list(){
+  goToRoutelist(){
     this.router.navigate(['routes/list']);
   }
 }

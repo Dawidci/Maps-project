@@ -7,9 +7,10 @@ import { RouteCreateComponent } from "./route-create/route-create.component";
 import { RouteListComponent } from "./route-list/route-list.component";
 import { RouteDetailsComponent } from "./route-details/route-details.component";
 import { DestinationsCreateComponent } from "./destinations-create/destinations-create.component";
-import {ResourceTypeCreateComponent} from "./resource-type-create/resource-type-create.component";
-import {ResourceTypeListComponent} from "./resource-type-list/resource-type-list.component";
-import {ResourceTypeUpdateComponent} from "./resource-type-update/resource-type-update.component";
+import { ResourceTypeCreateComponent } from "./resource-type-create/resource-type-create.component";
+import { ResourceTypeListComponent } from "./resource-type-list/resource-type-list.component";
+import { ResourceTypeUpdateComponent } from "./resource-type-update/resource-type-update.component";
+import { WarehouseDetailsComponent } from "./warehouse-details/warehouse-details.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'warehouses', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'warehouses', component: WarehouseListComponent },
   { path: 'warehouses/add', component: WarehouseCreateComponent },
   { path: 'warehouses/update/:id', component: WarehouseUpdateComponent },
+  { path: 'warehouses/details/:id', component: WarehouseDetailsComponent },
 
   { path: 'routes/add', component: RouteCreateComponent },
   { path: 'routes/list', component: RouteListComponent },

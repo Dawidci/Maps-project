@@ -1,22 +1,29 @@
-<h2>Route Details</h2>
+<h2>Warehouse Details</h2>
 
 <div id="map">
 </div>
 
 <hr/>
 
-<div *ngIf="route0">
+<div *ngIf="warehouse">
 
   <div>
-    <label><b>Name: </b></label> {{route0.name}}
+    <label><b>Name: </b></label> {{warehouse.name}}
   </div>
+
   <div>
-    <label><b>First Warehouse: </b></label> {{warehouses[0].name}}
+    <label><b>Latitude: </b></label> {{warehouse.latitude}}
   </div>
+
+  <div>
+    <label><b>Longitude: </b></label> {{warehouse.longitude}}
+  </div>
+
 </div>
 
 <br>
 
+<!--
 <div class="panel panel-primary">
 
   <div class="panel-heading">
@@ -50,4 +57,5 @@
   </div>
 </div>
 
-<button (click)="goToRoutelist()" class="btn btn-primary">Back to Route List</button><br>
+<button (click)="list()" class="btn btn-primary">Back to Route List</button><br>
+-->

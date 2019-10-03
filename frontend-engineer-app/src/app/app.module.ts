@@ -15,6 +15,7 @@ import { DestinationsCreateComponent } from './destinations-create/destinations-
 import { ResourceTypeCreateComponent } from './resource-type-create/resource-type-create.component';
 import { ResourceTypeListComponent } from './resource-type-list/resource-type-list.component';
 import { ResourceTypeUpdateComponent } from './resource-type-update/resource-type-update.component';
+import { WarehouseDetailsComponent } from './warehouse-details/warehouse-details.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ResourceTypeUpdateComponent } from './resource-type-update/resource-typ
     ResourceTypeCreateComponent,
     ResourceTypeListComponent,
     ResourceTypeUpdateComponent,
+    WarehouseDetailsComponent,
   ],
   imports: [
     BrowserModule,
