@@ -18,8 +18,10 @@ export class WarehouseDetailsComponent implements OnInit {
   id: number;
   warehouse: Warehouse;
   resources: Resource [] = [];
-  resourceNames: string [] = [];
+  resourceNames: Resource [] = [];
   resourceQuantity: number [] = [];
+  newResource: Resource;
+  addResourceType: Resource [] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -29,18 +31,48 @@ export class WarehouseDetailsComponent implements OnInit {
               private resourceTypeService: ResourceTypeService) { }
 
   async ngOnInit() {
+    await this.delay(100);
+
     this.warehouse = new Warehouse();
+    this.newResource = new Resource();
     this.id = this.route.snapshot.params['id'];
+    this.newResource.idWarehouse = this.id;
 
     await this.loadWarehouse();
     await this.delay(250);
+    await this.loadResourceTypes();
     this.loadMap();
+  }
+
+  loadResourceTypes() {
+    this.addResourceType.length = 0;
+    this.resourceTypeService.getResourceTypesList()
+      .subscribe(types => {
+
+        for(let i = 0; i < types.length; i++) {
+
+          let push = true;
+
+          for(let j = 0; j < this.resourceNames.length; j++) {
+            if(types[i].id == this.resourceNames[j].id) {
+              push = false;
+              break;
+            }
+          }
+
+          if(push == true) {
+            console.log(types[i]);
+            this.addResourceType.push(types[i]);
+          }
+
+        }
+      });
   }
 
   loadWarehouse() {
     this.warehouseService.getWarehouse(this.id)
       .subscribe(data => {
-        console.log(data);
+        console.log("LOAD");
         this.warehouse = data;
         this.getResources();
       }, error => console.log(error));
@@ -49,13 +81,12 @@ export class WarehouseDetailsComponent implements OnInit {
   getResources() {
     this.resourceService.getResourcesByIdWarehouse(this.id)
       .subscribe(resources => {
-        console.log(resources);
         this.resources = resources;
         this.getResourcesTypeNames();
       }, error => console.log(error));
   }
 
-  getResourcesTypeNames() {
+  async getResourcesTypeNames() {
     for(let i = 0; i < this.resources.length; i++) {
       this.resourceTypeService.getResourceType(this.resources[i].idResourceType)
         .subscribe(resourceType => {
@@ -74,11 +105,14 @@ export class WarehouseDetailsComponent implements OnInit {
     await this.mapsService.showWarehouse(this.warehouse);
   }
 
-  deleteResource(id: number) {
+  async deleteResource(id: number) {
+    await this.delay(100);
+
     this.resourceService.deleteResource(id)
       .subscribe(data => {
           console.log(data);
-          this.loadWarehouse();
+          //this.loadWarehouse();
+          this.ngOnInit();
         },error => console.log(error));
   }
 
@@ -88,6 +122,17 @@ export class WarehouseDetailsComponent implements OnInit {
       .subscribe(newResource => {
         console.log(newResource);
       }, error => console.log(error));
+  }
+
+  addResource() {
+    console.log(this.newResource);
+
+    this.resourceService.createResource(this.newResource)
+      .subscribe(newResource => {
+        console.log(newResource);
+      }, error => console.log(error));
+
+    this.ngOnInit();
   }
 
   goToWarehouselist(){

@@ -35,7 +35,6 @@
       <thead>
       <tr>
         <th>ID</th>
-        <th>ID Resource Type</th>
         <th>Resource Name</th>
         <th>Quantity</th>
         <th>Change Quantity</th>
@@ -46,15 +45,31 @@
       <tbody>
       <tr *ngFor="let resource of resources, let index = index">
         <td>{{resource.id}}</td>
-        <td>{{resource.idResourceType}}</td>
         <td>{{resourceNames[index].name}}</td>
         <td>{{resource.quantity}}</td>
         <td>
-          <input type="number" [(ngModel)]="resourceQuantity[index]">
+          <input type="number" [(ngModel)]="resourceQuantity[index]" class="form-control">
         </td>
         <td>
           <button (click)="deleteResource(resource.id)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
           <button (click)="updateResource(resource.id, index)" class="btn btn-warning" style="margin-left: 5px">Update</button>
+        </td>
+      </tr>
+
+      <tr *ngIf="addResourceType.length > 0">
+        <td></td>
+        <td>
+          <select [(ngModel)]="newResource.idResourceType" class="form-control">
+            <option></option>
+            <option *ngFor="let resourceType of addResourceType" [ngValue]="resourceType.id">{{resourceType.name}}</option>
+          </select>
+        </td>
+        <td></td>
+        <td>
+          <input type="number" [(ngModel)]="newResource.quantity" class="form-control">
+        </td>
+        <td>
+          <button (click)="addResource()" class="btn btn-secondary" style="margin-left: 5px">Add Resource</button>
         </td>
       </tr>
       </tbody>
