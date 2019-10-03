@@ -16,10 +16,12 @@
     <file url="file://$PROJECT_DIR$/route-create/route-create.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route-create/route-create.component.spec.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route-details/route-details.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/route-details/route-details.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route-list/route-list.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/route.service.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-create/warehouse-create.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-details/warehouse-details.component.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warehouse-details/warehouse-details.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-list/warehouse-list.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-update/warehouse-update.component.html" charset="UTF-8" />
   </component>

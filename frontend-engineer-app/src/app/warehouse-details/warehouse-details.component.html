@@ -38,6 +38,8 @@
         <th>ID Resource Type</th>
         <th>Resource Name</th>
         <th>Quantity</th>
+        <th>Change Quantity</th>
+        <th>Actions</th>
       </tr>
       </thead>
 
@@ -47,6 +49,13 @@
         <td>{{resource.idResourceType}}</td>
         <td>{{resourceNames[index].name}}</td>
         <td>{{resource.quantity}}</td>
+        <td>
+          <input type="number" [(ngModel)]="resourceQuantity[index]">
+        </td>
+        <td>
+          <button (click)="deleteResource(resource.id)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
+          <button (click)="updateResource(resource.id, index)" class="btn btn-warning" style="margin-left: 5px">Update</button>
+        </td>
       </tr>
       </tbody>
 
@@ -54,4 +63,4 @@
   </div>
 </div>
 
-<button (click)="list()" class="btn btn-primary">Back to Route List</button><br>
+<button (click)="goToWarehouselist()" class="btn btn-primary">Back to Warehouses List</button><br>

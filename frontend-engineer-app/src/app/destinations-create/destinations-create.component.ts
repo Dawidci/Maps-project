@@ -175,6 +175,6 @@ export class DestinationsCreateComponent implements OnInit {
   }
 
   gotoList() {
-    this.router.navigate(['/routes/list']);
+    this.router.navigate(['/routes']);
   }
 }

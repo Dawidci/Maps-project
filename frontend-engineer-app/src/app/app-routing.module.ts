@@ -20,8 +20,8 @@ const routes: Routes = [
   { path: 'warehouses/update/:id', component: WarehouseUpdateComponent },
   { path: 'warehouses/details/:id', component: WarehouseDetailsComponent },
 
+  { path: 'routes', component: RouteListComponent },
   { path: 'routes/add', component: RouteCreateComponent },
-  { path: 'routes/list', component: RouteListComponent },
   { path: 'routes/details/:id', component: RouteDetailsComponent },
 
   { path: 'resource-types', component: ResourceTypeListComponent },

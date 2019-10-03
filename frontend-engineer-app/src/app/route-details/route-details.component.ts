@@ -92,6 +92,6 @@ export class RouteDetailsComponent implements OnInit {
   }
 
   goToRoutelist(){
-    this.router.navigate(['routes/list']);
+    this.router.navigate(['routes']);
   }
 }

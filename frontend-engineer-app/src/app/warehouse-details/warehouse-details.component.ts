@@ -1,36 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { Route } from '../route';
-import { RouteService } from '../route.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Warehouse } from "../warehouse";
 import { WarehouseService } from "../warehouse.service";
-import { Destination } from "../destination";
-import { DestinationService } from "../destination.service";
-import { MapService} from "../map.service";
-import {Resource} from "../resource";
-import {ResourceService} from "../resource.service";
-import {ResourceTypeService} from "../resource-type.service";
+import { MapService } from "../map.service";
+import { Resource } from "../resource";
+import { ResourceService } from "../resource.service";
+import { ResourceTypeService } from "../resource-type.service";
 
 @Component({
   selector: 'app-warehouse-details',
   templateUrl: './warehouse-details.component.html',
   styleUrls: ['./warehouse-details.component.css']
 })
+
 export class WarehouseDetailsComponent implements OnInit {
 
   id: number;
   warehouse: Warehouse;
-  resources: Resource[] = [];
-  resourceNames: string[] =[];
+  resources: Resource [] = [];
+  resourceNames: string [] = [];
+  resourceQuantity: number [] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private routeService: RouteService,
               private warehouseService: WarehouseService,
               private mapsService: MapService,
               private resourceService: ResourceService,
-              private resourceTypeService: ResourceTypeService,
-              private destinationService: DestinationService) { }
+              private resourceTypeService: ResourceTypeService) { }
 
   async ngOnInit() {
     this.warehouse = new Warehouse();
@@ -46,23 +42,27 @@ export class WarehouseDetailsComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.warehouse = data;
-
-        this.resourceService.getResourcesByIdWarehouse(this.id)
-          .subscribe(resources => {
-            console.log(resources);
-            this.resources = resources;
-
-            for(let i = 0; i < this.resources.length; i++) {
-              this.resourceTypeService.getResourceType(this.resources[i].idResourceType)
-                .subscribe(resourceType => {
-                  console.log(resourceType);
-                  this.resourceNames[i] = resourceType;
-                }, error => console.log(error));
-            }
-
-          }, error => console.log(error));
-
+        this.getResources();
       }, error => console.log(error));
+  }
+
+  getResources() {
+    this.resourceService.getResourcesByIdWarehouse(this.id)
+      .subscribe(resources => {
+        console.log(resources);
+        this.resources = resources;
+        this.getResourcesTypeNames();
+      }, error => console.log(error));
+  }
+
+  getResourcesTypeNames() {
+    for(let i = 0; i < this.resources.length; i++) {
+      this.resourceTypeService.getResourceType(this.resources[i].idResourceType)
+        .subscribe(resourceType => {
+          console.log(resourceType);
+          this.resourceNames[i] = resourceType;
+        }, error => console.log(error));
+    }
   }
 
   delay(ms: number) {
@@ -74,7 +74,23 @@ export class WarehouseDetailsComponent implements OnInit {
     await this.mapsService.showWarehouse(this.warehouse);
   }
 
-  list(){
-    this.router.navigate(['warehouses/list']);
+  deleteResource(id: number) {
+    this.resourceService.deleteResource(id)
+      .subscribe(data => {
+          console.log(data);
+          this.loadWarehouse();
+        },error => console.log(error));
+  }
+
+  updateResource(id: number, index: number) {
+    this.resources[index].quantity = this.resourceQuantity[index];
+    this.resourceService.updateResource(id, this.resources[index])
+      .subscribe(newResource => {
+        console.log(newResource);
+      }, error => console.log(error));
+  }
+
+  goToWarehouselist(){
+    this.router.navigate(['warehouses']);
   }
 }
