@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8db15ed5-43e2-4a13-bc4b-0cadc9930cd4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/ResourceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/model/Resource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/repository/ResourceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/DestinationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/DestinationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/ResourceTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/ResourceTypeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/RouteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/RouteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/WarehouseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/WarehouseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Inżynierka/_Analysis.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Inżynierka/_Analysis.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Inżynierka/~$nalysis.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Inżynierka/~$nalysis.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/model/Resource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/model/Resource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -89,7 +86,8 @@
       <workItem from="1569742678495" duration="1840000" />
       <workItem from="1569912320107" duration="5776000" />
       <workItem from="1569930554776" duration="939000" />
-      <workItem from="1570004141840" duration="14718000" />
+      <workItem from="1570004141840" duration="15317000" />
+      <workItem from="1570086283909" duration="2104000" />
     </task>
     <servers />
   </component>

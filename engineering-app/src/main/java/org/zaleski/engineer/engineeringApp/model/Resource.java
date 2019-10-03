@@ -19,6 +19,8 @@ public class Resource {
     @Column(name = "quantity", nullable = false)
     private long quantity;
 
+    public Resource() {}
+
     public Resource(long idResourceType, long idWarehouse, long quantity) {
         this.idResourceType = idResourceType;
         this.idWarehouse = idWarehouse;
