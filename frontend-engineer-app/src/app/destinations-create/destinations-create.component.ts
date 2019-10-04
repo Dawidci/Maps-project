@@ -10,6 +10,10 @@ import { WarehouseService } from "../warehouse.service";
 import { Destination } from "../destination";
 import { DestinationService } from "../destination.service";
 import { MapService} from "../map.service";
+import { ResourceTypeService } from "../resource-type.service";
+import { ResourceType } from "../resource-type";
+import { Resource } from "../resource";
+import {ResourceService} from "../resource.service";
 
 @Component({
   selector: 'app-destinations-create',
@@ -28,10 +32,19 @@ export class DestinationsCreateComponent implements OnInit {
   count = 1;
   submitted = false;
   distance: number[][] = [];
+  resourceTypes: ResourceType[] = [];
+  resource: Resource;
+  resourceWarehouses: Warehouse[] = [];
+  resources: Resource[] = [];
+  resourceDestinations: Destination[][] = [];
+  resourceMatrix: Resource[][] = [];
+
 
   destinationForm = this.fb.group({
     firstDestination: [{value: '', disabled: true}, Validators.required],
-    newDestination: ['']
+    newDestination: [''],
+    resource: [''],
+    quantity: [0],
   });
 
   constructor(private route: ActivatedRoute,
@@ -39,17 +52,29 @@ export class DestinationsCreateComponent implements OnInit {
               private routeService: RouteService,
               private warehouseService: WarehouseService,
               private destinationService: DestinationService,
+              private resourceTypeService: ResourceTypeService,
+              private resourceService: ResourceService,
               private mapService: MapService,
               private fb: FormBuilder) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.route0 = new Route();
+    this.resource = new Resource();
 
     this.reloadData();
+    this.getResourceTypes();
     this.mapService.initializeMap();
     this.mapService.showWarehouses();
     this.loadRoute();
+  }
+
+  getResourceTypes() {
+    this.resourceTypeService.getResourceTypesList()
+      .subscribe(resourceTypes => {
+        console.log(resourceTypes);
+        this.resourceTypes = resourceTypes;
+      }, error => console.log(error));
   }
 
   loadRoute() {
@@ -63,7 +88,7 @@ export class DestinationsCreateComponent implements OnInit {
           .subscribe(first => {
             console.log(first);
             this.firstWarehouse = first;
-          }, error => console.log(error))
+          }, error => console.log(error));
 
       }, error => console.log(error));
   }
@@ -82,6 +107,63 @@ export class DestinationsCreateComponent implements OnInit {
     this.submitted = true;
     this.save();
   }
+
+  createRouteByResource() {
+    //this.submitted = true;
+    //getResourcesByIdResourceType();
+    //
+
+    this.saveByResource();
+  }
+
+  saveByResource() {
+    this.resourceTypeService.getResourceType(this.resource.idResourceType)
+      .subscribe(type => {
+        console.log(type);
+        let totalQuantity = 0;
+
+        this.resourceService.getResourcesByIdResourceType(type.id)
+          .subscribe(resources => {
+            console.log(resources);
+            this.resources = resources;
+
+            for(let i = 0; i < resources.length; i++) {
+              totalQuantity += resources[i].quantity;
+            }
+
+            this.getResourceMatrix(resources);
+
+          }, error => console.log(error));
+
+      });
+  }
+
+  getResourceMatrix(resources) {
+    let localResources = resources;
+    console.log(this.resource.quantity);
+
+    for(let i = 0; i < localResources.length; i++) {
+      localResources.sort((a,b) => b.quantity - a.quantity);
+      console.log(localResources[i]);
+
+      if(localResources[i].quantity >= this.resource.quantity) {
+        this.resourceMatrix[i].push(localResources[i]);
+        this.resourceMatrix[i].push(localResources[i]);
+      }
+    }
+
+    for(let i = 0; i < localResources.length; i++) {
+      console.log(this.resourceMatrix[i]);
+    }
+
+
+
+    console.log(this.resourceMatrix);
+
+
+
+  }
+
 
   async save() {
     await this.loadWarehouses();
