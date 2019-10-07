@@ -34,10 +34,8 @@ export class DestinationsCreateComponent implements OnInit {
   distance: number[][] = [];
   resourceTypes: ResourceType[] = [];
   resource: Resource;
-  resourceWarehouses: Warehouse[] = [];
   resources: Resource[] = [];
-  resourceDestinations: Destination[][] = [];
-  resourceMatrix: Resource[][] = [];
+  result: Resource[][] = [];
 
 
   destinationForm = this.fb.group({
@@ -109,14 +107,12 @@ export class DestinationsCreateComponent implements OnInit {
   }
 
   createRouteByResource() {
-    //this.submitted = true;
-    //getResourcesByIdResourceType();
-    //
-
+    this.submitted = true;
     this.saveByResource();
+    console.log(this.destinations);
   }
 
-  saveByResource() {
+  loadEverything() {
     this.resourceTypeService.getResourceType(this.resource.idResourceType)
       .subscribe(type => {
         console.log(type);
@@ -133,39 +129,51 @@ export class DestinationsCreateComponent implements OnInit {
 
             this.getResourceMatrix(resources);
 
+            for(let i = 0; i < this.result[0].length; i++) {
+              this.warehouseService.getWarehouse(this.result[0][i].idWarehouse)
+                .subscribe(warehouse => {
+                  console.log(warehouse);
+                  this.count++;
+                  this.destinations.push({id: this.count, id_route: this.id, id_warehouse: warehouse.id, order: this.count});
+                });
+            }
+
           }, error => console.log(error));
 
       });
   }
 
   getResourceMatrix(resources) {
-    let localResources = resources;
-    console.log(this.resource.quantity);
+    resources.sort((a,b) => b.quantity - a.quantity);
 
-    for(let i = 0; i < localResources.length; i++) {
-      localResources.sort((a,b) => b.quantity - a.quantity);
-      console.log(localResources[i]);
+    for(let i = 0; i < resources.length; i++) {
+      let sum = 0;
+      let localMatrix: Resource[] = [];
 
-      if(localResources[i].quantity >= this.resource.quantity) {
-        this.resourceMatrix[i].push(localResources[i]);
-        this.resourceMatrix[i].push(localResources[i]);
+      for(let j = i; j < resources.length; j++) {
+        localMatrix.push(resources[j]);
+        sum += resources[j].quantity;
+
+        if(sum >= this.resource.quantity) {
+          this.result[i] = localMatrix;
+          break;
+        }
       }
     }
-
-    for(let i = 0; i < localResources.length; i++) {
-      console.log(this.resourceMatrix[i]);
-    }
-
-
-
-    console.log(this.resourceMatrix);
-
-
-
   }
 
-
   async save() {
+    await this.loadWarehouses();
+    await this.delay(250);
+    await this.computeDistance();
+    await this.computeOrder();
+    await this.createDestinations();
+    this.gotoList();
+  }
+
+  async saveByResource() {
+    await this.loadEverything();
+    await this.delay(250);
     await this.loadWarehouses();
     await this.delay(250);
     await this.computeDistance();
@@ -220,6 +228,7 @@ export class DestinationsCreateComponent implements OnInit {
     let dist = 10000000;
     let newStart = 0;
     let count = 1;
+    console.log(this.wars.length);
 
     for(let i = 0; i < this.wars.length; i++) {
       console.log("START: " + start + ", WAR: " + this.wars[start].id);
