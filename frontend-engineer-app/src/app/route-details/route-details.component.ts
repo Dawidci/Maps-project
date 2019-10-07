@@ -7,6 +7,10 @@ import { WarehouseService } from "../warehouse.service";
 import { Destination } from "../destination";
 import { DestinationService } from "../destination.service";
 import { MapService} from "../map.service";
+import {Transport} from "../transport";
+import {TransportService} from "../transport.service";
+import {ResourceType} from "../resource-type";
+import {ResourceTypeService} from "../resource-type.service";
 
 @Component({
   selector: 'app-route-details',
@@ -17,6 +21,8 @@ export class RouteDetailsComponent implements OnInit {
 
   id: number;
   route0: Route;
+  transport: Transport;
+  resourceType: ResourceType;
   warehouses: Warehouse[] = [];
   destinations: Destination[] = [];
   latlngArray: any[] = [];
@@ -26,13 +32,17 @@ export class RouteDetailsComponent implements OnInit {
               private routeService: RouteService,
               private warehouseService: WarehouseService,
               private mapsService: MapService,
+              private resourceTypeService: ResourceTypeService,
+              private transportService: TransportService,
               private destinationService: DestinationService) { }
 
   async ngOnInit() {
     this.route0 = new Route();
+    this.transport = new Transport();
     this.id = this.route.snapshot.params['id'];
     await this.reloadData();
     await this.loadRoute();
+    await this.loadTransport();
     await this.delay(250);
     this.loadMap();
   }
@@ -67,6 +77,20 @@ export class RouteDetailsComponent implements OnInit {
           console.log("LOAD ROUTE - LOAD WAREHOUSES");
         });
     }
+  }
+
+  loadTransport() {
+    this.transportService.getTransportByIdRoute(this.id)
+      .subscribe(transport => {
+        console.log(transport);
+        this.transport = transport;
+        this.resourceTypeService.getResourceType(this.transport.idResourceType)
+          .subscribe(resourceType => {
+            console.log(resourceType);
+            this.resourceType = resourceType;
+          }, error => console.log(error));
+
+      }, error => console.log(error));
   }
 
   delay(ms: number) {

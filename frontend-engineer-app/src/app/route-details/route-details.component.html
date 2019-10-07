@@ -17,6 +17,24 @@
 
 <br>
 
+<div *ngIf="transport">
+  
+  <div>
+    <h4>
+      Transport
+    </h4>
+  </div>
+
+  <div>
+    <label><b>Resource Type: </b></label> {{resourceType.name}}
+  </div>
+
+  <div>
+    <label><b>Quantity: </b></label> {{transport.quantity}}
+  </div>
+  <br>
+</div>
+
 <div class="panel panel-primary">
 
   <div class="panel-heading">

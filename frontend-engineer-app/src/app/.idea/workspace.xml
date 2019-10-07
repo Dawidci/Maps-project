@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8db15ed5-43e2-4a13-bc4b-0cadc9930cd4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/TransportController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/model/Transport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/repository/TransportRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transport.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/destinations-create/destinations-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/destinations-create/destinations-create.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route-details/route-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/route-details/route-details.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route-details/route-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-details/route-details.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +93,7 @@
       <workItem from="1570004141840" duration="15317000" />
       <workItem from="1570086283909" duration="19594000" />
       <workItem from="1570179830146" duration="16715000" />
-      <workItem from="1570435009591" duration="13492000" />
+      <workItem from="1570435009591" duration="18106000" />
     </task>
     <servers />
   </component>

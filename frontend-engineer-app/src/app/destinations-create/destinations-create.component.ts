@@ -14,6 +14,8 @@ import { ResourceTypeService } from "../resource-type.service";
 import { ResourceType } from "../resource-type";
 import { Resource } from "../resource";
 import {ResourceService} from "../resource.service";
+import {TransportService} from "../transport.service";
+import {Transport} from "../transport";
 
 @Component({
   selector: 'app-destinations-create',
@@ -34,6 +36,7 @@ export class DestinationsCreateComponent implements OnInit {
   distance: number[][] = [];
   resourceTypes: ResourceType[] = [];
   resource: Resource;
+  transport: Transport;
   resources: Resource[] = [];
   result: Resource[][] = [];
 
@@ -52,6 +55,7 @@ export class DestinationsCreateComponent implements OnInit {
               private destinationService: DestinationService,
               private resourceTypeService: ResourceTypeService,
               private resourceService: ResourceService,
+              private transportService: TransportService,
               private mapService: MapService,
               private fb: FormBuilder) {}
 
@@ -59,6 +63,7 @@ export class DestinationsCreateComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.route0 = new Route();
     this.resource = new Resource();
+    this.transport = new Transport();
 
     this.reloadData();
     this.getResourceTypes();
@@ -109,6 +114,16 @@ export class DestinationsCreateComponent implements OnInit {
   createRouteByResource() {
     this.submitted = true;
     this.saveByResource();
+    this.transport.id = 0;
+    this.transport.idResourceType = this.resource.idResourceType;
+    this.transport.idRoute = this.id;
+    this.transport.quantity = this.resource.quantity;
+    console.log("TRANSPORT");
+    console.log(this.transport);
+    console.log("TRANSPORT");
+    this.transportService.createTransport(this.transport)
+      .subscribe(data =>
+        console.log(data));
     console.log(this.destinations);
   }
 
@@ -228,7 +243,6 @@ export class DestinationsCreateComponent implements OnInit {
     let dist = 10000000;
     let newStart = 0;
     let count = 1;
-    console.log(this.wars.length);
 
     for(let i = 0; i < this.wars.length; i++) {
       console.log("START: " + start + ", WAR: " + this.wars[start].id);
