@@ -1,12 +1,12 @@
 import {Observable} from "rxjs";
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {Route} from "../route";
-import {RouteService} from "../route.service";
-import {WarehouseService} from "../warehouse.service";
-import {DestinationService} from "../destination.service";
-import {Warehouse} from "../warehouse";
+import {Route} from "../../models/route";
+import {RouteService} from "../../services/route.service";
+import {WarehouseService} from "../../services/warehouse.service";
+import {DestinationService} from "../../services/destination.service";
+import {Warehouse} from "../../models/warehouse";
 import {Router} from '@angular/router';
-import {MapService} from "../map.service";
+import {MapService} from "../../services/map.service";
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

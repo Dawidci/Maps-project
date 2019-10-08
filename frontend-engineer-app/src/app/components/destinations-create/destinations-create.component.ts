@@ -3,19 +3,19 @@ import { Observable } from "rxjs";
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Route } from '../route';
-import { RouteService } from '../route.service';
-import { Warehouse } from "../warehouse";
-import { WarehouseService } from "../warehouse.service";
-import { Destination } from "../destination";
-import { DestinationService } from "../destination.service";
-import { MapService} from "../map.service";
-import { ResourceTypeService } from "../resource-type.service";
-import { ResourceType } from "../resource-type";
-import { Resource } from "../resource";
-import {ResourceService} from "../resource.service";
-import {TransportService} from "../transport.service";
-import {Transport} from "../transport";
+import { Route } from '../../models/route';
+import { RouteService } from '../../services/route.service';
+import { Warehouse } from "../../models/warehouse";
+import { WarehouseService } from "../../services/warehouse.service";
+import { Destination } from "../../models/destination";
+import { DestinationService } from "../../services/destination.service";
+import { MapService} from "../../services/map.service";
+import { ResourceTypeService } from "../../services/resource-type.service";
+import { ResourceType } from "../../models/resource-type";
+import { Resource } from "../../models/resource";
+import {ResourceService} from "../../services/resource.service";
+import {TransportService} from "../../services/transport.service";
+import {Transport} from "../../models/transport";
 
 @Component({
   selector: 'app-destinations-create',

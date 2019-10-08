@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Route } from '../route';
-import { RouteService } from '../route.service';
+import { Route } from '../../models/route';
+import { RouteService } from '../../services/route.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Warehouse } from "../warehouse";
-import { WarehouseService } from "../warehouse.service";
-import { Destination } from "../destination";
-import { DestinationService } from "../destination.service";
-import { MapService} from "../map.service";
-import {Transport} from "../transport";
-import {TransportService} from "../transport.service";
-import {ResourceType} from "../resource-type";
-import {ResourceTypeService} from "../resource-type.service";
+import { Warehouse } from "../../models/warehouse";
+import { WarehouseService } from "../../services/warehouse.service";
+import { Destination } from "../../models/destination";
+import { DestinationService } from "../../services/destination.service";
+import { MapService} from "../../services/map.service";
+import {Transport} from "../../models/transport";
+import {TransportService} from "../../services/transport.service";
+import {ResourceType} from "../../models/resource-type";
+import {ResourceTypeService} from "../../services/resource-type.service";
 
 @Component({
   selector: 'app-route-details',

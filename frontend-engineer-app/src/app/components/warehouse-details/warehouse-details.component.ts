@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Warehouse } from "../warehouse";
-import { WarehouseService } from "../warehouse.service";
-import { MapService } from "../map.service";
-import { Resource } from "../resource";
-import { ResourceService } from "../resource.service";
-import { ResourceTypeService } from "../resource-type.service";
+import { Warehouse } from "../../models/warehouse";
+import { WarehouseService } from "../../services/warehouse.service";
+import { MapService } from "../../services/map.service";
+import { Resource } from "../../models/resource";
+import { ResourceService } from "../../services/resource.service";
+import { ResourceTypeService } from "../../services/resource-type.service";
 
 @Component({
   selector: 'app-warehouse-details',

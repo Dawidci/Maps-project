@@ -5,25 +5,28 @@
     <file url="file://$PROJECT_DIR$/app.component.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app.component.ts" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app.module.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/destination.service.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/destinations-create/destinations-create.component.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/destinations-create/destinations-create.component.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/map.service.spec.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/resource-type-create/resource-type-create.component.css" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/resource-type-list/resource-type-list.component.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/resource-type-update/resource-type-update.component.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/resource-type.service.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/route-create/route-create.component.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/route-create/route-create.component.spec.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/route-create/route-create.component.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/route-details/route-details.component.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/route-details/route-details.component.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/route-list/route-list.component.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/route.service.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/warehouse-create/warehouse-create.component.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/warehouse-details/warehouse-details.component.css" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/warehouse-details/warehouse-details.component.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/warehouse-list/warehouse-list.component.ts" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/warehouse-update/warehouse-update.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/destinations-create/destinations-create.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/destinations-create/destinations-create.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/resource-type-create/resource-type-create.component.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/resource-type-create/resource-type-create.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/resource-type-list/resource-type-list.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/resource-type-update/resource-type-update.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/route-create/route-create.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/route-create/route-create.component.spec.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/route-create/route-create.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/route-details/route-details.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/route-details/route-details.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/route-list/route-list.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/route-list/route-list.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/warehouse-create/warehouse-create.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/warehouse-details/warehouse-details.component.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/warehouse-details/warehouse-details.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/warehouse-details/warehouse-details.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/warehouse-list/warehouse-list.component.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/warehouse-update/warehouse-update.component.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/destination.service.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/map.service.spec.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/resource-type.service.ts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/route.service.ts" charset="UTF-8" />
   </component>
 </project>

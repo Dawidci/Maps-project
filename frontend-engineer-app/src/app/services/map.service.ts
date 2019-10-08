@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Warehouse} from "./warehouse";
+import {Warehouse} from "../models/warehouse";
 import { Observable } from "rxjs";
 import {WarehouseService} from "./warehouse.service";
 

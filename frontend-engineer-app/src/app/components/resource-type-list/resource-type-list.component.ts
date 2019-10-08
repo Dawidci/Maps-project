@@ -1,9 +1,9 @@
 import { Observable } from "rxjs";
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
-import { ResourceType } from "../resource-type";
-import { ResourceTypeService } from "../resource-type.service";
-import {ResourceService} from "../resource.service";
+import { ResourceType } from "../../models/resource-type";
+import { ResourceTypeService } from "../../services/resource-type.service";
+import {ResourceService} from "../../services/resource.service";
 
 @Component({
   selector: 'app-resource-type-list',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import {ResourceType} from "../resource-type";
-import {ResourceTypeService} from "../resource-type.service";
+import {ResourceType} from "../../models/resource-type";
+import {ResourceTypeService} from "../../services/resource-type.service";
 import {ResourceTypeListComponent} from "../resource-type-list/resource-type-list.component";
 
 @Component({
