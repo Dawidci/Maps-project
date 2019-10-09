@@ -16,7 +16,7 @@ import { Resource } from "../../models/resource";
 import { ResourceService } from "../../services/resource.service";
 import { TransportService } from "../../services/transport.service";
 import { Transport } from "../../models/transport";
-import {ComputeOrderService} from "../../services/compute-order.service";
+import { ComputeOrderService } from "../../services/compute-order.service";
 
 @Component({
   selector: 'app-destinations-create',
@@ -35,10 +35,9 @@ export class DestinationsCreateComponent implements OnInit {
   count = 1;
   submitted = false;
   resourceTypes: ResourceType[] = [];
-  resource: Resource;
-  transport: Transport;
   resources: Resource[] = [];
   result: Resource[][] = [];
+  transport: Transport;
 
   destinationForm = this.fb.group({
     firstDestination: [{value: '', disabled: true}, Validators.required],
@@ -62,8 +61,8 @@ export class DestinationsCreateComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.route0 = new Route();
-    this.resource = new Resource();
     this.transport = new Transport();
+    this.transport.idRoute = this.id;
 
     this.reloadData();
     this.getResourceTypes();
@@ -116,10 +115,6 @@ export class DestinationsCreateComponent implements OnInit {
   createRouteByResource() {
     this.submitted = true;
     this.saveByResource();
-    this.transport.id = 0;
-    this.transport.idResourceType = this.resource.idResourceType;
-    this.transport.idRoute = this.id;
-    this.transport.quantity = this.resource.quantity;
     this.createTransport();
     console.log(this.destinations);
   }
@@ -127,12 +122,13 @@ export class DestinationsCreateComponent implements OnInit {
   createTransport() {
     this.transportService.createTransport(this.transport)
       .subscribe(data => {
+        console.log("TRANSPORT");
         console.log(data);
       }, error => console.log(error));
   }
 
   loadEverything() {
-    this.resourceTypeService.getResourceType(this.resource.idResourceType)
+    this.resourceTypeService.getResourceType(this.transport.idResourceType)
       .subscribe(type => {
         console.log(type);
         let totalQuantity = 0;
@@ -179,7 +175,7 @@ export class DestinationsCreateComponent implements OnInit {
         localMatrix.push(resources[j]);
         sum += resources[j].quantity;
 
-        if(sum >= this.resource.quantity) {
+        if(sum >= this.transport.quantity) {
           this.result[i] = localMatrix;
           break;
         }

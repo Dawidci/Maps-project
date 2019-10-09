@@ -24,7 +24,7 @@
 
     <div class="form-group">
       <label for="resource">Pick resource: </label>
-      <select formControlName="resource" [(ngModel)]="resource.idResourceType" class="form-control" id="resource">
+      <select formControlName="resource" [(ngModel)]="transport.idResourceType" class="form-control" id="resource">
         <option></option>
         <option *ngFor="let type of resourceTypes" [ngValue]="type.id">{{type.name}}</option>
       </select>
@@ -32,7 +32,7 @@
 
     <div class="form-group">
       <label for="quantity">Choose quantity: </label>
-      <input type="number" formControlName="quantity" [(ngModel)]="resource.quantity" class="form-control" id="quantity">
+      <input type="number" formControlName="quantity" [(ngModel)]="transport.quantity" class="form-control" id="quantity">
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>
