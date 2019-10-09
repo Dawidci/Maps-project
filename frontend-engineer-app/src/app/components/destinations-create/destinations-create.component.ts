@@ -113,16 +113,16 @@ export class DestinationsCreateComponent implements OnInit {
   }
 
   createRouteByResource() {
-    this.submitted = true;
+    //this.submitted = true;
     this.saveByResource();
-    this.createTransport();
-    console.log(this.destinations);
+    //this.createTransport();
+    //console.log(this.destinations);
   }
 
   async saveByResource() {
     await this.loadEverything();
-    await this.delay(250);
-    this.save();
+    //await this.delay(250);
+    //this.save();
   }
 
   createTransport() {
@@ -154,7 +154,6 @@ export class DestinationsCreateComponent implements OnInit {
   getResourcesByType(totalQuantity, type) {
     this.resourceService.getResourcesByIdResourceType(type.id)
       .subscribe(resources => {
-        console.log(resources);
         this.resources = resources;
         this.sumResourceTypeTotalQuantity(totalQuantity, resources);
         this.getResourceMatrix(resources);
@@ -166,23 +165,50 @@ export class DestinationsCreateComponent implements OnInit {
     for(let i = 0; i < resources.length; i++) {
       totalQuantity += resources[i].quantity;
     }
+
+    if(totalQuantity < this.transport.quantity) {
+      console.log("NOT ENOUGH RESOURCES");
+    }
   }
 
   getResourceMatrix(resources) {
-    resources.sort((a,b) => b.quantity - a.quantity);
+    resources.sort((a, b) => b.quantity - a.quantity);
 
     for(let i = 0; i < resources.length; i++) {
-      let sum = 0;
-      let localMatrix: Resource[] = [];
+      if(resources[i].quantity >= this.transport.quantity) {
+        this.result.push(resources[i]);
+      } else if ((i + 1) == resources.length) {
+        break;
+      } else {
 
-      for(let j = i; j < resources.length; j++) {
-        localMatrix.push(resources[j]);
-        sum += resources[j].quantity;
+        let localMatrix: Resource[] = [];
+        let sum = 0;
+        localMatrix.push(this.resources[i]);
+        sum += this.resources[i].quantity;
 
-        if(sum >= this.transport.quantity) {
-          this.result[i] = localMatrix;
-          break;
-        }
+        this.getResult(resources, i, localMatrix, sum);
+      }
+    }
+    console.log("RESULT");
+    console.log(this.result);
+  }
+
+  getResult(resources, i, localMatrix, sum) {
+    for(let j = i + 1; j < resources.length; j++) {
+      let local: Resource[] = [];
+      let total: Resource[] = [];
+      let localSum: number = sum;
+
+      local.push(resources[j]);
+      localSum += resources[j].quantity;
+      total = localMatrix.concat(local);
+
+      if(localSum >= this.transport.quantity) {
+        this.result.push(total);
+      } else if((j + 1) == resources.length) {
+        break;
+      } else {
+        this.getResult(resources, j, total, localSum);
       }
     }
   }

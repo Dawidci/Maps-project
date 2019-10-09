@@ -6,6 +6,9 @@ import { Injectable } from '@angular/core';
 export class ComputeOrderService {
 
   distance: number[][] = [];
+  dist: number;
+  allDistances: number[] = [];
+
 
   constructor() { }
 
@@ -45,6 +48,7 @@ export class ComputeOrderService {
     let start = 0;
     let newStart = 0;
     let count = 1;
+    let totalDistance = 0;
 
     for(let i = 0; i < warehouses.length; i++) {
       let dist = 10000000;
@@ -61,6 +65,8 @@ export class ComputeOrderService {
           newStart = j;
         }
       }
+
+      totalDistance += dist;
 
       start = newStart;
       count++;
