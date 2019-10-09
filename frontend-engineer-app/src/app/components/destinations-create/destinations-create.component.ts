@@ -71,6 +71,10 @@ export class DestinationsCreateComponent implements OnInit {
     this.loadRoute();
   }
 
+  reloadData() {
+    this.warehouses = this.mapService.loadWarehouses();
+  }
+
   getResourceTypes() {
     this.resourceTypeService.getResourceTypesList()
       .subscribe(resourceTypes => {
@@ -97,10 +101,6 @@ export class DestinationsCreateComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  reloadData() {
-    this.warehouses = this.mapService.loadWarehouses();
-  }
-
   addNewDestination() {
     this.count++;
     this.destinations.push({id: this.count, id_route: this.id, id_warehouse: 0, order: this.count});
@@ -119,6 +119,12 @@ export class DestinationsCreateComponent implements OnInit {
     console.log(this.destinations);
   }
 
+  async saveByResource() {
+    await this.loadEverything();
+    await this.delay(250);
+    this.save();
+  }
+
   createTransport() {
     this.transportService.createTransport(this.transport)
       .subscribe(data => {
@@ -127,13 +133,22 @@ export class DestinationsCreateComponent implements OnInit {
       }, error => console.log(error));
   }
 
+  async save() {
+    await this.loadWarehouses();
+    await this.delay(250);
+    await this.computeOrderService.computeDistance(this.wars);
+    this.destinations = await this.computeOrderService.computeOrder(this.destinations, this.wars);
+    await this.createDestinations();
+    this.gotoList();
+  }
+
   loadEverything() {
     this.resourceTypeService.getResourceType(this.transport.idResourceType)
       .subscribe(type => {
         console.log(type);
         let totalQuantity = 0;
         this.getResourcesByType(totalQuantity, type);
-      }, error => console.log(error));
+      },error => console.log(error));
   }
 
   getResourcesByType(totalQuantity, type) {
@@ -150,17 +165,6 @@ export class DestinationsCreateComponent implements OnInit {
   sumResourceTypeTotalQuantity(totalQuantity, resources) {
     for(let i = 0; i < resources.length; i++) {
       totalQuantity += resources[i].quantity;
-    }
-  }
-
-  getWarehousesWithChosenResource() {
-    for(let i = 0; i < this.result[0].length; i++) {
-      this.warehouseService.getWarehouse(this.result[0][i].idWarehouse)
-        .subscribe(warehouse => {
-          console.log(warehouse);
-          this.count++;
-          this.destinations.push({id: this.count, id_route: this.id, id_warehouse: warehouse.id, order: this.count});
-        });
     }
   }
 
@@ -183,27 +187,14 @@ export class DestinationsCreateComponent implements OnInit {
     }
   }
 
-  async save() {
-    await this.loadWarehouses();
-    await this.delay(250);
-    await this.computeOrderService.computeDistance(this.wars);
-    this.destinations = await this.computeOrderService.computeOrder(this.destinations, this.wars);
-    await this.createDestinations();
-    this.gotoList();
-  }
-
-  async saveByResource() {
-    await this.loadEverything();
-    await this.delay(250);
-    this.save();
-  }
-
-  async createDestinations() {
-    for(let i = 0; i < this.destinations.length; i++) {
-      await this.destinationService.createDestination(this.destinations[i])
-        .subscribe(data => {
-          console.log(data);
-        }, error => console.log(error));
+  getWarehousesWithChosenResource() {
+    for(let i = 0; i < this.result[0].length; i++) {
+      this.warehouseService.getWarehouse(this.result[0][i].idWarehouse)
+        .subscribe(warehouse => {
+          console.log(warehouse);
+          this.count++;
+          this.destinations.push({id: this.count, id_route: this.id, id_warehouse: warehouse.id, order: this.count});
+        });
     }
   }
 
@@ -217,11 +208,19 @@ export class DestinationsCreateComponent implements OnInit {
     }
   }
 
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+  async createDestinations() {
+    for(let i = 0; i < this.destinations.length; i++) {
+      await this.destinationService.createDestination(this.destinations[i])
+        .subscribe(data => {
+          console.log(data);
+        }, error => console.log(error));
+    }
   }
-
   gotoList() {
     this.router.navigate(['/routes']);
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }
