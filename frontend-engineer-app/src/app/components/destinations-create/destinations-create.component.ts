@@ -38,6 +38,8 @@ export class DestinationsCreateComponent implements OnInit {
   resources: Resource[] = [];
   result: Resource[][] = [];
   transport: Transport;
+  allDestinations: Destination[][] = [];
+  allWarehouses: Warehouse[][] = [];
 
   destinationForm = this.fb.group({
     firstDestination: [{value: '', disabled: true}, Validators.required],
@@ -113,16 +115,18 @@ export class DestinationsCreateComponent implements OnInit {
   }
 
   createRouteByResource() {
-    //this.submitted = true;
+    this.submitted = true;
     this.saveByResource();
-    //this.createTransport();
-    //console.log(this.destinations);
+    this.createTransport();
+    console.log(this.destinations);
   }
 
   async saveByResource() {
     await this.loadEverything();
-    //await this.delay(250);
-    //this.save();
+    await this.delay(500);
+    //await this.loadAllWarehouses();
+    //await this.computeOrderService.computeAllOrder(this.allDestinations, this.allWarehouses);
+    this.save();
   }
 
   createTransport() {
@@ -158,6 +162,7 @@ export class DestinationsCreateComponent implements OnInit {
         this.sumResourceTypeTotalQuantity(totalQuantity, resources);
         this.getResourceMatrix(resources);
         this.getWarehousesWithChosenResource();
+        //this.getAllResourceWarehouses();
       }, error => console.log(error));
   }
 
@@ -189,8 +194,6 @@ export class DestinationsCreateComponent implements OnInit {
         this.getResult(resources, i, localMatrix, sum);
       }
     }
-    console.log("RESULT");
-    console.log(this.result);
   }
 
   getResult(resources, i, localMatrix, sum) {
@@ -221,6 +224,36 @@ export class DestinationsCreateComponent implements OnInit {
           this.count++;
           this.destinations.push({id: this.count, id_route: this.id, id_warehouse: warehouse.id, order: this.count});
         });
+    }
+  }
+
+  getAllResourceWarehouses() {
+    for(let i = 0; i < this.result.length; i++) {
+
+      this.allDestinations[i] = [];
+      this.allDestinations[i].push({id:1, id_route: this.id, id_warehouse: this.route0.id_first_warehouse, order: 1});
+
+      for(let j = 0; j < this.result[i].length; j++) {
+        let count = j + 2;
+        this.warehouseService.getWarehouse(this.result[i][j].idWarehouse)
+          .subscribe(warehouse => {
+            this.allDestinations[i].push({id: count, id_route: this.id, id_warehouse: warehouse.id, order: count});
+          });
+      }
+    }
+  }
+
+  loadAllWarehouses() {
+    for(let i = 0; i < this.allDestinations.length; i++) {
+      this.allWarehouses[i] = [];
+      console.log(this.allDestinations[i].length);
+
+      for(let j = 0; j < this.allDestinations[i].length; j++) {
+        this.warehouseService.getWarehouse(this.allDestinations[i][j].id_warehouse)
+          .subscribe(warehouse => {
+            this.allWarehouses[i].push(warehouse);
+          });
+      }
     }
   }
 

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Warehouse} from "../models/warehouse";
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ export class ComputeOrderService {
   distance: number[][] = [];
   dist: number;
   allDistances: number[] = [];
+  totalDistance: number;
 
 
   constructor() { }
@@ -33,6 +35,8 @@ export class ComputeOrderService {
   }
 
   computeDistance(warehouses) {
+    warehouses = Array.from(warehouses);
+    console.log(warehouses.length);
     for(let i = 0; i < warehouses.length; i++) {
       this.distance[i] = [];
       for (let j = 0; j < warehouses.length; j++) {
@@ -44,11 +48,23 @@ export class ComputeOrderService {
     }
   }
 
+  computeAllOrder(allDestinations, allWarehouses) {
+    for(let i = 0; i < allDestinations.length; i++) {
+      let war: Warehouse[] = [];
+      war = allWarehouses[i];
+      this.computeDistance(allWarehouses[i]);
+      this.computeOrder(allDestinations[i], allWarehouses[i]);
+      this.allDistances[i] = this.totalDistance;
+    }
+
+    console.log(this.allDistances);
+  }
+
    computeOrder(destinations, warehouses) {
     let start = 0;
     let newStart = 0;
     let count = 1;
-    let totalDistance = 0;
+    this.totalDistance = 0;
 
     for(let i = 0; i < warehouses.length; i++) {
       let dist = 10000000;
@@ -66,7 +82,7 @@ export class ComputeOrderService {
         }
       }
 
-      totalDistance += dist;
+      this.totalDistance += dist;
 
       start = newStart;
       count++;
