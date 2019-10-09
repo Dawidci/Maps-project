@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import {ResourceType} from "../../models/resource-type";
 import {ResourceTypeService} from "../../services/resource-type.service";
-import {ResourceTypeListComponent} from "../resource-type-list/resource-type-list.component";
 
 @Component({
   selector: 'app-resource-type-update',
@@ -36,14 +35,19 @@ export class ResourceTypeUpdateComponent implements OnInit {
   }
 
   save() {
-    this.resourceTypeService.updateResourceType(this.id, this.resourceType)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.updateResourceType();
     this.resourceType = new ResourceType();
     this.gotoList();
+  }
+
+  updateResourceType() {
+    this.resourceTypeService.updateResourceType(this.id, this.resourceType)
+      .subscribe(data => {
+        console.log(data)
+      }, error => console.log(error));
   }
 
   gotoList() {
     this.router.navigate(['/resource-types']);
   }
 }
-

@@ -52,19 +52,26 @@ export class RouteCreateComponent implements OnInit {
   }
 
   async save() {
-    await this.routeService.createRoute(this.route)
-      .subscribe(data => console.log(data), error => console.log(error));
-
+    await this.createNewRoute();
     await this.delay(500);
+    this.getRouteByName();
+    this.route = new Route();
+  }
 
+  createNewRoute() {
+    this.routeService.createRoute(this.route)
+      .subscribe(data => {
+        console.log(data)
+      },error => console.log(error));
+  }
+
+  getRouteByName() {
     this.routeService.getRouteByName(this.route.name)
       .subscribe(data => {
         console.log(data);
         this.route = data;
         this.createDestinations(this.route.id);
       }, error => console.log(error));
-
-    this.route = new Route();
   }
 
   createDestinations(id: number) {

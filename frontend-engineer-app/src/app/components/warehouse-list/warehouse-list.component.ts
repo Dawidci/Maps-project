@@ -46,4 +46,3 @@ export class WarehouseListComponent implements OnInit {
     this.router.navigate(['warehouses/details', id]);
   }
 }
-

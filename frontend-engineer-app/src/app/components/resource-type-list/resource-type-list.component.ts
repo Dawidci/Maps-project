@@ -26,25 +26,33 @@ export class ResourceTypeListComponent implements OnInit {
 
   reloadData() {
    this.resourceTypes = this.resourceTypeService.getResourceTypesList();
+   this.getAllResourceTypes();
+  }
 
+  getAllResourceTypes() {
     this.resourceTypeService.getResourceTypesList()
       .subscribe(resourceTypes => {
         console.log(resourceTypes);
         this.types = resourceTypes;
-
-        for(let i = 0; i < this.types.length; i++) {
-          this.resourceService.getResourcesByIdResourceType(this.types[i].id)
-            .subscribe(resources => {
-              console.log(resources);
-              this.resourceTypeQuantity[i] = 0;
-
-              for(let j = 0; j < resources.length; j++) {
-                this.resourceTypeQuantity[i] += resources[j].quantity;
-              }
-            }, error => console.log(error));
-        }
-
+        this.getResourcesByType();
       }, error => console.log(error));
+  }
+
+  getResourcesByType() {
+    for(let i = 0; i < this.types.length; i++) {
+      this.resourceService.getResourcesByIdResourceType(this.types[i].id)
+        .subscribe(resources => {
+          console.log(resources);
+          this.resourceTypeQuantity[i] = 0;
+          this.sumResources(resources, i);
+        }, error => console.log(error));
+    }
+  }
+
+  sumResources(resources, i) {
+    for(let j = 0; j < resources.length; j++) {
+      this.resourceTypeQuantity[i] += resources[j].quantity;
+    }
   }
 
   deleteResourceType(id: number) {
@@ -60,4 +68,3 @@ export class ResourceTypeListComponent implements OnInit {
     this.router.navigate(['resource-types/update', id]);
   }
 }
-

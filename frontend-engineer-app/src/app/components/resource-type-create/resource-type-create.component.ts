@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import {ResourceType} from "../../models/resource-type";
 import {ResourceTypeService} from "../../services/resource-type.service";
-import {ResourceTypeListComponent} from "../resource-type-list/resource-type-list.component";
 
 @Component({
   selector: 'app-resource-type-create',
@@ -32,14 +31,19 @@ export class ResourceTypeCreateComponent implements OnInit {
   }
 
   save() {
-    this.resourceTypeService.createResourceType(this.resourceType)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.createResourceType();
     this.resourceType = new ResourceType();
     this.gotoList();
+  }
+
+  createResourceType() {
+    this.resourceTypeService.createResourceType(this.resourceType)
+      .subscribe(data => {
+        console.log(data)
+      },error => console.log(error));
   }
 
   gotoList() {
     this.router.navigate(['/resource-types']);
   }
 }
-

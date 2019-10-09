@@ -13,9 +13,10 @@ import { MapService} from "../../services/map.service";
 import { ResourceTypeService } from "../../services/resource-type.service";
 import { ResourceType } from "../../models/resource-type";
 import { Resource } from "../../models/resource";
-import {ResourceService} from "../../services/resource.service";
-import {TransportService} from "../../services/transport.service";
-import {Transport} from "../../models/transport";
+import { ResourceService } from "../../services/resource.service";
+import { TransportService } from "../../services/transport.service";
+import { Transport } from "../../models/transport";
+import {ComputeOrderService} from "../../services/compute-order.service";
 
 @Component({
   selector: 'app-destinations-create',
@@ -33,13 +34,11 @@ export class DestinationsCreateComponent implements OnInit {
   newDestinations: number[] = [];
   count = 1;
   submitted = false;
-  distance: number[][] = [];
   resourceTypes: ResourceType[] = [];
   resource: Resource;
   transport: Transport;
   resources: Resource[] = [];
   result: Resource[][] = [];
-
 
   destinationForm = this.fb.group({
     firstDestination: [{value: '', disabled: true}, Validators.required],
@@ -57,6 +56,7 @@ export class DestinationsCreateComponent implements OnInit {
               private resourceService: ResourceService,
               private transportService: TransportService,
               private mapService: MapService,
+              private computeOrderService: ComputeOrderService,
               private fb: FormBuilder) {}
 
   ngOnInit() {
@@ -86,13 +86,15 @@ export class DestinationsCreateComponent implements OnInit {
         console.log(data);
         this.route0 = data;
         this.destinations.push({id:1, id_route: this.id, id_warehouse: this.route0.id_first_warehouse, order: 1});
+        this.getFirstWarehouse();
+      }, error => console.log(error));
+  }
 
-        this.warehouseService.getWarehouse(this.route0.id_first_warehouse)
-          .subscribe(first => {
-            console.log(first);
-            this.firstWarehouse = first;
-          }, error => console.log(error));
-
+  getFirstWarehouse() {
+    this.warehouseService.getWarehouse(this.route0.id_first_warehouse)
+      .subscribe(first => {
+        console.log(first);
+        this.firstWarehouse = first;
       }, error => console.log(error));
   }
 
@@ -118,13 +120,15 @@ export class DestinationsCreateComponent implements OnInit {
     this.transport.idResourceType = this.resource.idResourceType;
     this.transport.idRoute = this.id;
     this.transport.quantity = this.resource.quantity;
-    console.log("TRANSPORT");
-    console.log(this.transport);
-    console.log("TRANSPORT");
-    this.transportService.createTransport(this.transport)
-      .subscribe(data =>
-        console.log(data));
+    this.createTransport();
     console.log(this.destinations);
+  }
+
+  createTransport() {
+    this.transportService.createTransport(this.transport)
+      .subscribe(data => {
+        console.log(data);
+      }, error => console.log(error));
   }
 
   loadEverything() {
@@ -132,30 +136,36 @@ export class DestinationsCreateComponent implements OnInit {
       .subscribe(type => {
         console.log(type);
         let totalQuantity = 0;
+        this.getResourcesByType(totalQuantity, type);
+      }, error => console.log(error));
+  }
 
-        this.resourceService.getResourcesByIdResourceType(type.id)
-          .subscribe(resources => {
-            console.log(resources);
-            this.resources = resources;
+  getResourcesByType(totalQuantity, type) {
+    this.resourceService.getResourcesByIdResourceType(type.id)
+      .subscribe(resources => {
+        console.log(resources);
+        this.resources = resources;
+        this.sumResourceTypeTotalQuantity(totalQuantity, resources);
+        this.getResourceMatrix(resources);
+        this.getWarehousesWithChosenResource();
+      }, error => console.log(error));
+  }
 
-            for(let i = 0; i < resources.length; i++) {
-              totalQuantity += resources[i].quantity;
-            }
+  sumResourceTypeTotalQuantity(totalQuantity, resources) {
+    for(let i = 0; i < resources.length; i++) {
+      totalQuantity += resources[i].quantity;
+    }
+  }
 
-            this.getResourceMatrix(resources);
-
-            for(let i = 0; i < this.result[0].length; i++) {
-              this.warehouseService.getWarehouse(this.result[0][i].idWarehouse)
-                .subscribe(warehouse => {
-                  console.log(warehouse);
-                  this.count++;
-                  this.destinations.push({id: this.count, id_route: this.id, id_warehouse: warehouse.id, order: this.count});
-                });
-            }
-
-          }, error => console.log(error));
-
-      });
+  getWarehousesWithChosenResource() {
+    for(let i = 0; i < this.result[0].length; i++) {
+      this.warehouseService.getWarehouse(this.result[0][i].idWarehouse)
+        .subscribe(warehouse => {
+          console.log(warehouse);
+          this.count++;
+          this.destinations.push({id: this.count, id_route: this.id, id_warehouse: warehouse.id, order: this.count});
+        });
+    }
   }
 
   getResourceMatrix(resources) {
@@ -180,8 +190,8 @@ export class DestinationsCreateComponent implements OnInit {
   async save() {
     await this.loadWarehouses();
     await this.delay(250);
-    await this.computeDistance();
-    await this.computeOrder();
+    await this.computeOrderService.computeDistance(this.wars);
+    this.destinations = await this.computeOrderService.computeOrder(this.destinations, this.wars);
     await this.createDestinations();
     this.gotoList();
   }
@@ -189,12 +199,7 @@ export class DestinationsCreateComponent implements OnInit {
   async saveByResource() {
     await this.loadEverything();
     await this.delay(250);
-    await this.loadWarehouses();
-    await this.delay(250);
-    await this.computeDistance();
-    await this.computeOrder();
-    await this.createDestinations();
-    this.gotoList();
+    this.save();
   }
 
   async createDestinations() {
@@ -203,65 +208,6 @@ export class DestinationsCreateComponent implements OnInit {
         .subscribe(data => {
           console.log(data);
         }, error => console.log(error));
-    }
-  }
-
-  computeDistance() {
-    for(let i = 0; i < this.wars.length; i++) {
-      this.distance[i] = [];
-      for(let j = 0; j < this.wars.length; j++) {
-        if(i != j) {
-          this.distance[i][j] = this.distanceBetweenCoordinates(this.wars[i].latitude,
-            this.wars[i].longitude, this.wars[j].latitude, this.wars[j].longitude);
-        }
-      }
-    }
-  }
-
-  degreesToRadians(degrees) {
-    return degrees * Math.PI / 180;
-  }
-
-  distanceBetweenCoordinates(lat1, lon1, lat2, lon2) {
-    let earthRadiusKm = 6371;
-
-    let dLat = this.degreesToRadians(lat2 - lat1);
-    let dLon = this.degreesToRadians(lon2 - lon1);
-
-    lat1 = this.degreesToRadians(lat1);
-    lat2 = this.degreesToRadians(lat2);
-
-    let a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-    return earthRadiusKm * c;
-  }
-
-  computeOrder() {
-    let start = 0;
-    let dist = 10000000;
-    let newStart = 0;
-    let count = 1;
-
-    for(let i = 0; i < this.wars.length; i++) {
-      console.log("START: " + start + ", WAR: " + this.wars[start].id);
-      this.destinations[start].order = count;
-
-      for(let j = 0; j < this.wars.length; j++) {
-        delete this.distance[j][start];
-      }
-
-      for(let j = 0; j < this.wars.length; j++) {
-        if(this.distance[start][j] < dist) {
-          dist = this.distance[start][j];
-          newStart = j;
-        }
-      }
-
-      start = newStart;
-      dist = 10000000;
-      count++;
     }
   }
 

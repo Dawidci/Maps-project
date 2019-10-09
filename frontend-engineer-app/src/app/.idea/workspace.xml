@@ -3,49 +3,38 @@
   <component name="ChangeListManager">
     <list default="true" id="8db15ed5-43e2-4a13-bc4b-0cadc9930cd4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../../Inżynierka/_Analysis.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Inżynierka/_Analysis.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../engineering-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Inżynierka/~$nalysis.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Inżynierka/~WRL0003.tmp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compute-order.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/compute-order.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compute-order.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/compute-order.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/destination.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/destination.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/destination.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/destination.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/destination.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/destination.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/destinations-create/destinations-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/destinations-create/destinations-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/map.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/map.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource-type-create/resource-type-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/resource-type-create/resource-type-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource-type-list/resource-type-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/resource-type-list/resource-type-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource-type-update/resource-type-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/resource-type-update/resource-type-update.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource-type.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/resource-type.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource-type.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/resource-type.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource-type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/resource-type.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/resource.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/resource.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/resource.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-create/route-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-create/route-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-details/route-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/route-details/route-details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-details/route-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-details/route-details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-list/route-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/route-list/route-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/route.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/route.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transport.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/transport.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transport.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/transport.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transport.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/transport.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse-create/warehouse-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-create/warehouse-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse-details/warehouse-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-details/warehouse-details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse-list/warehouse-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-list/warehouse-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse-update/warehouse-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/warehouse-update/warehouse-update.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/warehouse.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/warehouse.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/warehouse.ts" beforeDir="false" afterPath="$PROJECT_DIR$/models/warehouse.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/destinations-create/destinations-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/destinations-create/destinations-create.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/resource-type-create/resource-type-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/resource-type-create/resource-type-create.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/resource-type-list/resource-type-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/resource-type-list/resource-type-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/resource-type-update/resource-type-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/resource-type-update/resource-type-update.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/route-create/route-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/route-create/route-create.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/route-list/route-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/route-list/route-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/warehouse-details/warehouse-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/warehouse-details/warehouse-details.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/warehouse-list/warehouse-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/warehouse-list/warehouse-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/compute-order.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/compute-order.service.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -78,6 +67,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projekty\Fullstack\frontend-engineer-app\src\app\components" />
       <recent name="C:\Projekty\Fullstack\frontend-engineer-app\src\app\services" />
       <recent name="C:\Projekty\Fullstack\frontend-engineer-app\src\app\models" />
     </key>
@@ -130,7 +120,8 @@
       <workItem from="1570086283909" duration="19594000" />
       <workItem from="1570179830146" duration="16715000" />
       <workItem from="1570435009591" duration="19424000" />
-      <workItem from="1570514778205" duration="2904000" />
+      <workItem from="1570514778205" duration="11103000" />
+      <workItem from="1570602375046" duration="1320000" />
     </task>
     <servers />
   </component>

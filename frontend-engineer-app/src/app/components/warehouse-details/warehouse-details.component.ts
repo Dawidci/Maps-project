@@ -48,25 +48,26 @@ export class WarehouseDetailsComponent implements OnInit {
     this.addResourceType.length = 0;
     this.resourceTypeService.getResourceTypesList()
       .subscribe(types => {
+        console.log(types);
+        this.getListOfResourceTypesThatCouldBeAdded(types);
+      }, error => console.log(error));
+  }
 
-        for(let i = 0; i < types.length; i++) {
+  getListOfResourceTypesThatCouldBeAdded(types) {
+    for(let i = 0; i < types.length; i++) {
+      let push = true;
 
-          let push = true;
-
-          for(let j = 0; j < this.resourceNames.length; j++) {
-            if(types[i].id == this.resourceNames[j].id) {
-              push = false;
-              break;
-            }
-          }
-
-          if(push == true) {
-            console.log(types[i]);
-            this.addResourceType.push(types[i]);
-          }
-
+      for(let j = 0; j < this.resourceNames.length; j++) {
+        if(types[i].id == this.resourceNames[j].id) {
+          push = false;
+          break;
         }
-      });
+      }
+
+      if(push == true) {
+        this.addResourceType.push(types[i]);
+      }
+    }
   }
 
   loadWarehouse() {

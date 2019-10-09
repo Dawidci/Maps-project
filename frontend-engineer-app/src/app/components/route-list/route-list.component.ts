@@ -57,10 +57,4 @@ export class RouteListComponent implements OnInit {
   routeDetails(id: number){
     this.router.navigate(['/routes/details', id]);
   }
-/*
-  updateRoute(id: number) {
-    this.router.navigate(['destinations/update/route', id]);
-  }
- */
 }
-
