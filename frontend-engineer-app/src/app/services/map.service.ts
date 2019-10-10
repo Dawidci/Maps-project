@@ -15,7 +15,11 @@ export class MapService {
   leafletRoute: any;
   map: any;
 
-  constructor(private warehouseService: WarehouseService) { }
+  constructor(private warehouseService: WarehouseService) {
+    L.Icon.Default.prototype.options.iconUrl = "../../assets/leaflet/images/marker-icon.png";
+    L.Icon.Default.prototype.options.iconRetinaUrl = "../../assets/leaflet/images/marker-icon-2x.png";
+    L.Icon.Default.prototype.options.shadowUrl = "../../assets/leaflet/images/marker-shadow.png";
+  }
 
   loadWarehouses() {
     return this.warehouses = this.warehouseService.getWarehousesList();

@@ -49,7 +49,7 @@
   <form [formGroup]="destinationForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
-      <button (click)="addNewDestination()" type="button" [disabled]="!routeForm.valid" class="btn btn-primary">Add new destination</button>
+      <button (click)="addNewDestination()" type="button" [disabled]="!destinationForm.valid" class="btn btn-primary">Add new destination</button>
     </div>
 
     <div class="form-group" *ngFor = "let new of newDestinations, let index = index">

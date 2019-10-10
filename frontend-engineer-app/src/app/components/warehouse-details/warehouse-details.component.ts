@@ -6,6 +6,7 @@ import { MapService } from "../../services/map.service";
 import { Resource } from "../../models/resource";
 import { ResourceService } from "../../services/resource.service";
 import { ResourceTypeService } from "../../services/resource-type.service";
+import { ResourceType } from "../../models/resource-type";
 
 @Component({
   selector: 'app-warehouse-details',
@@ -18,7 +19,7 @@ export class WarehouseDetailsComponent implements OnInit {
   id: number;
   warehouse: Warehouse;
   resources: Resource [] = [];
-  resourceNames: Resource [] = [];
+  resourceNames: ResourceType [] = [];
   resourceQuantity: number [] = [];
   newResource: Resource;
   addResourceType: Resource [] = [];

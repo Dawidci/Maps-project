@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+
+    database:
+        image: mysql
+        container_name: database
+        environment: 
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: localhost
+            MYSQL_USER: dawid
+            MYSQL_PASSWORD: dawid
+        ports:
+            - 3306:3306
+        volumes: 
+            - dockerDatabaseData:/var/lib/mysql
+        networks:
+            - backendNetwork
+            
+    springapi:
+        image: openjdk:10-jre-slim
+        container_name: springapi
+        ports:
+            - 8080:8080
+        depends_on:
+            - database
+        volumes:
+            - ./engineering-app/target/engineering-app-0.0.1-SNAPSHOT.jar:/application.jar
+        command: ["java", "-jar", "application.jar"]
+        networks: 
+            - backendNetwork
+            - frontendNetwork
+            
+    angular:
+        image: nginx:alpine
+        container_name: angular
+        ports:
+            - 4200:80
+        depends_on:
+            - springapi
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf
+            - ./frontend-engineer-app/dist/frontend-engineer-app/:/usr/share/nginx/html
+        networks:
+            - frontendNetwork            
+            
+volumes:
+    dockerDatabaseData:
+    
+networks:
+    backendNetwork:
+    frontendNetwork:
+            
