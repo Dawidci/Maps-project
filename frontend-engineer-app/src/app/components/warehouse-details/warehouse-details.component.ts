@@ -107,15 +107,23 @@ export class WarehouseDetailsComponent implements OnInit {
     await this.mapsService.showWarehouse(this.warehouse);
   }
 
-  async deleteResource(id: number) {
+  async deleteResource(id: number, idType: number) {
     await this.delay(100);
 
     this.resourceService.deleteResource(id)
       .subscribe(data => {
+          this.deleteResourceFromArray(idType);
           console.log(data);
-          //this.loadWarehouse();
           this.ngOnInit();
         },error => console.log(error));
+  }
+
+  deleteResourceFromArray(idType) {
+    for(let i = 0; i < this.resourceNames.length; i++) {
+      if(this.resourceNames[i].id == idType) {
+        this.resourceNames.splice(i, 1);
+      }
+    }
   }
 
   updateResource(id: number, index: number) {

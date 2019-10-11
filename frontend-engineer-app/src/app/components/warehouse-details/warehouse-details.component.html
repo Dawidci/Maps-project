@@ -51,7 +51,7 @@
           <input type="number" [(ngModel)]="resourceQuantity[index]" class="form-control">
         </td>
         <td>
-          <button (click)="deleteResource(resource.id)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
+          <button (click)="deleteResource(resource.id, resource.idResourceType)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
           <button (click)="updateResource(resource.id, index)" class="btn btn-warning" style="margin-left: 5px">Update</button>
         </td>
       </tr>
