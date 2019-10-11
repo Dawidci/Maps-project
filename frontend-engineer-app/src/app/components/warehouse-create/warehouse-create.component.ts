@@ -39,11 +39,16 @@ export class WarehouseCreateComponent implements OnInit {
     this.save();
   }
 
-  save() {
+  async save() {
     this.warehouseService.createWarehouse(this.warehouse)
       .subscribe(data => console.log(data), error => console.log(error));
     this.warehouse = new Warehouse();
+    await this.delay(100);
     this.gotoList();
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
   gotoList() {

@@ -3,7 +3,7 @@ import { WarehouseService } from "../../services/warehouse.service";
 import { MapService } from "../../services/map.service";
 import { Warehouse } from "../../models/warehouse";
 import { Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-warehouse-list',
@@ -13,9 +13,11 @@ import { Router } from '@angular/router';
 export class WarehouseListComponent implements OnInit {
 
   warehouses: Observable<Warehouse[]>;
+  wart: any;
   map: any;
 
-  constructor(private warehouseService: WarehouseService,
+  constructor(private route: ActivatedRoute,
+              private warehouseService: WarehouseService,
               private mapService: MapService,
               private router: Router) {}
 
@@ -33,7 +35,7 @@ export class WarehouseListComponent implements OnInit {
     this.warehouseService.deleteWarehouse(id)
       .subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           this.reloadData();
         },error => console.log(error));
   }

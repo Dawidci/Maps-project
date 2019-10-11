@@ -11,11 +11,12 @@ import { ResourceTypeCreateComponent } from "./components/resource-type-create/r
 import { ResourceTypeListComponent } from "./components/resource-type-list/resource-type-list.component";
 import { ResourceTypeUpdateComponent } from "./components/resource-type-update/resource-type-update.component";
 import { WarehouseDetailsComponent } from "./components/warehouse-details/warehouse-details.component";
+import {AllWarehousesResolverService} from "./all-warehouses-resolver.service";
 
 const routes: Routes = [
   { path: '', redirectTo: 'warehouses', pathMatch: 'full' },
 
-  { path: 'warehouses', component: WarehouseListComponent },
+  { path: 'warehouses', component: WarehouseListComponent, resolve: { warehouses: AllWarehousesResolverService }},
   { path: 'warehouses/add', component: WarehouseCreateComponent },
   { path: 'warehouses/update/:id', component: WarehouseUpdateComponent },
   { path: 'warehouses/details/:id', component: WarehouseDetailsComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ AllWarehousesResolverService ]
 })
 export class AppRoutingModule { }

@@ -16,6 +16,7 @@ import { ResourceTypeCreateComponent } from './components/resource-type-create/r
 import { ResourceTypeListComponent } from './components/resource-type-list/resource-type-list.component';
 import { ResourceTypeUpdateComponent } from './components/resource-type-update/resource-type-update.component';
 import { WarehouseDetailsComponent } from './components/warehouse-details/warehouse-details.component';
+import {AllWarehousesResolverService} from "./all-warehouses-resolver.service";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { WarehouseDetailsComponent } from './components/warehouse-details/wareho
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AllWarehousesResolverService],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

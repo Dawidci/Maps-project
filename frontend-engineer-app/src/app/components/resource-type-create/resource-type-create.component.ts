@@ -33,7 +33,12 @@ export class ResourceTypeCreateComponent implements OnInit {
   save() {
     this.createResourceType();
     this.resourceType = new ResourceType();
+    this.delay(100);
     this.gotoList();
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
   createResourceType() {
