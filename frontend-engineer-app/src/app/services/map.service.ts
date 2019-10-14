@@ -58,6 +58,12 @@ export class MapService {
       "Airport: " + warehouse.seaport.toString() + "<br>");
   }
 
+  showWarehousesWithDetails(warehouses) {
+    for(let i = 0; i < warehouses.length; i++) {
+      this.showWarehouse(warehouses[i]);
+    }
+  }
+
   showRoute(latlngArray) {
     this.leafletRoute = L.Routing.control({
       waypoints: latlngArray,

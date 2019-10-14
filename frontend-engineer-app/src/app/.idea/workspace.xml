@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8db15ed5-43e2-4a13-bc4b-0cadc9930cd4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/resource-type-create/resource-type-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/resource-type-create/resource-type-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/warehouse-create/warehouse-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/warehouse-create/warehouse-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/warehouse-list/warehouse-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/warehouse-list/warehouse-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/route-details/route-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/route-details/route-details.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/map.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/map.service.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -117,6 +114,7 @@
       <workItem from="1570602375046" duration="24946000" />
       <workItem from="1570687178048" duration="7124000" />
       <workItem from="1570782047687" duration="19094000" />
+      <workItem from="1571035575238" duration="604000" />
     </task>
     <servers />
   </component>
