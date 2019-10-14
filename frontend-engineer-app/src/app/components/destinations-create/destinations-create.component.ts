@@ -33,6 +33,7 @@ export class DestinationsCreateComponent implements OnInit {
   wars: Warehouse[] = [];
   count = 1;
   submitted = false;
+  enoughResources: boolean = false;
   resourceTypes: ResourceType[] = [];
   resources: Resource[] = [];
   result: Resource[][] = [];
@@ -105,15 +106,12 @@ export class DestinationsCreateComponent implements OnInit {
         this.firstWarehouse = first;
         this.wars[0] = this.firstWarehouse;
         this.deleteWarehouseFromSelectList(this.firstWarehouse);
-        console.log("SELECT");
         console.log(this.warehousesToSelect);
       }, error => console.log(error));
   }
 
   addDestinationToList() {
     this.count++;
-    this.destinationToAdd.id = this.destinationToAdd.order = this.count;
-    this.destinationToAdd.id_route = this.id;
     this.destinations.push({id: this.count, id_route: this.id, id_warehouse: this.destinationToAdd.id_warehouse, order: this.count});
     this.loadWarehouseToWars(this.destinationToAdd.id_warehouse);
     this.destinationToAdd = new Destination();
@@ -149,15 +147,18 @@ export class DestinationsCreateComponent implements OnInit {
     this.save();
   }
 
-  createRouteByResource() {
-    this.submitted = true;
-    this.saveByResource();
-    this.createTransport();
-    console.log(this.destinations);
+  async createRouteByResource() {
+    await this.loadEverything();
+    await this.delay(100);
+
+    if(this.enoughResources == true) {
+      this.submitted = true;
+      this.saveByResource();
+    }
   }
 
   async saveByResource() {
-    await this.loadEverything();
+    this.createTransport();
     await this.delay(500);
     //await this.loadAllWarehouses();
     //await this.computeOrderService.computeAllOrder(this.allDestinations, this.allWarehouses);
@@ -172,7 +173,6 @@ export class DestinationsCreateComponent implements OnInit {
   createTransport() {
     this.transportService.createTransport(this.transport)
       .subscribe(data => {
-        console.log("TRANSPORT");
         console.log(data);
       }, error => console.log(error));
   }
@@ -196,10 +196,13 @@ export class DestinationsCreateComponent implements OnInit {
   getResourcesByType(totalQuantity, type) {
     this.resourceService.getResourcesByIdResourceType(type.id)
       .subscribe(resources => {
+        console.log(resources);
         this.resources = resources;
         this.sumResourceTypeTotalQuantity(totalQuantity, resources);
-        this.getResourceMatrix(resources);
-        this.getWarehousesWithChosenResource();
+        if(this.enoughResources == true) {
+          this.getResourceMatrix(resources);
+          this.getWarehousesWithChosenResource();
+        }
         //this.getAllResourceWarehouses();
       }, error => console.log(error));
   }
@@ -209,8 +212,12 @@ export class DestinationsCreateComponent implements OnInit {
       totalQuantity += resources[i].quantity;
     }
 
-    if(totalQuantity < this.transport.quantity) {
-      console.log("NOT ENOUGH RESOURCES");
+    if(totalQuantity >= this.transport.quantity) {
+      this.enoughResources = true;
+    } else {
+      alert("Not enough resources\n" +
+            "You need: " + this.transport.quantity + "\n" +
+            "Total quantity: " + totalQuantity);
     }
   }
 

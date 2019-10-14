@@ -100,8 +100,8 @@ export class RouteDetailsComponent implements OnInit {
   async loadMap() {
     await this.mapsService.initializeMap();
     await this.mapsService.loadCoordinatesArray(this.warehouses, this.latlngArray);
-    await this.mapsService.showWarehousesWithDetails(this.warehouses);
-    this.mapsService.showRoute(this.latlngArray);
+    await this.mapsService.showRoute(this.latlngArray);
+    this.mapsService.showWarehousesWithDetails(this.warehouses);
     this.showRouteDetailsAlert();
   }
 
