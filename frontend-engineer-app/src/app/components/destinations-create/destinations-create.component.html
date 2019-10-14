@@ -16,7 +16,7 @@
 <hr>
 
 <h3>
-  Choose resource nad quantity
+  Choose resource and quantity
 </h3>
 
 <div [hidden]="submitted" style="width: 400px;">
@@ -43,23 +43,29 @@
 <h3>
   Choose destinations
 </h3>
-<hr>
 
 <div [hidden]="submitted" style="width: 400px;">
   <form [formGroup]="destinationForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
-      <button (click)="addNewDestination()" type="button" [disabled]="!destinationForm.valid" class="btn btn-primary">Add new destination</button>
-    </div>
-
-    <div class="form-group" *ngFor = "let new of newDestinations, let index = index">
       <label>New Destination: </label>
-      <br>ID: {{destinations[index+1].id_warehouse}}
-      <select formControlName="newDestination" [(ngModel)]="destinations[index+1].id_warehouse" class="form-control">
+      <select formControlName="newDestination" [(ngModel)]="destinationToAdd.id_warehouse" class="form-control">
         <option></option>
-        <option *ngFor="let warehouse of warehouses | async" [ngValue]="warehouse.id">{{warehouse.name}}</option>
+        <option *ngFor="let warehouse of warehousesToSelect" [ngValue]="warehouse.id">{{warehouse.name}}</option>
       </select>
     </div>
+
+    <div class="form-group" *ngIf="destinationToAdd.id_warehouse != null && destinationToAdd.id_warehouse != 0">
+      <button (click)="addDestinationToList()" type="button" [disabled]="!destinationForm.valid" class="btn btn-primary">Add new destination</button>
+    </div>
+
+    <div *ngIf="destinations.length > 0">
+      <label>Chosen destinations: </label>
+      <div *ngFor="let destination of destinations; index as i">
+        {{i+1}}. {{wars[i].name}}
+      </div>
+    </div>
+    <br>
 
     <button type="submit" class="btn btn-success">Submit</button>
   </form>

@@ -6,11 +6,11 @@ import { Warehouse } from "../../models/warehouse";
 import { WarehouseService } from "../../services/warehouse.service";
 import { Destination } from "../../models/destination";
 import { DestinationService } from "../../services/destination.service";
-import { MapService} from "../../services/map.service";
-import {Transport} from "../../models/transport";
-import {TransportService} from "../../services/transport.service";
-import {ResourceType} from "../../models/resource-type";
-import {ResourceTypeService} from "../../services/resource-type.service";
+import { MapService } from "../../services/map.service";
+import { Transport } from "../../models/transport";
+import { TransportService } from "../../services/transport.service";
+import { ResourceType } from "../../models/resource-type";
+import { ResourceTypeService } from "../../services/resource-type.service";
 
 @Component({
   selector: 'app-route-details',
@@ -53,7 +53,6 @@ export class RouteDetailsComponent implements OnInit {
         console.log(data);
         this.destinations = data;
         this.destinations.sort((a,b) => a.order - b.order);
-        console.log("RELOAD DATA");
       });
   }
 
@@ -63,7 +62,6 @@ export class RouteDetailsComponent implements OnInit {
         console.log(data);
         this.route0 = data;
         this.loadWarehouses();
-        console.log("LOAD ROUTE");
       }, error => console.log(error));
   }
 
@@ -74,7 +72,6 @@ export class RouteDetailsComponent implements OnInit {
         .subscribe(warehouse => {
           console.log(warehouse);
           this.warehouses[i] = warehouse;
-          console.log("LOAD ROUTE - LOAD WAREHOUSES");
         });
     }
   }
@@ -84,13 +81,16 @@ export class RouteDetailsComponent implements OnInit {
       .subscribe(transport => {
         console.log(transport);
         this.transport = transport;
-        this.resourceTypeService.getResourceType(this.transport.idResourceType)
-          .subscribe(resourceType => {
-            console.log(resourceType);
-            this.resourceType = resourceType;
-          }, error => console.log(error));
+        this.loadResourceType();
+      },error => console.log(error));
+  }
 
-      }, error => console.log(error));
+  loadResourceType() {
+    this.resourceTypeService.getResourceType(this.transport.idResourceType)
+      .subscribe(resourceType => {
+        console.log(resourceType);
+        this.resourceType = resourceType;
+      }, error => console.log(error))
   }
 
   delay(ms: number) {
@@ -100,8 +100,8 @@ export class RouteDetailsComponent implements OnInit {
   async loadMap() {
     await this.mapsService.initializeMap();
     await this.mapsService.loadCoordinatesArray(this.warehouses, this.latlngArray);
-    await this.mapsService.showRoute(this.latlngArray);
-    this.mapsService.showWarehousesWithDetails(this.warehouses);
+    await this.mapsService.showWarehousesWithDetails(this.warehouses);
+    this.mapsService.showRoute(this.latlngArray);
     this.showRouteDetailsAlert();
   }
 
@@ -113,7 +113,6 @@ export class RouteDetailsComponent implements OnInit {
         'Total time is ' + Math.round(summary.totalTime / 3600) + ' hours ' +
         'and ' + Math.round(summary.totalTime % 3600 / 60) + ' minutes.');
     });
-    console.log("LOAD MAP - SHOW ALERT");
   }
 
   goToRoutelist(){

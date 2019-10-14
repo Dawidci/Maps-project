@@ -31,7 +31,6 @@ export class DestinationsCreateComponent implements OnInit {
   destinations: Destination[] = [];
   firstWarehouse: Warehouse;
   wars: Warehouse[] = [];
-  newDestinations: number[] = [];
   count = 1;
   submitted = false;
   resourceTypes: ResourceType[] = [];
@@ -40,6 +39,8 @@ export class DestinationsCreateComponent implements OnInit {
   transport: Transport;
   allDestinations: Destination[][] = [];
   allWarehouses: Warehouse[][] = [];
+  destinationToAdd: Destination;
+  warehousesToSelect: Warehouse[] = [];
 
   destinationForm = this.fb.group({
     firstDestination: [{value: '', disabled: true}, Validators.required],
@@ -65,6 +66,7 @@ export class DestinationsCreateComponent implements OnInit {
     this.route0 = new Route();
     this.transport = new Transport();
     this.transport.idRoute = this.id;
+    this.destinationToAdd = new Destination();
 
     this.reloadData();
     this.getResourceTypes();
@@ -75,6 +77,7 @@ export class DestinationsCreateComponent implements OnInit {
 
   reloadData() {
     this.warehouses = this.mapService.loadWarehouses();
+    this.loadWarehousesToSelect();
   }
 
   getResourceTypes() {
@@ -100,13 +103,45 @@ export class DestinationsCreateComponent implements OnInit {
       .subscribe(first => {
         console.log(first);
         this.firstWarehouse = first;
+        this.wars[0] = this.firstWarehouse;
+        this.deleteWarehouseFromSelectList(this.firstWarehouse);
+        console.log("SELECT");
+        console.log(this.warehousesToSelect);
       }, error => console.log(error));
   }
 
-  addNewDestination() {
+  addDestinationToList() {
     this.count++;
-    this.destinations.push({id: this.count, id_route: this.id, id_warehouse: 0, order: this.count});
-    this.newDestinations.push(this.count);
+    this.destinationToAdd.id = this.destinationToAdd.order = this.count;
+    this.destinationToAdd.id_route = this.id;
+    this.destinations.push({id: this.count, id_route: this.id, id_warehouse: this.destinationToAdd.id_warehouse, order: this.count});
+    this.loadWarehouseToWars(this.destinationToAdd.id_warehouse);
+    this.destinationToAdd = new Destination();
+  }
+
+  loadWarehouseToWars(idWarehouse) {
+    this.warehouseService.getWarehouse(idWarehouse)
+      .subscribe(warehouse => {
+        console.log(warehouse);
+        this.wars.push(warehouse);
+        this.deleteWarehouseFromSelectList(warehouse);
+      });
+  }
+
+  loadWarehousesToSelect() {
+    this.warehouseService.getWarehousesList()
+      .subscribe(warehouses => {
+        console.log(warehouses);
+        this.warehousesToSelect = warehouses;
+      });
+  }
+
+  deleteWarehouseFromSelectList(warehouseToRemove) {
+    for(let i = 0; i < this.warehousesToSelect.length; i++) {
+      if(this.warehousesToSelect[i].name == warehouseToRemove.name) {
+        this.warehousesToSelect.splice(i, 1);
+      }
+    }
   }
 
   onSubmit() {
@@ -126,7 +161,12 @@ export class DestinationsCreateComponent implements OnInit {
     await this.delay(500);
     //await this.loadAllWarehouses();
     //await this.computeOrderService.computeAllOrder(this.allDestinations, this.allWarehouses);
-    this.save();
+    await this.loadWarehouses();
+    await this.delay(250);
+    await this.computeOrderService.computeDistance(this.wars);
+    this.destinations = await this.computeOrderService.computeOrder(this.destinations, this.wars);
+    await this.createDestinations();
+    this.gotoList();
   }
 
   createTransport() {
@@ -138,8 +178,6 @@ export class DestinationsCreateComponent implements OnInit {
   }
 
   async save() {
-    await this.loadWarehouses();
-    await this.delay(250);
     await this.computeOrderService.computeDistance(this.wars);
     this.destinations = await this.computeOrderService.computeOrder(this.destinations, this.wars);
     await this.createDestinations();
@@ -275,6 +313,7 @@ export class DestinationsCreateComponent implements OnInit {
         }, error => console.log(error));
     }
   }
+
   gotoList() {
     this.router.navigate(['/routes']);
   }
