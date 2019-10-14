@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Route } from '../../models/route';
 import { RouteService } from '../../services/route.service';
@@ -198,6 +198,7 @@ export class DestinationsCreateComponent implements OnInit {
       .subscribe(resources => {
         console.log(resources);
         this.resources = resources;
+        this.deleteResourceBeingInFirstWarehouse(this.firstWarehouse);
         this.sumResourceTypeTotalQuantity(totalQuantity, resources);
         if(this.enoughResources == true) {
           this.getResourceMatrix(resources);
@@ -205,6 +206,14 @@ export class DestinationsCreateComponent implements OnInit {
         }
         //this.getAllResourceWarehouses();
       }, error => console.log(error));
+  }
+
+  deleteResourceBeingInFirstWarehouse(firstWarehouse) {
+    for(let i = 0; i < this.resources.length; i++) {
+      if(this.resources[i].idWarehouse == firstWarehouse.id) {
+        this.resources.splice(i, 1);
+      }
+    }
   }
 
   sumResourceTypeTotalQuantity(totalQuantity, resources) {

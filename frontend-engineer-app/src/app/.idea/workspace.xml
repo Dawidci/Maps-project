@@ -4,8 +4,6 @@
     <list default="true" id="8db15ed5-43e2-4a13-bc4b-0cadc9930cd4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/destinations-create/destinations-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/destinations-create/destinations-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/route-details/route-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/route-details/route-details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/map.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/map.service.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -116,7 +114,7 @@
       <workItem from="1570687178048" duration="7124000" />
       <workItem from="1570782047687" duration="19094000" />
       <workItem from="1571035575238" duration="808000" />
-      <workItem from="1571041092778" duration="14953000" />
+      <workItem from="1571041092778" duration="17571000" />
     </task>
     <servers />
   </component>
