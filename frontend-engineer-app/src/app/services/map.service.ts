@@ -67,12 +67,8 @@ export class MapService {
   showRoute(latlngArray) {
     this.leafletRoute = L.Routing.control({
       waypoints: latlngArray,
-      show: false,
+      show: false
     }).addTo(this.map);
-  }
-
-  hideRoutingMachineMarkers() {
-    return null;
   }
 
   loadCoordinatesArray(warehouses, latlngArray) {

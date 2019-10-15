@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Warehouse} from "../models/warehouse";
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +6,40 @@ import {Warehouse} from "../models/warehouse";
 export class ComputeOrderService {
 
   distance: number[][] = [];
-  dist: number;
   allDistances: number[] = [];
   totalDistance: number;
 
-
   constructor() { }
 
-  degreesToRadians(degrees) {
-    return degrees * Math.PI / 180;
+  computeAllOrder(allDestinations, allWarehouses) {
+    let maxTotalDistance = 100000000;
+    let indexOfShortestRoute = 0;
+
+    for(let i = 0; i < allDestinations.length; i++) {
+      this.computeDistance(allWarehouses[i]);
+      this.computeOrder(allDestinations[i], allWarehouses[i]);
+
+      if(this.totalDistance < maxTotalDistance) {
+        maxTotalDistance = this.totalDistance;
+        indexOfShortestRoute = i;
+      }
+    }
+
+    return allDestinations[indexOfShortestRoute];
+  }
+
+  computeDistance(warehouses) {
+    warehouses = Array.from(warehouses);
+    console.log(warehouses.length);
+    for(let i = 0; i < warehouses.length; i++) {
+      this.distance[i] = [];
+      for (let j = 0; j < warehouses.length; j++) {
+        if (i != j) {
+          this.distance[i][j] = this.distanceBetweenCoordinates(warehouses[i].latitude,
+            warehouses[i].longitude, warehouses[j].latitude, warehouses[j].longitude);
+        }
+      }
+    }
   }
 
   distanceBetweenCoordinates(lat1, lon1, lat2, lon2) {
@@ -34,30 +58,8 @@ export class ComputeOrderService {
     return earthRadiusKm * c;
   }
 
-  computeDistance(warehouses) {
-    warehouses = Array.from(warehouses);
-    console.log(warehouses.length);
-    for(let i = 0; i < warehouses.length; i++) {
-      this.distance[i] = [];
-      for (let j = 0; j < warehouses.length; j++) {
-        if (i != j) {
-          this.distance[i][j] = this.distanceBetweenCoordinates(warehouses[i].latitude,
-            warehouses[i].longitude, warehouses[j].latitude, warehouses[j].longitude);
-        }
-      }
-    }
-  }
-
-  computeAllOrder(allDestinations, allWarehouses) {
-    for(let i = 0; i < allDestinations.length; i++) {
-      let war: Warehouse[] = [];
-      war = allWarehouses[i];
-      this.computeDistance(allWarehouses[i]);
-      this.computeOrder(allDestinations[i], allWarehouses[i]);
-      this.allDistances[i] = this.totalDistance;
-    }
-
-    console.log(this.allDistances);
+  degreesToRadians(degrees) {
+    return degrees * Math.PI / 180;
   }
 
    computeOrder(destinations, warehouses) {
@@ -80,6 +82,10 @@ export class ComputeOrderService {
           dist = this.distance[start][j];
           newStart = j;
         }
+      }
+
+      if(i == warehouses.length - 1) {
+        dist = 0;
       }
 
       this.totalDistance += dist;
