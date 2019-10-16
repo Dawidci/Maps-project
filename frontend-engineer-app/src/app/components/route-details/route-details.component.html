@@ -3,37 +3,22 @@
 <div id="map">
 </div>
 
-<hr/>
+<hr>
 
-<div *ngIf="route0">
-
-  <div>
-    <label><b>Name: </b></label> {{route0.name}}
-  </div>
-  <div>
-    <label><b>First Warehouse: </b></label> {{warehouses[0].name}}
-  </div>
+<div *ngIf="routeName">
+  <div><label><b>Route Name: </b></label> {{routeName}}</div>
+  <div><label><b>First: </b></label> {{firstWarehouseName}}</div>
 </div>
 
 <br>
 
-<div *ngIf="transport">
-
-  <div>
-    <h4>
-      Transport
-    </h4>
-  </div>
-
-  <div>
-    <label><b>Resource Type: </b></label> {{resourceType.name}}
-  </div>
-
-  <div>
-    <label><b>Quantity: </b></label> {{transport.quantity}}
-  </div>
-  <br>
+<div *ngIf="transport && resourceType">
+  <div><h4>Transport</h4></div>
+  <div><label><b>Resource Type: </b></label> {{resourceType.name}}</div>
+  <div><label><b>Quantity: </b></label> {{transport.quantity}}</div>
 </div>
+
+<br>
 
 <div class="panel panel-primary">
 

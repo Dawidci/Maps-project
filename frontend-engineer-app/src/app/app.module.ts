@@ -12,9 +12,7 @@ import { RouteCreateComponent } from './components/route-create/route-create.com
 import { RouteListComponent } from './components/route-list/route-list.component';
 import { RouteDetailsComponent } from './components/route-details/route-details.component';
 import { DestinationsCreateComponent } from './components/destinations-create/destinations-create.component';
-import { ResourceTypeCreateComponent } from './components/resource-type-create/resource-type-create.component';
 import { ResourceTypeListComponent } from './components/resource-type-list/resource-type-list.component';
-import { ResourceTypeUpdateComponent } from './components/resource-type-update/resource-type-update.component';
 import { WarehouseDetailsComponent } from './components/warehouse-details/warehouse-details.component';
 import {AllWarehousesResolverService} from "./all-warehouses-resolver.service";
 
@@ -28,9 +26,7 @@ import {AllWarehousesResolverService} from "./all-warehouses-resolver.service";
     RouteListComponent,
     RouteDetailsComponent,
     DestinationsCreateComponent,
-    ResourceTypeCreateComponent,
     ResourceTypeListComponent,
-    ResourceTypeUpdateComponent,
     WarehouseDetailsComponent,
   ],
   imports: [

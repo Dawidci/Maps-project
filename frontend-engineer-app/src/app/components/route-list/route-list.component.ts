@@ -24,10 +24,6 @@ export class RouteListComponent implements OnInit {
               private router: Router) {}
 
   ngOnInit() {
-    this.reloadData();
-  }
-
-  reloadData() {
     this.loadRoutes();
   }
 
@@ -72,9 +68,8 @@ export class RouteListComponent implements OnInit {
 
   deleteRouteById(id) {
     this.routeService.deleteRoute(id)
-      .subscribe(
-        data => {
-          this.reloadData();
+      .subscribe(data => {
+          this.ngOnInit()
         },error => console.log(error));
   }
 

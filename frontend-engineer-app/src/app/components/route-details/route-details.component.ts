@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Route } from '../../models/route';
 import { RouteService } from '../../services/route.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Warehouse } from "../../models/warehouse";
@@ -20,10 +19,11 @@ import { ResourceTypeService } from "../../services/resource-type.service";
 export class RouteDetailsComponent implements OnInit {
 
   id: number;
-  route0: Route;
+  routeName: string;
   transport: Transport;
   resourceType: ResourceType;
   warehouses: Warehouse[] = [];
+  firstWarehouseName: string;
   destinations: Destination[] = [];
   latlngArray: any[] = [];
 
@@ -37,20 +37,16 @@ export class RouteDetailsComponent implements OnInit {
               private destinationService: DestinationService) { }
 
   async ngOnInit() {
-    this.route0 = new Route();
-    this.transport = new Transport();
     this.id = this.route.snapshot.params['id'];
     await this.reloadData();
     await this.loadRoute();
     await this.loadTransport();
-    await this.delay(250);
     this.loadMap();
   }
 
   reloadData() {
     this.destinationService.getDestinatonsByRoute(this.id)
       .subscribe(data => {
-        console.log(data);
         this.destinations = data;
         this.destinations.sort((a,b) => a.order - b.order);
       });
@@ -59,18 +55,23 @@ export class RouteDetailsComponent implements OnInit {
   loadRoute() {
     this.routeService.getRoute(this.id)
       .subscribe(data => {
-        console.log(data);
-        this.route0 = data;
+        this.routeName = data.name;
+        this.loadFirstWarehouse(data.id_first_warehouse);
         this.loadWarehouses();
       }, error => console.log(error));
   }
 
+  loadFirstWarehouse(id_first_warehouse: number) {
+    this.warehouseService.getWarehouse(id_first_warehouse)
+      .subscribe(firstWarehouse => {
+        this.firstWarehouseName = firstWarehouse.name;
+      })
+  }
+
   loadWarehouses() {
     for(let i = 0; i < this.destinations.length; i++) {
-      console.log(this.destinations[i].id_warehouse);
       this.warehouseService.getWarehouse(this.destinations[i].id_warehouse)
         .subscribe(warehouse => {
-          console.log(warehouse);
           this.warehouses[i] = warehouse;
         });
     }
@@ -79,16 +80,16 @@ export class RouteDetailsComponent implements OnInit {
   loadTransport() {
     this.transportService.getTransportByIdRoute(this.id)
       .subscribe(transport => {
-        console.log(transport);
         this.transport = transport;
-        this.loadResourceType();
+        if(transport != null) {
+          this.loadResourceType();
+        }
       },error => console.log(error));
   }
 
   loadResourceType() {
     this.resourceTypeService.getResourceType(this.transport.idResourceType)
       .subscribe(resourceType => {
-        console.log(resourceType);
         this.resourceType = resourceType;
       }, error => console.log(error))
   }

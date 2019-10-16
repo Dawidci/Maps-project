@@ -5,13 +5,9 @@
 </div>
 <br>
 
-<div [hidden]="submitted" style="width: 400px;">
-  <form [formGroup]="destinationForm">
-    <div class="form-group">
-      <label for="firstDestination">Chosen warehouse: </label>
-      <input type="text" formControlName="firstDestination" [(ngModel)]="firstWarehouse.name" class="form-control" id="firstDestination">
-    </div>
-  </form>
+<div *ngIf="!submitted" style="width: 400px;">
+      <label>Chosen warehouse: </label>
+      <div>{{firstWarehouse.name}}</div>
 </div>
 <hr>
 
@@ -19,7 +15,7 @@
   Choose resource and quantity
 </h3>
 
-<div [hidden]="submitted" style="width: 400px;">
+<div *ngIf="!submitted" style="width: 400px;">
   <form [formGroup]="destinationForm" (ngSubmit)="createRouteByResource()">
 
     <div class="form-group">

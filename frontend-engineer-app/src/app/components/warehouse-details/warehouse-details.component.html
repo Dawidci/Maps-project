@@ -1,26 +1,12 @@
 <h2>Warehouse Details</h2>
-
-<div id="map">
-</div>
-
-<hr/>
+<div id="map"></div>
+<hr>
 
 <div *ngIf="warehouse">
-
-  <div>
-    <label><b>Name: </b></label> {{warehouse.name}}
-  </div>
-
-  <div>
-    <label><b>Latitude: </b></label> {{warehouse.latitude}}
-  </div>
-
-  <div>
-    <label><b>Longitude: </b></label> {{warehouse.longitude}}
-  </div>
-
+  <div><label><b>Name: </b></label> {{warehouse.name}}</div>
+  <div><label><b>Latitude: </b></label> {{warehouse.latitude}}</div>
+  <div><label><b>Longitude: </b></label> {{warehouse.longitude}}</div>
 </div>
-
 <br>
 
 <div class="panel panel-primary">
@@ -47,9 +33,7 @@
         <td>{{resource.id}}</td>
         <td>{{resourceNames[index].name}}</td>
         <td>{{resource.quantity}}</td>
-        <td>
-          <input type="number" [(ngModel)]="resourceQuantity[index]" class="form-control">
-        </td>
+        <td><input type="number" [(ngModel)]="resourceQuantity[index]" class="form-control"></td>
         <td>
           <button (click)="deleteResource(resource.id, resource.idResourceType)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
           <button (click)="updateResource(resource.id, index)" class="btn btn-warning" style="margin-left: 5px">Update</button>
@@ -65,12 +49,8 @@
           </select>
         </td>
         <td></td>
-        <td>
-          <input type="number" [(ngModel)]="newResource.quantity" class="form-control">
-        </td>
-        <td>
-          <button (click)="addResource()" class="btn btn-secondary" style="margin-left: 5px">Add Resource</button>
-        </td>
+        <td><input type="number" [(ngModel)]="newResource.quantity" class="form-control"></td>
+        <td><button (click)="addResource()" class="btn btn-secondary" style="margin-left: 5px">Add Resource</button></td>
       </tr>
       </tbody>
 

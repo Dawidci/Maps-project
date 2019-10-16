@@ -7,11 +7,9 @@ import { RouteCreateComponent } from "./components/route-create/route-create.com
 import { RouteListComponent } from "./components/route-list/route-list.component";
 import { RouteDetailsComponent } from "./components/route-details/route-details.component";
 import { DestinationsCreateComponent } from "./components/destinations-create/destinations-create.component";
-import { ResourceTypeCreateComponent } from "./components/resource-type-create/resource-type-create.component";
 import { ResourceTypeListComponent } from "./components/resource-type-list/resource-type-list.component";
-import { ResourceTypeUpdateComponent } from "./components/resource-type-update/resource-type-update.component";
 import { WarehouseDetailsComponent } from "./components/warehouse-details/warehouse-details.component";
-import {AllWarehousesResolverService} from "./all-warehouses-resolver.service";
+import { AllWarehousesResolverService } from "./all-warehouses-resolver.service";
 
 const routes: Routes = [
   { path: '', redirectTo: 'warehouses', pathMatch: 'full' },
@@ -26,8 +24,6 @@ const routes: Routes = [
   { path: 'routes/details/:id', component: RouteDetailsComponent },
 
   { path: 'resource-types', component: ResourceTypeListComponent },
-  { path: 'resource-types/add', component: ResourceTypeCreateComponent },
-  { path: 'resource-types/update/:id', component: ResourceTypeUpdateComponent },
 
   { path: 'destinations/create/route/:id', component: DestinationsCreateComponent },
 ];

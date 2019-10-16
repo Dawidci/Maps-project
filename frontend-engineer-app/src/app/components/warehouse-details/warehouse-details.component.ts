@@ -33,8 +33,6 @@ export class WarehouseDetailsComponent implements OnInit {
 
   async ngOnInit() {
     await this.delay(100);
-
-    this.warehouse = new Warehouse();
     this.newResource = new Resource();
     this.id = this.route.snapshot.params['id'];
     this.newResource.idWarehouse = this.id;
@@ -49,7 +47,6 @@ export class WarehouseDetailsComponent implements OnInit {
     this.addResourceType.length = 0;
     this.resourceTypeService.getResourceTypesList()
       .subscribe(types => {
-        console.log(types);
         this.getListOfResourceTypesThatCouldBeAdded(types);
       }, error => console.log(error));
   }
@@ -74,7 +71,6 @@ export class WarehouseDetailsComponent implements OnInit {
   loadWarehouse() {
     this.warehouseService.getWarehouse(this.id)
       .subscribe(data => {
-        console.log("LOAD");
         this.warehouse = data;
         this.getResources();
       }, error => console.log(error));
@@ -88,18 +84,17 @@ export class WarehouseDetailsComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  async getResourcesTypeNames() {
+  getResourcesTypeNames() {
     for(let i = 0; i < this.resources.length; i++) {
       this.resourceTypeService.getResourceType(this.resources[i].idResourceType)
         .subscribe(resourceType => {
-          console.log(resourceType);
           this.resourceNames[i] = resourceType;
         }, error => console.log(error));
     }
   }
 
   delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async loadMap() {
@@ -113,12 +108,11 @@ export class WarehouseDetailsComponent implements OnInit {
     this.resourceService.deleteResource(id)
       .subscribe(data => {
           this.deleteResourceFromArray(idType);
-          console.log(data);
           this.ngOnInit();
         },error => console.log(error));
   }
 
-  deleteResourceFromArray(idType) {
+  deleteResourceFromArray(idType: number) {
     for(let i = 0; i < this.resourceNames.length; i++) {
       if(this.resourceNames[i].id == idType) {
         this.resourceNames.splice(i, 1);
@@ -128,20 +122,11 @@ export class WarehouseDetailsComponent implements OnInit {
 
   updateResource(id: number, index: number) {
     this.resources[index].quantity = this.resourceQuantity[index];
-    this.resourceService.updateResource(id, this.resources[index])
-      .subscribe(newResource => {
-        console.log(newResource);
-      }, error => console.log(error));
+    this.resourceService.updateResource(id, this.resources[index]).subscribe();
   }
 
   addResource() {
-    console.log(this.newResource);
-
-    this.resourceService.createResource(this.newResource)
-      .subscribe(newResource => {
-        console.log(newResource);
-      }, error => console.log(error));
-
+    this.resourceService.createResource(this.newResource).subscribe();
     this.ngOnInit();
   }
 
