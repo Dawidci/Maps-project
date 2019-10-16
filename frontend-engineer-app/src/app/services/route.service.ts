@@ -19,6 +19,10 @@ export class RouteService {
     return this.http.get(`${this.baseUrl}/name/${name}`);
   }
 
+  getRoutesByWarehouse(id_warehouse: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/warehouse/${id_warehouse}`);
+  }
+
   createRoute(warehouse: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}`, warehouse);
   }

@@ -201,7 +201,6 @@ export class DestinationsCreateComponent implements OnInit {
 
         if(this.enoughResources == true) {
           this.getResourceMatrix(resources);
-          //this.getWarehousesWithChosenResource();
           this.getAllResourceWarehouses();
         }
       }, error => console.log(error));
@@ -271,17 +270,6 @@ export class DestinationsCreateComponent implements OnInit {
     }
   }
 
-  getWarehousesWithChosenResource() {
-    for(let i = 0; i < this.result[0].length; i++) {
-      this.warehouseService.getWarehouse(this.result[0][i].idWarehouse)
-        .subscribe(warehouse => {
-          console.log(warehouse);
-          this.count++;
-          this.destinations.push({id: this.count, id_route: this.id, id_warehouse: warehouse.id, order: this.count});
-        });
-    }
-  }
-
   getAllResourceWarehouses() {
     for(let i = 0; i < this.result.length; i++) {
       this.allDestinations[i] = [];
@@ -302,11 +290,6 @@ export class DestinationsCreateComponent implements OnInit {
     await this.loadAllWarehouses();
     await this.delay(100);
     this.destinations = await this.computeOrderService.computeAllOrder(this.allDestinations, this.allWarehouses);
-
-    //await this.loadWarehouses();
-    //await this.delay(250);
-    //await this.computeOrderService.computeDistance(this.wars);
-    //this.destinations = await this.computeOrderService.computeOrder(this.destinations, this.wars);
     await this.createDestinations();
     this.gotoList();
   }
@@ -320,16 +303,6 @@ export class DestinationsCreateComponent implements OnInit {
 
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
-  }
-
-  loadWarehouses() {
-    for(let i = 0; i < this.destinations.length; i++) {
-      this.warehouseService.getWarehouse(this.destinations[i].id_warehouse)
-        .subscribe(warehouse => {
-          console.log(warehouse);
-          this.wars[i] = warehouse;
-        });
-    }
   }
 
   loadAllWarehouses() {

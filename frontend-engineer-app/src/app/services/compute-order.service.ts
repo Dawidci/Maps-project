@@ -16,8 +16,13 @@ export class ComputeOrderService {
     let indexOfShortestRoute = 0;
 
     for(let i = 0; i < allDestinations.length; i++) {
+
       this.computeDistance(allWarehouses[i]);
       this.computeOrder(allDestinations[i], allWarehouses[i]);
+
+      console.log("Destinations: ");
+      console.log(allDestinations[i]);
+      console.log("Distance" + this.totalDistance);
 
       if(this.totalDistance < maxTotalDistance) {
         maxTotalDistance = this.totalDistance;
@@ -25,6 +30,8 @@ export class ComputeOrderService {
       }
     }
 
+    console.log("Shortest distance: " + maxTotalDistance);
+    console.log("Shortest index: " + indexOfShortestRoute)
     return allDestinations[indexOfShortestRoute];
   }
 

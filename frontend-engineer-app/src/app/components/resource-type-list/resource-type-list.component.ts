@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ResourceType } from "../../models/resource-type";
 import { ResourceTypeService } from "../../services/resource-type.service";
 import {ResourceService} from "../../services/resource.service";
+import {TransportService} from "../../services/transport.service";
 
 @Component({
   selector: 'app-resource-type-list',
@@ -18,6 +19,7 @@ export class ResourceTypeListComponent implements OnInit {
 
   constructor(private resourceTypeService: ResourceTypeService,
               private resourceService: ResourceService,
+              private transportService: TransportService,
               private router: Router) {}
 
   ngOnInit() {
@@ -55,13 +57,40 @@ export class ResourceTypeListComponent implements OnInit {
     }
   }
 
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
   deleteResourceType(id: number) {
+    this.deleteResourcesByType(id);
+    this.deleteTransportByResourceType(id);
+    this.deleteTypeOfResource(id);
+  }
+
+  deleteResourcesByType(id) {
+    this.resourceService.getResourcesByIdResourceType(id)
+      .subscribe(resources => {
+        for(let i = 0; i < resources.length; i++) {
+          this.resourceService.deleteResource(resources[i].id).subscribe();
+        }
+      }, error => console.log(error));
+  }
+
+  deleteTransportByResourceType(id) {
+    this.transportService.getTransportByIdResourceType(id)
+      .subscribe(transports => {
+        for(let i = 0; i < transports.length; i++) {
+          this.transportService.deleteTransport(transports[i].id).subscribe();
+        }
+      }, error => console.log(error));
+  }
+
+  deleteTypeOfResource(id) {
     this.resourceTypeService.deleteResourceType(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },error => console.log(error));
+      .subscribe(data => {
+        console.log(data);
+        this.reloadData();
+      },error => console.log(error));
   }
 
   updateResourceType(id: number) {

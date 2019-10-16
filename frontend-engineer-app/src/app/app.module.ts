@@ -42,7 +42,7 @@ import {AllWarehousesResolverService} from "./all-warehouses-resolver.service";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AllWarehousesResolverService],
+  providers: [AllWarehousesResolverService, RouteListComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

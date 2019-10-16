@@ -39,6 +39,12 @@ public class DestinationController {
         return destinations;
     }
 
+    @GetMapping("/warehouse/{idWarehouse}")
+    public List<Destination> getDestinationsByIdWarehouse(@PathVariable(value = "idWarehouse") int idWarehouse) {
+        List<Destination> destinations = destinationRepository.findByIdWarehouse(idWarehouse);
+        return destinations;
+    }
+
     @PostMapping("")
     public Destination createDestination(@Valid @RequestBody Destination destination) {
         return destinationRepository.save(destination);

@@ -41,6 +41,12 @@ public class TransportController {
         return ResponseEntity.ok().body(transport);
     }
 
+    @GetMapping("/resource-type/{idResourceType}")
+    public List<Transport> getTransportsByIdResourceType(@PathVariable(value = "idResourceType") long idResourceType) {
+        List<Transport> transports = transportRepository.findByIdResourceType(idResourceType);
+        return transports;
+    }
+
     @PostMapping("")
     public Transport createTransport(@Valid @RequestBody Transport transport) {
         return transportRepository.save(transport);

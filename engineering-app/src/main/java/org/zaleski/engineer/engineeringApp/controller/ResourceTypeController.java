@@ -58,6 +58,7 @@ public class ResourceTypeController {
                 .orElseThrow(() -> new ResourceNotFoundException("Route not found for this id :: " + id));
 
         resourceTypeRepository.delete(resourceType);
+
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
 

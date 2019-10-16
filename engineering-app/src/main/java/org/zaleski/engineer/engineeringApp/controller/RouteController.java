@@ -39,6 +39,12 @@ public class RouteController {
         return ResponseEntity.ok().body(route);
     }
 
+    @GetMapping("/warehouse/{idFirstWarehouse}")
+    public List<Route> getRoutesByIdFirstWarehouse(@PathVariable(value = "idFirstWarehouse") long idFirstWarehouse) {
+        List<Route> routes = routeRepository.findByIdFirstWarehouse(idFirstWarehouse);
+        return routes;
+    }
+
     @PostMapping("")
     public Route createRoute(@Valid @RequestBody Route route) {
         return routeRepository.save(route);

@@ -19,6 +19,10 @@ export class TransportService {
     return this.http.get(`${this.baseUrl}/route/${idRoute}`);
   }
 
+  getTransportByIdResourceType(idResourceType: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/resource-type/${idResourceType}`);
+  }
+
   createTransport(transport: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}`, transport);
   }

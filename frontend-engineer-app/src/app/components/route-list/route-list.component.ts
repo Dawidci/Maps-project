@@ -4,6 +4,8 @@ import { RouteService } from "../../services/route.service";
 import { WarehouseService } from "../../services/warehouse.service";
 import { Route } from "../../models/route";
 import { Router } from '@angular/router';
+import {DestinationService} from "../../services/destination.service";
+import {TransportService} from "../../services/transport.service";
 
 @Component({
   selector: 'app-route-list',
@@ -17,6 +19,8 @@ export class RouteListComponent implements OnInit {
 
   constructor(private routeService: RouteService,
               private warehouseService: WarehouseService,
+              private destinationService: DestinationService,
+              private transportService: TransportService,
               private router: Router) {}
 
   ngOnInit() {
@@ -46,6 +50,28 @@ export class RouteListComponent implements OnInit {
   }
 
   deleteRoute(id: number) {
+    this.deleteDestinationsByIdRoute(id);
+    this.deleteTransportByIdRoute(id);
+    this.deleteRouteById(id);
+  }
+
+  deleteDestinationsByIdRoute(id) {
+    this.destinationService.getDestinatonsByRoute(id)
+      .subscribe(destinations => {
+        for (let i = 0; i < destinations.length; i++) {
+          this.destinationService.deleteDestination(destinations[i].id).subscribe();
+        }
+      }, error => console.log(error));
+  }
+
+  deleteTransportByIdRoute(id) {
+    this.transportService.getTransportByIdRoute(id)
+      .subscribe(transport => {
+        this.transportService.deleteTransport(transport.id).subscribe();
+      }, error => console.log(error));
+  }
+
+  deleteRouteById(id) {
     this.routeService.deleteRoute(id)
       .subscribe(
         data => {

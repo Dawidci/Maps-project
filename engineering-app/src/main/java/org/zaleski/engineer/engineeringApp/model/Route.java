@@ -14,7 +14,7 @@ public class Route {
     private String name;
 
     @Column(name = "id_first_warehouse", nullable = false)
-    private long id_first_warehouse;
+    private long idFirstWarehouse;
 
     public Route() {}
 
@@ -22,9 +22,9 @@ public class Route {
         this.name = name;
     }
 
-    public Route(String name, long id_first_warehouse) {
+    public Route(String name, long idFirstWarehouse) {
         this.name = name;
-        this.id_first_warehouse = id_first_warehouse;
+        this.idFirstWarehouse = idFirstWarehouse;
     }
 
     public long getId() {
@@ -44,11 +44,11 @@ public class Route {
     }
 
     public long getId_first_warehouse() {
-        return id_first_warehouse;
+        return idFirstWarehouse;
     }
 
-    public void setId_first_warehouse(long id_first_warehouse) {
-        this.id_first_warehouse = id_first_warehouse;
+    public void setId_first_warehouse(long idFirstWarehouse) {
+        this.idFirstWarehouse = idFirstWarehouse;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Route {
         return "Route{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", id_first_warehouse=" + id_first_warehouse +
+                ", id_first_warehouse=" + idFirstWarehouse +
                 '}';
     }
 }
