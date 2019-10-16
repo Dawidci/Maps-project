@@ -1,9 +1,11 @@
 <div class="panel panel-primary">
+
   <div class="panel-heading">
     <h2>Warehouse List</h2>
   </div>
-  <div id="map">
-  </div>
+
+  <div id="map"></div>
+
   <div class="panel-body">
     <table class="table table-striped">
 
@@ -20,7 +22,7 @@
       </thead>
 
       <tbody>
-      <tr *ngFor="let warehouse of warehouses | async">
+      <tr *ngFor="let warehouse of warehouses">
         <td>{{warehouse.id}}</td>
         <td>{{warehouse.name}}</td>
         <td>{{warehouse.latitude}}</td>
@@ -31,10 +33,6 @@
           <button (click)="deleteWarehouse(warehouse.id)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
           <button (click)="updateWarehouse(warehouse.id)" class="btn btn-warning" style="margin-left: 5px">Update</button>
           <button (click)="warehouseDetails(warehouse.id)" class="btn btn-info" style="margin-left: 5px">Details</button>
-
-          <!--
-          <button (click)="updateEmployee(employee.id)" class="btn btn-warning" style="margin-left: 10px">Update</button>
-          -->
         </td>
       </tr>
       </tbody>

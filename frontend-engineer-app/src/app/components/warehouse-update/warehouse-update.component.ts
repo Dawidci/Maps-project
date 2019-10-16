@@ -14,7 +14,6 @@ export class WarehouseUpdateComponent implements OnInit {
 
   id: number;
   warehouse: Warehouse;
-  submitted = false;
 
   warehouseForm = this.fb.group({
     name: ['', Validators.required],
@@ -31,7 +30,6 @@ export class WarehouseUpdateComponent implements OnInit {
               private fb: FormBuilder) { }
 
   async ngOnInit() {
-    this.warehouse = new Warehouse();
     this.id = this.route.snapshot.params['id'];
     this.getWarehouse();
     this.mapService.initializeMap();
@@ -40,30 +38,23 @@ export class WarehouseUpdateComponent implements OnInit {
 
   getWarehouse() {
     this.warehouseService.getWarehouse(this.id)
-      .subscribe(data => {
-        console.log(data)
-        this.warehouse = data;
+      .subscribe(warehouse => {
+        this.warehouse = warehouse;
+        this.mapService.showWarehouse(warehouse);
       }, error => console.log(error));
-  }
-
-  onSubmit() {
-    this.submitted = true;
-    this.save();
-  }
-
-  save() {
-    this.warehouseService.updateWarehouse(this.id, this.warehouse)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.warehouse = new Warehouse();
-    this.gotoList();
-  }
-
-  gotoList() {
-    this.router.navigate(['/warehouses']);
   }
 
   onMapClick(e) {
     this.warehouse.latitude = Math.round(e.latlng.lat * 100) / 100;
     this.warehouse.longitude = Math.round(e.latlng.lng * 100) / 100;
+  }
+
+  onSubmit() {
+    this.warehouseService.updateWarehouse(this.id, this.warehouse).subscribe(error => console.log(error));
+    this.gotoList();
+  }
+
+  gotoList() {
+    this.router.navigate(['/warehouses']);
   }
 }

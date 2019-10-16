@@ -33,14 +33,43 @@ export class WarehouseDetailsComponent implements OnInit {
 
   async ngOnInit() {
     await this.delay(100);
-    this.newResource = new Resource();
     this.id = this.route.snapshot.params['id'];
+    this.newResource = new Resource();
     this.newResource.idWarehouse = this.id;
 
     await this.loadWarehouse();
     await this.delay(250);
     await this.loadResourceTypes();
     this.loadMap();
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  loadWarehouse() {
+    this.warehouseService.getWarehouse(this.id)
+      .subscribe(data => {
+        this.warehouse = data;
+        this.getResources();
+      },error => console.log(error));
+  }
+
+  getResources() {
+    this.resourceService.getResourcesByIdWarehouse(this.id)
+      .subscribe(resources => {
+        this.resources = resources;
+        this.getResourcesTypeNames();
+      }, error => console.log(error));
+  }
+
+  getResourcesTypeNames() {
+    for(let i = 0; i < this.resources.length; i++) {
+      this.resourceTypeService.getResourceType(this.resources[i].idResourceType)
+        .subscribe(resourceType => {
+          this.resourceNames[i] = resourceType;
+        }, error => console.log(error));
+    }
   }
 
   loadResourceTypes() {
@@ -66,35 +95,6 @@ export class WarehouseDetailsComponent implements OnInit {
         this.addResourceType.push(types[i]);
       }
     }
-  }
-
-  loadWarehouse() {
-    this.warehouseService.getWarehouse(this.id)
-      .subscribe(data => {
-        this.warehouse = data;
-        this.getResources();
-      }, error => console.log(error));
-  }
-
-  getResources() {
-    this.resourceService.getResourcesByIdWarehouse(this.id)
-      .subscribe(resources => {
-        this.resources = resources;
-        this.getResourcesTypeNames();
-      }, error => console.log(error));
-  }
-
-  getResourcesTypeNames() {
-    for(let i = 0; i < this.resources.length; i++) {
-      this.resourceTypeService.getResourceType(this.resources[i].idResourceType)
-        .subscribe(resourceType => {
-          this.resourceNames[i] = resourceType;
-        }, error => console.log(error));
-    }
-  }
-
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async loadMap() {

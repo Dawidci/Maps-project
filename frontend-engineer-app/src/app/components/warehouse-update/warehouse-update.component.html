@@ -1,11 +1,10 @@
 <h2>Update Warehouse</h2>
-
 <hr>
 
-<div id="map">
-</div>
+<div id="map"></div>
+<br>
 
-<div [hidden]="submitted" style="width: 400px;">
+<div *ngIf="warehouse" style="width: 400px;">
   <form [formGroup]="warehouseForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
@@ -52,4 +51,3 @@
     <button type="submit" [disabled]="!warehouseForm.valid" class="btn btn-success">Submit</button>
   </form>
 </div>
-

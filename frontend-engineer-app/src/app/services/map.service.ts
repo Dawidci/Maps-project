@@ -46,6 +46,10 @@ export class MapService {
     });
   }
 
+  showWarehousesWithParameters(warehouses) {
+    warehouses.forEach((warehouse: Warehouse) => this.showWarehouse(warehouse));
+  }
+
   showWarehouse(warehouse) {
     let marker = new L.Marker([warehouse.latitude, warehouse.longitude]).addTo(this.map);
     marker.bindPopup("ID: " + warehouse.id.toString() + "<br>" +

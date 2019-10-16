@@ -1,13 +1,12 @@
-import { Observable } from "rxjs";
 import { WarehouseService } from "../../services/warehouse.service";
 import { MapService } from "../../services/map.service";
 import { Warehouse } from "../../models/warehouse";
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
-import {RouteListComponent} from "../route-list/route-list.component";
-import {RouteService} from "../../services/route.service";
-import {DestinationService} from "../../services/destination.service";
-import {ResourceService} from "../../services/resource.service";
+import { RouteListComponent } from "../route-list/route-list.component";
+import { RouteService } from "../../services/route.service";
+import { DestinationService } from "../../services/destination.service";
+import { ResourceService } from "../../services/resource.service";
 
 @Component({
   selector: 'app-warehouse-list',
@@ -16,9 +15,7 @@ import {ResourceService} from "../../services/resource.service";
 })
 export class WarehouseListComponent implements OnInit {
 
-  warehouses: Observable<Warehouse[]>;
-  wart: any;
-  map: any;
+  warehouses: Warehouse[] = [];
 
   constructor(private route: ActivatedRoute,
               private warehouseService: WarehouseService,
@@ -32,11 +29,14 @@ export class WarehouseListComponent implements OnInit {
   ngOnInit() {
     this.reloadData();
     this.mapService.initializeMap();
-    this.mapService.showWarehouses();
   }
 
   reloadData() {
-    this.warehouses = this.mapService.loadWarehouses();
+    this.warehouseService.getWarehousesList()
+      .subscribe(warehouses => {
+        this.warehouses = warehouses;
+        this.mapService.showWarehousesWithParameters(warehouses);
+      }, error => console.log(error));
   }
 
   deleteWarehouse(id: number) {
@@ -46,39 +46,35 @@ export class WarehouseListComponent implements OnInit {
     this.deleteWarehouseById(id);
   }
 
-  deleteResourcesByIdWarehouse(id) {
+  deleteResourcesByIdWarehouse(id: number) {
     this.resourceService.getResourcesByIdWarehouse(id)
       .subscribe(resources => {
-        for(let i = 0; i < resources.length; i++) {
-          this.resourceService.deleteResource(resources[i].id).subscribe();
-        }
+        resources.forEach(resource => {
+          this.resourceService.deleteResource(resource.id).subscribe(error => console.log(error));
+        });
       }, error => console.log(error));
   }
 
-  deleteDestinationsByIdWarehouse(id) {
+  deleteDestinationsByIdWarehouse(id: number) {
     this.destinationService.getDestinatonsByWarehouse(id)
       .subscribe(destinations => {
-        for (let i = 0; i < destinations.length; i++) {
-          this.destinationService.deleteDestination(destinations[i].id).subscribe();
-        }
+        destinations.forEach(destination => {
+          this.destinationService.deleteDestination(destination.id).subscribe(error => console.log(error));
+        });
       }, error => console.log(error));
   }
 
-  deleteRoutesByWarehouseId(id) {
+  deleteRoutesByWarehouseId(id: number) {
     this.routeService.getRoutesByWarehouse(id)
       .subscribe(routes => {
-        for(let i = 0; i < routes.length; i++) {
-          this.routeListComponent.deleteRoute(routes[i].id);
-        }
+        routes.forEach(route => {
+          this.routeListComponent.deleteRoute(route.id);
+        });
       }, error => console.log(error));
   }
 
-  deleteWarehouseById(id) {
-    this.warehouseService.deleteWarehouse(id)
-      .subscribe(
-        data => {
-          this.reloadData();
-        },error => console.log(error));
+  deleteWarehouseById(id: number) {
+    this.warehouseService.deleteWarehouse(id).subscribe(() => this.reloadData(),error => console.log(error));
   }
 
   updateWarehouse(id: number) {
