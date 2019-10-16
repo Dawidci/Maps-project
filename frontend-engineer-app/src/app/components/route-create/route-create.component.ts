@@ -61,14 +61,12 @@ export class RouteCreateComponent implements OnInit {
   createNewRoute() {
     this.routeService.createRoute(this.route)
       .subscribe(data => {
-        console.log(data)
       },error => console.log(error));
   }
 
   getRouteByName() {
     this.routeService.getRouteByName(this.route.name)
       .subscribe(data => {
-        console.log(data);
         this.route = data;
         this.createDestinations(this.route.id);
       }, error => console.log(error));

@@ -34,7 +34,6 @@ export class RouteListComponent implements OnInit {
   loadRoutes() {
     this.routeService.getRoutesList()
       .subscribe(data => {
-        console.log(data);
         this.routes = data;
         this.loadWarehouseNames();
       }, error => console.log(error));
@@ -75,7 +74,6 @@ export class RouteListComponent implements OnInit {
     this.routeService.deleteRoute(id)
       .subscribe(
         data => {
-          console.log(data);
           this.reloadData();
         },error => console.log(error));
   }

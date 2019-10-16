@@ -84,7 +84,6 @@ export class DestinationsCreateComponent implements OnInit {
   loadWarehousesToSelect() {
     this.warehouseService.getWarehousesList()
       .subscribe(warehouses => {
-        console.log(warehouses);
         this.warehousesToSelect = warehouses;
       });
   }
@@ -92,7 +91,6 @@ export class DestinationsCreateComponent implements OnInit {
   getResourceTypes() {
     this.resourceTypeService.getResourceTypesList()
       .subscribe(resourceTypes => {
-        console.log(resourceTypes);
         this.resourceTypes = resourceTypes;
       }, error => console.log(error));
   }
@@ -100,7 +98,6 @@ export class DestinationsCreateComponent implements OnInit {
   loadRoute() {
     this.routeService.getRoute(this.id)
       .subscribe(data => {
-        console.log(data);
         this.route0 = data;
         this.destinations.push({id:1, id_route: this.id, id_warehouse: this.route0.id_first_warehouse, order: 1});
         this.getFirstWarehouse();
@@ -110,11 +107,9 @@ export class DestinationsCreateComponent implements OnInit {
   getFirstWarehouse() {
     this.warehouseService.getWarehouse(this.route0.id_first_warehouse)
       .subscribe(first => {
-        console.log(first);
         this.firstWarehouse = first;
         this.wars[0] = this.firstWarehouse;
         this.deleteWarehouseFromSelectList(this.firstWarehouse);
-        console.log(this.warehousesToSelect);
       }, error => console.log(error));
   }
 
@@ -138,7 +133,6 @@ export class DestinationsCreateComponent implements OnInit {
   loadWarehouseToWars(idWarehouse) {
     this.warehouseService.getWarehouse(idWarehouse)
       .subscribe(warehouse => {
-        console.log(warehouse);
         this.wars.push(warehouse);
         this.deleteWarehouseFromSelectList(warehouse);
       });
@@ -162,7 +156,6 @@ export class DestinationsCreateComponent implements OnInit {
     for(let i = 0; i < this.destinations.length; i++) {
       await this.destinationService.createDestination(this.destinations[i])
         .subscribe(data => {
-          console.log(data);
         }, error => console.log(error));
     }
   }
@@ -186,7 +179,6 @@ export class DestinationsCreateComponent implements OnInit {
   loadEverything() {
     this.resourceTypeService.getResourceType(this.transport.idResourceType)
       .subscribe(type => {
-        console.log(type);
         this.getResourcesByType(type);
       },error => console.log(error));
   }
@@ -194,7 +186,6 @@ export class DestinationsCreateComponent implements OnInit {
   getResourcesByType(type) {
     this.resourceService.getResourcesByIdResourceType(type.id)
       .subscribe(resources => {
-        console.log(resources);
         this.resources = resources;
         this.deleteResourceBeingInFirstWarehouse(this.firstWarehouse);
         this.sumResourceTypeTotalQuantity(resources);
@@ -235,7 +226,9 @@ export class DestinationsCreateComponent implements OnInit {
 
     for(let i = 0; i < resources.length; i++) {
       if(resources[i].quantity >= this.transport.quantity) {
-        this.result.push(resources[i]);
+        let local: Resource[] = [];
+        local.push(resources[i]);
+        this.result.push(local);
       } else if ((i + 1) == resources.length) {
         break;
       } else {
@@ -274,6 +267,7 @@ export class DestinationsCreateComponent implements OnInit {
     for(let i = 0; i < this.result.length; i++) {
       this.allDestinations[i] = [];
       this.allDestinations[i].push({id:1, id_route: this.id, id_warehouse: this.route0.id_first_warehouse, order: 1});
+
       for(let j = 0; j < this.result[i].length; j++) {
         let count = j + 2;
         this.warehouseService.getWarehouse(this.result[i][j].idWarehouse)
@@ -297,7 +291,6 @@ export class DestinationsCreateComponent implements OnInit {
   createTransport() {
     this.transportService.createTransport(this.transport)
       .subscribe(data => {
-        console.log(data);
       }, error => console.log(error));
   }
 

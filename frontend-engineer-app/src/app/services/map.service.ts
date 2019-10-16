@@ -36,13 +36,11 @@ export class MapService {
         [-90, -180],
         [90, 180]
       ]);
-    console.log("LOAD MAP - INITIALIZE MAP");
   }
 
   showWarehouses() {
     this.warehouses.subscribe(elements => {
       elements.forEach((warehouse : any) => {
-        console.log(warehouse.name);
         this.showWarehouse(warehouse);
       })
     });
@@ -76,6 +74,5 @@ export class MapService {
       let ltln = L.latLng(warehouses[i].latitude, warehouses[i].longitude);
       latlngArray.push(ltln);
     }
-    console.log("LOAD MAP - LOAD COORDINATES");
   }
 }
