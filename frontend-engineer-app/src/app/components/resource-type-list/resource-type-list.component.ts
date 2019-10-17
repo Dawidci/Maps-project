@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
 import { ResourceType } from "../../models/resource-type";
 import { ResourceTypeService } from "../../services/resource-type.service";
 import { ResourceService } from "../../services/resource.service";
 import { TransportService } from "../../services/transport.service";
+import { Resource } from "../../models/resource";
 
 @Component({
   selector: 'app-resource-type-list',
@@ -14,20 +14,14 @@ export class ResourceTypeListComponent implements OnInit {
 
   resourceTypeQuantity: number[] = [];
   types: ResourceType[] = [];
-  newResourceType: ResourceType;
+  newResourceType: ResourceType = new ResourceType();
   newNameOfResourceType: string[] = [];
 
   constructor(private resourceTypeService: ResourceTypeService,
               private resourceService: ResourceService,
-              private transportService: TransportService,
-              private router: Router) {}
+              private transportService: TransportService) {}
 
   ngOnInit() {
-    this.newResourceType = new ResourceType();
-    this.reloadData();
-  }
-
-  reloadData() {
     this.getAllResourceTypes();
   }
 
@@ -36,7 +30,7 @@ export class ResourceTypeListComponent implements OnInit {
       .subscribe(resourceTypes => {
         this.types = resourceTypes;
         this.getResourcesByType();
-      }, error => console.log(error));
+      },error => console.log(error));
   }
 
   getResourcesByType() {
@@ -45,13 +39,13 @@ export class ResourceTypeListComponent implements OnInit {
         .subscribe(resources => {
           this.resourceTypeQuantity[i] = 0;
           this.sumResources(resources, i);
-        }, error => console.log(error));
+        },error => console.log(error));
     }
   }
 
-  sumResources(resources, i) {
+  sumResources(resources: Resource[], index: number) {
     for(let j = 0; j < resources.length; j++) {
-      this.resourceTypeQuantity[i] += resources[j].quantity;
+      this.resourceTypeQuantity[index] += resources[j].quantity;
     }
   }
 
@@ -61,7 +55,7 @@ export class ResourceTypeListComponent implements OnInit {
     this.deleteTypeOfResource(id);
   }
 
-  deleteResourcesByType(id) {
+  deleteResourcesByType(id: number) {
     this.resourceService.getResourcesByIdResourceType(id)
       .subscribe(resources => {
         for(let i = 0; i < resources.length; i++) {
@@ -70,7 +64,7 @@ export class ResourceTypeListComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  deleteTransportByResourceType(id) {
+  deleteTransportByResourceType(id: number) {
     this.transportService.getTransportByIdResourceType(id)
       .subscribe(transports => {
         for(let i = 0; i < transports.length; i++) {
@@ -79,21 +73,17 @@ export class ResourceTypeListComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  deleteTypeOfResource(id) {
+  deleteTypeOfResource(id: number) {
     this.resourceTypeService.deleteResourceType(id)
-      .subscribe(data => {
-        this.reloadData();
+      .subscribe(() => this.ngOnInit(),error => console.log(error));
+  }
+
+  addResourceType() {
+    this.resourceTypeService.createResourceType(this.newResourceType)
+      .subscribe(() => {
+        this.newResourceType.name = '';
+        this.ngOnInit();
       },error => console.log(error));
-  }
-
-  async addResourceType() {
-    await this.resourceTypeService.createResourceType(this.newResourceType).subscribe();
-    await this.delay(10);
-    this.ngOnInit();
-  }
-
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   updateResourceType(id: number, index: number) {

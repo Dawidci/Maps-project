@@ -32,13 +32,14 @@ export class WarehouseDetailsComponent implements OnInit {
               private resourceTypeService: ResourceTypeService) { }
 
   async ngOnInit() {
-    await this.delay(100);
     this.id = this.route.snapshot.params['id'];
     this.newResource = new Resource();
     this.newResource.idWarehouse = this.id;
+    await this.delay(100);
 
     await this.loadWarehouse();
     await this.delay(250);
+
     await this.loadResourceTypes();
     this.loadMap();
   }

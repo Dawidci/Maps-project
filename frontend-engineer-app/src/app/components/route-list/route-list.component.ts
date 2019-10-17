@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from "rxjs";
 import { RouteService } from "../../services/route.service";
 import { WarehouseService } from "../../services/warehouse.service";
 import { Route } from "../../models/route";
 import { Router } from '@angular/router';
-import {DestinationService} from "../../services/destination.service";
-import {TransportService} from "../../services/transport.service";
+import { DestinationService } from "../../services/destination.service";
+import { TransportService } from "../../services/transport.service";
 
 @Component({
   selector: 'app-route-list',
@@ -32,7 +31,7 @@ export class RouteListComponent implements OnInit {
       .subscribe(data => {
         this.routes = data;
         this.loadWarehouseNames();
-      }, error => console.log(error));
+      },error => console.log(error));
   }
 
   loadWarehouseNames() {
@@ -50,7 +49,7 @@ export class RouteListComponent implements OnInit {
     this.deleteRouteById(id);
   }
 
-  deleteDestinationsByIdRoute(id) {
+  deleteDestinationsByIdRoute(id: number) {
     this.destinationService.getDestinatonsByRoute(id)
       .subscribe(destinations => {
         for (let i = 0; i < destinations.length; i++) {
@@ -59,18 +58,16 @@ export class RouteListComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  deleteTransportByIdRoute(id) {
+  deleteTransportByIdRoute(id: number) {
     this.transportService.getTransportByIdRoute(id)
       .subscribe(transport => {
         this.transportService.deleteTransport(transport.id).subscribe();
-      }, error => console.log(error));
+      },error => console.log(error));
   }
 
-  deleteRouteById(id) {
+  deleteRouteById(id: number) {
     this.routeService.deleteRoute(id)
-      .subscribe(data => {
-          this.ngOnInit()
-        },error => console.log(error));
+      .subscribe(() => this.ngOnInit(), error => console.log(error));
   }
 
   routeDetails(id: number){

@@ -154,9 +154,7 @@ export class DestinationsCreateComponent implements OnInit {
 
   async createDestinations() {
     for(let i = 0; i < this.destinations.length; i++) {
-      await this.destinationService.createDestination(this.destinations[i])
-        .subscribe(data => {
-        }, error => console.log(error));
+      this.destinationService.createDestination(this.destinations[i]).subscribe(error => console.log(error));
     }
   }
 
@@ -289,13 +287,11 @@ export class DestinationsCreateComponent implements OnInit {
   }
 
   createTransport() {
-    this.transportService.createTransport(this.transport)
-      .subscribe(data => {
-      }, error => console.log(error));
+    this.transportService.createTransport(this.transport).subscribe(error => console.log(error));
   }
 
   delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   loadAllWarehouses() {

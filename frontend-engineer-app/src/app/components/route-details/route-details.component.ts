@@ -18,14 +18,14 @@ import { ResourceTypeService } from "../../services/resource-type.service";
 })
 export class RouteDetailsComponent implements OnInit {
 
-  id: number;
+  id: number = this.route.snapshot.params['id'];
   routeName: string;
   transport: Transport;
   resourceType: ResourceType;
   warehouses: Warehouse[] = [];
   firstWarehouseName: string;
   destinations: Destination[] = [];
-  latlngArray: any[] = [];
+  latlngArray: number[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -37,51 +37,46 @@ export class RouteDetailsComponent implements OnInit {
               private destinationService: DestinationService) { }
 
   async ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
     await this.reloadData();
     await this.loadRoute();
     await this.loadTransport();
+    await this.delay(100);
     this.loadMap();
   }
 
   reloadData() {
     this.destinationService.getDestinatonsByRoute(this.id)
-      .subscribe(data => {
-        this.destinations = data;
-        this.destinations.sort((a,b) => a.order - b.order);
-      });
+      .subscribe(destinations => this.destinations = destinations.sort((a,b) => a.order - b.order),
+          error => console.log(error));
   }
 
   loadRoute() {
     this.routeService.getRoute(this.id)
-      .subscribe(data => {
-        this.routeName = data.name;
-        this.loadFirstWarehouse(data.id_first_warehouse);
+      .subscribe(route => {
+        this.routeName = route.name;
+        this.loadFirstWarehouse(route.id_first_warehouse);
         this.loadWarehouses();
-      }, error => console.log(error));
+      },error => console.log(error));
   }
 
   loadFirstWarehouse(id_first_warehouse: number) {
     this.warehouseService.getWarehouse(id_first_warehouse)
-      .subscribe(firstWarehouse => {
-        this.firstWarehouseName = firstWarehouse.name;
-      })
+      .subscribe(firstWarehouse => this.firstWarehouseName = firstWarehouse.name,
+          error => console.log(error));
   }
 
   loadWarehouses() {
     for(let i = 0; i < this.destinations.length; i++) {
       this.warehouseService.getWarehouse(this.destinations[i].id_warehouse)
-        .subscribe(warehouse => {
-          this.warehouses[i] = warehouse;
-        });
+        .subscribe(warehouse => this.warehouses[i] = warehouse,error => console.log(error));
     }
   }
 
   loadTransport() {
     this.transportService.getTransportByIdRoute(this.id)
       .subscribe(transport => {
-        this.transport = transport;
         if(transport != null) {
+          this.transport = transport;
           this.loadResourceType();
         }
       },error => console.log(error));
@@ -89,13 +84,11 @@ export class RouteDetailsComponent implements OnInit {
 
   loadResourceType() {
     this.resourceTypeService.getResourceType(this.transport.idResourceType)
-      .subscribe(resourceType => {
-        this.resourceType = resourceType;
-      }, error => console.log(error))
+      .subscribe(resourceType => this.resourceType = resourceType,error => console.log(error));
   }
 
   delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async loadMap() {
