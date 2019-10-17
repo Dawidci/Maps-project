@@ -1,27 +1,22 @@
-<h2>Route Details - {{route0.name}}</h2>
-<br>
+<h2>Route Details - {{createdRoute.name}}</h2><br>
 
-<div id="map"></div>
-<br>
+<div id="map"></div><br>
 
-<div *ngIf="!submitted" style="width: 400px;">
+<div style="width: 400px;">
   <label>Chosen warehouse: </label>
-  <div>{{firstWarehouse.name}}</div>
+  <div>{{chosenWarehouses[0].name}}</div>
 </div>
 <hr>
 
-<h3>
-  Choose resource and quantity
-</h3>
+<h3>Choose resource and quantity</h3>
 
-<div *ngIf="!submitted" style="width: 400px;">
+<div style="width: 400px;">
   <form [formGroup]="destinationForm" (ngSubmit)="createRouteByResource()">
 
     <div class="form-group">
       <label for="resource">Pick resource: </label>
       <select formControlName="resource" [(ngModel)]="transport.idResourceType" class="form-control" id="resource">
-        <option></option>
-        <option *ngFor="let type of resourceTypes" [ngValue]="type.id">{{type.name}}</option>
+        <option *ngFor="let type of resourceTypes | async" [ngValue]="type.id">{{type.name}}</option>
       </select>
     </div>
 
@@ -35,17 +30,14 @@
 </div>
 <hr>
 
-<h3>
-  Choose destinations
-</h3>
+<h3>Choose destinations</h3>
 
-<div [hidden]="submitted" style="width: 400px;">
+<div style="width: 400px;">
   <form [formGroup]="destinationForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
       <label>New Destination: </label>
       <select formControlName="newDestination" [(ngModel)]="destinationToAdd.id_warehouse" class="form-control">
-        <option></option>
         <option *ngFor="let warehouse of warehousesToSelect" [ngValue]="warehouse.id">{{warehouse.name}}</option>
       </select>
     </div>
@@ -57,7 +49,7 @@
     <div *ngIf="destinations.length > 0">
       <label>Chosen destinations: </label>
       <div *ngFor="let destination of destinations; index as i">
-        {{i+1}}. {{wars[i].name}}
+        {{i+1}}. {{chosenWarehouses[i].name}}
       </div>
     </div>
     <br>

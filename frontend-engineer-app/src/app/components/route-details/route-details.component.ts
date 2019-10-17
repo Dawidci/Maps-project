@@ -40,7 +40,7 @@ export class RouteDetailsComponent implements OnInit {
     await this.reloadData();
     await this.loadRoute();
     await this.loadTransport();
-    await this.delay(100);
+    await this.delay(250);
     this.loadMap();
   }
 

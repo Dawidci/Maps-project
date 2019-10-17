@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 export class ComputeOrderService {
 
   distance: number[][] = [];
-  allDistances: number[] = [];
   totalDistance: number;
 
   constructor() { }
@@ -31,7 +30,7 @@ export class ComputeOrderService {
     }
 
     console.log("Shortest distance: " + maxTotalDistance);
-    console.log("Shortest index: " + indexOfShortestRoute)
+    console.log("Shortest index: " + indexOfShortestRoute);
     return allDestinations[indexOfShortestRoute];
   }
 
