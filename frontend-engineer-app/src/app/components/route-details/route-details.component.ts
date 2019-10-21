@@ -61,14 +61,15 @@ export class RouteDetailsComponent implements OnInit {
 
   loadFirstWarehouse(id_first_warehouse: number) {
     this.warehouseService.getWarehouse(id_first_warehouse)
-      .subscribe(firstWarehouse => this.firstWarehouseName = firstWarehouse.name,
-          error => console.log(error));
+      .subscribe(firstWarehouse => this.firstWarehouseName = firstWarehouse.name, error => console.log(error));
   }
 
   loadWarehouses() {
     for(let i = 0; i < this.destinations.length; i++) {
       this.warehouseService.getWarehouse(this.destinations[i].id_warehouse)
-        .subscribe(warehouse => this.warehouses[i] = warehouse,error => console.log(error));
+        .subscribe(warehouse => {
+          this.warehouses[i] = warehouse;
+        },error => console.log(error));
     }
   }
 

@@ -12,7 +12,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class WarehouseUpdateComponent implements OnInit {
 
-  id: number;
+  id: number = this.route.snapshot.params['id'];
   warehouse: Warehouse;
 
   warehouseForm = this.fb.group({
@@ -29,8 +29,7 @@ export class WarehouseUpdateComponent implements OnInit {
               private mapService: MapService,
               private fb: FormBuilder) { }
 
-  async ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
+  ngOnInit() {
     this.getWarehouse();
     this.mapService.initializeMap();
     this.mapService.map.on('click', this.onMapClick.bind(this));
@@ -47,11 +46,12 @@ export class WarehouseUpdateComponent implements OnInit {
   onMapClick(e) {
     this.warehouse.latitude = Math.round(e.latlng.lat * 100) / 100;
     this.warehouse.longitude = Math.round(e.latlng.lng * 100) / 100;
+    this.mapService.addWarehouse(this.warehouse);
   }
 
   onSubmit() {
-    this.warehouseService.updateWarehouse(this.id, this.warehouse).subscribe(error => console.log(error));
-    this.gotoList();
+    this.warehouseService.updateWarehouse(this.id, this.warehouse)
+      .subscribe(() => this.gotoList(),error => console.log(error));
   }
 
   gotoList() {

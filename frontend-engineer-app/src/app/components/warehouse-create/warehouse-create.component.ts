@@ -32,9 +32,9 @@ export class WarehouseCreateComponent implements OnInit {
     this.mapService.map.on('click', this.onMapClick.bind(this));
   }
 
-  async onSubmit() {
-    this.warehouseService.createWarehouse(this.warehouse).subscribe(error => console.log(error));
-    this.gotoList();
+  onSubmit() {
+    this.warehouseService.createWarehouse(this.warehouse)
+      .subscribe(() => this.gotoList(), error => console.log(error));
   }
 
   gotoList() {
@@ -44,6 +44,7 @@ export class WarehouseCreateComponent implements OnInit {
   onMapClick(e) {
     this.warehouse.latitude = this.roundCoordinate(e.latlng.lat);
     this.warehouse.longitude = this.roundCoordinate(e.latlng.lng);
+    this.mapService.addWarehouse(this.warehouse);
   }
 
   roundCoordinate(coordinate) {

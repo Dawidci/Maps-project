@@ -14,6 +14,7 @@ export class MapService {
   warehouses: Observable<Warehouse[]>;
   leafletRoute: any;
   map: any;
+  marker: any;
 
   constructor(private warehouseService: WarehouseService) {
     L.Icon.Default.prototype.options.iconUrl = "../../assets/leaflet/images/marker-icon.png";
@@ -50,7 +51,7 @@ export class MapService {
     warehouses.forEach((warehouse: Warehouse) => this.showWarehouse(warehouse));
   }
 
-  showWarehouse(warehouse) {
+  showWarehouse(warehouse: Warehouse) {
     let marker = new L.Marker([warehouse.latitude, warehouse.longitude]).addTo(this.map);
     marker.bindPopup("ID: " + warehouse.id.toString() + "<br>" +
       "Name: " + warehouse.name + "<br>" +
@@ -58,6 +59,15 @@ export class MapService {
       "Longitude: " + warehouse.longitude.toString() + "<br>" +
       "Seaport: " + warehouse.airport.toString() + "<br>" +
       "Airport: " + warehouse.seaport.toString() + "<br>");
+  }
+
+  addWarehouse(warehouse: Warehouse) {
+    if(this.marker != undefined) {
+      this.marker.setLatLng([warehouse.latitude, warehouse.longitude]);
+    } else {
+      this.marker = new L.Marker([warehouse.latitude, warehouse.longitude]).addTo(this.map);
+      this.marker.bindPopup("New place for warehouse");
+    }
   }
 
   showWarehousesWithDetails(warehouses) {

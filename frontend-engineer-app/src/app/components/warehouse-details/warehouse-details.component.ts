@@ -16,12 +16,12 @@ import { ResourceType } from "../../models/resource-type";
 
 export class WarehouseDetailsComponent implements OnInit {
 
-  id: number;
+  id: number = this.route.snapshot.params['id'];
   warehouse: Warehouse;
   resources: Resource [] = [];
   resourceNames: ResourceType [] = [];
   resourceQuantity: number [] = [];
-  newResource: Resource;
+  newResource: Resource = new Resource();
   addResourceType: Resource [] = [];
 
   constructor(private route: ActivatedRoute,
@@ -31,21 +31,9 @@ export class WarehouseDetailsComponent implements OnInit {
               private resourceService: ResourceService,
               private resourceTypeService: ResourceTypeService) { }
 
-  async ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    this.newResource = new Resource();
+  ngOnInit() {
     this.newResource.idWarehouse = this.id;
-    await this.delay(100);
-
-    await this.loadWarehouse();
-    await this.delay(250);
-
-    await this.loadResourceTypes();
-    this.loadMap();
-  }
-
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    this.loadWarehouse();
   }
 
   loadWarehouse() {
@@ -53,6 +41,7 @@ export class WarehouseDetailsComponent implements OnInit {
       .subscribe(data => {
         this.warehouse = data;
         this.getResources();
+        this.loadMap();
       },error => console.log(error));
   }
 
@@ -61,6 +50,7 @@ export class WarehouseDetailsComponent implements OnInit {
       .subscribe(resources => {
         this.resources = resources;
         this.getResourcesTypeNames();
+        this.loadResourceTypes();
       }, error => console.log(error));
   }
 
@@ -104,8 +94,6 @@ export class WarehouseDetailsComponent implements OnInit {
   }
 
   async deleteResource(id: number, idType: number) {
-    await this.delay(100);
-
     this.resourceService.deleteResource(id)
       .subscribe(data => {
           this.deleteResourceFromArray(idType);
@@ -123,12 +111,22 @@ export class WarehouseDetailsComponent implements OnInit {
 
   updateResource(id: number, index: number) {
     this.resources[index].quantity = this.resourceQuantity[index];
-    this.resourceService.updateResource(id, this.resources[index]).subscribe();
+    this.resourceService.updateResource(id, this.resources[index])
+      .subscribe(() => this.resourceQuantity[index] = null, error => console.log(error));
   }
 
-  addResource() {
-    this.resourceService.createResource(this.newResource).subscribe();
-    this.ngOnInit();
+  async addResource() {
+    if(this.newResource.quantity > 0) {
+      this.resourceService.createResource(this.newResource)
+        .subscribe(() => {
+          this.newResource = new Resource();
+          this.newResource.idWarehouse = this.id;
+          this.ngOnInit();
+        }, error => console.log(error));
+    } else {
+      alert("Cannot add less than 1 quantity of resource");
+    }
+
   }
 
   goToWarehouselist(){

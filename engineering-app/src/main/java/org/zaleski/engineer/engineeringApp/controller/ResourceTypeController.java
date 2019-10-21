@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.zaleski.engineer.engineeringApp.exception.ResourceNotFoundException;
+import org.zaleski.engineer.engineeringApp.model.Resource;
 import org.zaleski.engineer.engineeringApp.model.ResourceType;
+import org.zaleski.engineer.engineeringApp.model.Transport;
 import org.zaleski.engineer.engineeringApp.repository.ResourceTypeRepository;
 
 import javax.validation.Valid;
@@ -19,6 +21,12 @@ public class ResourceTypeController {
 
     @Autowired
     private ResourceTypeRepository resourceTypeRepository;
+
+    @Autowired
+    private ResourceController resourceController;
+
+    @Autowired
+    private TransportController transportController;
 
     @GetMapping("")
     public List<ResourceType> getAllResourceTypes() {
@@ -58,6 +66,25 @@ public class ResourceTypeController {
                 .orElseThrow(() -> new ResourceNotFoundException("Route not found for this id :: " + id));
 
         resourceTypeRepository.delete(resourceType);
+
+        List<Resource> resourcesToDelete = resourceController.getResourcesByIdResourceType(id);
+        List<Transport> transportsToDelete = transportController.getTransportsByIdResourceType(id);
+
+        resourcesToDelete.forEach(resource -> {
+            try {
+                resourceController.deleteResource(resource.getId());
+            } catch (ResourceNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+
+        transportsToDelete.forEach(transport -> {
+            try {
+                transportController.deleteTransport(transport.getId());
+            } catch (ResourceNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
 
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);

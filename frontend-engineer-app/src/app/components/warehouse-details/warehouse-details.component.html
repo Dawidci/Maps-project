@@ -44,7 +44,6 @@
         <td></td>
         <td>
           <select [(ngModel)]="newResource.idResourceType" class="form-control">
-            <option></option>
             <option *ngFor="let resourceType of addResourceType" [ngValue]="resourceType.id">{{resourceType.name}}</option>
           </select>
         </td>

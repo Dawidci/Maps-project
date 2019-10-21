@@ -36,13 +36,13 @@ public class ResourceController {
     }
 
     @GetMapping("/warehouse/{idWarehouse}")
-    public List<Resource> getResourcesByIdWarehouse(@PathVariable(value = "idWarehouse") int idWarehouse) {
+    public List<Resource> getResourcesByIdWarehouse(@PathVariable(value = "idWarehouse") Long idWarehouse) {
         List<Resource> resources = resourceRepository.findByIdWarehouse(idWarehouse);
         return resources;
     }
 
     @GetMapping("/resource-type/{idResourceType}")
-    public List<Resource> getResourcesByIdResourceType(@PathVariable(value = "idResourceType") int idResourceType) {
+    public List<Resource> getResourcesByIdResourceType(@PathVariable(value = "idResourceType") Long idResourceType) {
         List<Resource> resources = resourceRepository.findByIdResourceType(idResourceType);
         return resources;
     }

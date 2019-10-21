@@ -50,30 +50,6 @@ export class ResourceTypeListComponent implements OnInit {
   }
 
   deleteResourceType(id: number) {
-    this.deleteResourcesByType(id);
-    this.deleteTransportByResourceType(id);
-    this.deleteTypeOfResource(id);
-  }
-
-  deleteResourcesByType(id: number) {
-    this.resourceService.getResourcesByIdResourceType(id)
-      .subscribe(resources => {
-        for(let i = 0; i < resources.length; i++) {
-          this.resourceService.deleteResource(resources[i].id).subscribe();
-        }
-      }, error => console.log(error));
-  }
-
-  deleteTransportByResourceType(id: number) {
-    this.transportService.getTransportByIdResourceType(id)
-      .subscribe(transports => {
-        for(let i = 0; i < transports.length; i++) {
-          this.transportService.deleteTransport(transports[i].id).subscribe();
-        }
-      }, error => console.log(error));
-  }
-
-  deleteTypeOfResource(id: number) {
     this.resourceTypeService.deleteResourceType(id)
       .subscribe(() => this.ngOnInit(),error => console.log(error));
   }

@@ -80,7 +80,7 @@ export class DestinationsCreateComponent implements OnInit {
   deleteWarehouseFromSelectList(warehouseToRemove) {
     this.destinations.push({id:null, id_route: this.createdRoute.id, id_warehouse: warehouseToRemove.id, order: null});
     this.chosenWarehouses.push(warehouseToRemove);
-    this.warehousesToSelect = this.warehousesToSelect.filter(warehouse => warehouse.name != warehouseToRemove.name);
+    this.warehousesToSelect = this.warehousesToSelect.filter(warehouse => warehouse.name !== warehouseToRemove.name);
   }
 
   addDestinationToList() {
@@ -123,8 +123,12 @@ export class DestinationsCreateComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  deleteResourceFromFirstWarehouse(resources: Resource[]) {
-    resources.splice(resources.findIndex(resource => resource.idWarehouse == this.chosenWarehouses[0].id), 1);
+  async deleteResourceFromFirstWarehouse(resources: Resource[]) {
+    resources.forEach(resource => {
+      if(resource.idWarehouse == this.chosenWarehouses[0].id) {
+        resources.splice(resources.findIndex(resource => resource.idWarehouse == this.chosenWarehouses[0].id), 1);
+      }
+    });
   }
 
   async sumResourceTypeTotalQuantity(resources: Resource[]) {
