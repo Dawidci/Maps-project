@@ -72,20 +72,10 @@ export class WarehouseDetailsComponent implements OnInit {
   }
 
   getListOfResourceTypesThatCouldBeAdded(types) {
-    for(let i = 0; i < types.length; i++) {
-      let push = true;
-
-      for(let j = 0; j < this.resourceNames.length; j++) {
-        if(types[i].id == this.resourceNames[j].id) {
-          push = false;
-          break;
-        }
-      }
-
-      if(push == true) {
-        this.addResourceType.push(types[i]);
-      }
-    }
+    this.resourceNames.forEach(resourceName => {
+      types.splice(types.findIndex(type => type.id == resourceName.id), 1);
+    });
+    this.addResourceType = types;
   }
 
   async loadMap() {
@@ -93,7 +83,7 @@ export class WarehouseDetailsComponent implements OnInit {
     await this.mapsService.showWarehouse(this.warehouse);
   }
 
-  async deleteResource(id: number, idType: number) {
+  deleteResource(id: number, idType: number) {
     this.resourceService.deleteResource(id)
       .subscribe(data => {
           this.deleteResourceFromArray(idType);
@@ -102,11 +92,7 @@ export class WarehouseDetailsComponent implements OnInit {
   }
 
   deleteResourceFromArray(idType: number) {
-    for(let i = 0; i < this.resourceNames.length; i++) {
-      if(this.resourceNames[i].id == idType) {
-        this.resourceNames.splice(i, 1);
-      }
-    }
+    this.resourceNames.splice(this.resourceNames.findIndex(resourceName => resourceName.id == idType), 1);
   }
 
   updateResource(id: number, index: number) {
@@ -115,7 +101,7 @@ export class WarehouseDetailsComponent implements OnInit {
       .subscribe(() => this.resourceQuantity[index] = null, error => console.log(error));
   }
 
-  async addResource() {
+  addResource() {
     if(this.newResource.quantity > 0) {
       this.resourceService.createResource(this.newResource)
         .subscribe(() => {
@@ -126,7 +112,6 @@ export class WarehouseDetailsComponent implements OnInit {
     } else {
       alert("Cannot add less than 1 quantity of resource");
     }
-
   }
 
   goToWarehouselist(){

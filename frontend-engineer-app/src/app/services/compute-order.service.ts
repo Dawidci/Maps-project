@@ -11,17 +11,13 @@ export class ComputeOrderService {
   constructor() { }
 
   computeAllOrder(allDestinations, allWarehouses) {
-    let maxTotalDistance = 100000000;
+    let maxTotalDistance = 1e8;
     let indexOfShortestRoute = 0;
 
     for(let i = 0; i < allDestinations.length; i++) {
 
       this.computeDistance(allWarehouses[i]);
-      this.computeOrder(allDestinations[i], allWarehouses[i]);
-
-      console.log("Destinations: ");
-      console.log(allDestinations[i]);
-      console.log("Distance" + this.totalDistance);
+      this.computeOrder(allDestinations[i]);
 
       if(this.totalDistance < maxTotalDistance) {
         maxTotalDistance = this.totalDistance;
@@ -29,14 +25,11 @@ export class ComputeOrderService {
       }
     }
 
-    console.log("Shortest distance: " + maxTotalDistance);
-    console.log("Shortest index: " + indexOfShortestRoute);
     return allDestinations[indexOfShortestRoute];
   }
 
   computeDistance(warehouses) {
     warehouses = Array.from(warehouses);
-    console.log(warehouses.length);
     for(let i = 0; i < warehouses.length; i++) {
       this.distance[i] = [];
       for (let j = 0; j < warehouses.length; j++) {
@@ -68,36 +61,27 @@ export class ComputeOrderService {
     return degrees * Math.PI / 180;
   }
 
-   computeOrder(destinations, warehouses) {
+   computeOrder(destinations) {
     let start = 0;
-    let newStart = 0;
-    let count = 1;
     this.totalDistance = 0;
 
-    for(let i = 0; i < warehouses.length; i++) {
-      let dist = 10000000;
-      console.log("START: " + start + ", WAR: " + warehouses[start].id);
-      destinations[start].order = count;
+    for(let i = 0; i < this.distance.length; i++) {
+      let maxDistance = 1e8;
+      destinations[start].order = i + 1;
+      this.distance.forEach(distance => delete distance[start]);
 
-      for(let j = 0; j < warehouses.length; j++) {
-        delete this.distance[j][start];
-      }
-
-      for(let j = 0; j < warehouses.length; j++) {
-        if(this.distance[start][j] < dist) {
-          dist = this.distance[start][j];
-          newStart = j;
+      for(let j = 0; j < this.distance.length; j++) {
+        if(this.distance[start][j] < maxDistance) {
+          maxDistance = this.distance[start][j];
+          start = j;
         }
       }
 
-      if(i == warehouses.length - 1) {
-        dist = 0;
+      if(i == this.distance.length - 1) {
+        maxDistance = 0;
       }
 
-      this.totalDistance += dist;
-
-      start = newStart;
-      count++;
+      this.totalDistance += maxDistance;
     }
      return destinations;
   }

@@ -3,8 +3,6 @@ import { RouteService } from "../../services/route.service";
 import { WarehouseService } from "../../services/warehouse.service";
 import { Route } from "../../models/route";
 import { Router } from '@angular/router';
-import { DestinationService } from "../../services/destination.service";
-import { TransportService } from "../../services/transport.service";
 
 @Component({
   selector: 'app-route-list',
@@ -18,8 +16,6 @@ export class RouteListComponent implements OnInit {
 
   constructor(private routeService: RouteService,
               private warehouseService: WarehouseService,
-              private destinationService: DestinationService,
-              private transportService: TransportService,
               private router: Router) {}
 
   ngOnInit() {

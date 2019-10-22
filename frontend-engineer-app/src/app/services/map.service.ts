@@ -71,9 +71,7 @@ export class MapService {
   }
 
   showWarehousesWithDetails(warehouses) {
-    for(let i = 0; i < warehouses.length; i++) {
-      this.showWarehouse(warehouses[i]);
-    }
+    warehouses.forEach(warehouse => this.showWarehouse(warehouse));
   }
 
   showRoute(latlngArray) {
@@ -84,9 +82,15 @@ export class MapService {
   }
 
   loadCoordinatesArray(warehouses, latlngArray) {
-    for (let i = 0; i < warehouses.length; i++) {
-      let ltln = L.latLng(warehouses[i].latitude, warehouses[i].longitude);
-      latlngArray.push(ltln);
-    }
+    warehouses.forEach(warehouse => latlngArray.push(L.latLng(warehouse.latitude, warehouse.longitude)));
+  }
+
+  saveWarehouseLocation(coordinates, warehouse) {
+    warehouse.latitude = this.roundCoordinate(coordinates.latlng.lat);
+    warehouse.longitude = this.roundCoordinate(coordinates.latlng.lng);
+  }
+
+  roundCoordinate(coordinate) {
+    return Math.round(coordinate * 100) / 100;
   }
 }

@@ -3,10 +3,6 @@ import { MapService } from "../../services/map.service";
 import { Warehouse } from "../../models/warehouse";
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
-import { RouteListComponent } from "../route-list/route-list.component";
-import { RouteService } from "../../services/route.service";
-import { DestinationService } from "../../services/destination.service";
-import { ResourceService } from "../../services/resource.service";
 
 @Component({
   selector: 'app-warehouse-list',
@@ -19,10 +15,6 @@ export class WarehouseListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private warehouseService: WarehouseService,
-              private routeService: RouteService,
-              private destinationService: DestinationService,
-              private routeListComponent: RouteListComponent,
-              private resourceService: ResourceService,
               private mapService: MapService,
               private router: Router) {}
 

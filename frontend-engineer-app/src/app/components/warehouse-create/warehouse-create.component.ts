@@ -42,12 +42,7 @@ export class WarehouseCreateComponent implements OnInit {
   }
 
   onMapClick(e) {
-    this.warehouse.latitude = this.roundCoordinate(e.latlng.lat);
-    this.warehouse.longitude = this.roundCoordinate(e.latlng.lng);
+    this.mapService.saveWarehouseLocation(e, this.warehouse);
     this.mapService.addWarehouse(this.warehouse);
-  }
-
-  roundCoordinate(coordinate) {
-    return Math.round(coordinate * 100) / 100;
   }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { ResourceType } from "../../models/resource-type";
 import { ResourceTypeService } from "../../services/resource-type.service";
 import { ResourceService } from "../../services/resource.service";
-import { TransportService } from "../../services/transport.service";
 import { Resource } from "../../models/resource";
 
 @Component({
@@ -18,8 +17,7 @@ export class ResourceTypeListComponent implements OnInit {
   newNameOfResourceType: string[] = [];
 
   constructor(private resourceTypeService: ResourceTypeService,
-              private resourceService: ResourceService,
-              private transportService: TransportService) {}
+              private resourceService: ResourceService) {}
 
   ngOnInit() {
     this.getAllResourceTypes();

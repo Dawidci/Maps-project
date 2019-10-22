@@ -95,7 +95,7 @@ export class DestinationsCreateComponent implements OnInit {
 
   onSubmit() {
     this.computeOrderService.computeDistance(this.chosenWarehouses);
-    this.destinations = this.computeOrderService.computeOrder(this.destinations, this.chosenWarehouses);
+    this.destinations = this.computeOrderService.computeOrder(this.destinations);
     this.createDestinations();
     this.gotoList();
   }
@@ -115,7 +115,7 @@ export class DestinationsCreateComponent implements OnInit {
       .subscribe(type => this.getResourcesByType(type),error => console.log(error));
   }
 
-  async getResourcesByType(type: ResourceType) {
+  getResourcesByType(type: ResourceType) {
     this.resourceService.getResourcesByIdResourceType(type.id)
       .subscribe(resources => {
         this.deleteResourceFromFirstWarehouse(resources);
@@ -123,7 +123,7 @@ export class DestinationsCreateComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  async deleteResourceFromFirstWarehouse(resources: Resource[]) {
+  deleteResourceFromFirstWarehouse(resources: Resource[]) {
     resources.forEach(resource => {
       if(resource.idWarehouse == this.chosenWarehouses[0].id) {
         resources.splice(resources.findIndex(resource => resource.idWarehouse == this.chosenWarehouses[0].id), 1);
@@ -131,9 +131,8 @@ export class DestinationsCreateComponent implements OnInit {
     });
   }
 
-  async sumResourceTypeTotalQuantity(resources: Resource[]) {
-    let totalQuantity = 0;
-    resources.forEach(resource => totalQuantity += resource.quantity);
+  sumResourceTypeTotalQuantity(resources: Resource[]) {
+    let totalQuantity = resources.reduce((prev, curr) => prev + curr.quantity, 0);
 
     if(totalQuantity >= this.transport.quantity) {
       this.getResourceMatrix(resources);
@@ -185,16 +184,12 @@ export class DestinationsCreateComponent implements OnInit {
     }
   }
 
-  async saveByResource() {
-    await this.fillAllDestinationsArray();
+  saveByResource() {
+    this.fillAllDestinationsArray();
     this.createTransport();
-    await this.delay(500);
-    this.destinations = await this.computeOrderService.computeAllOrder(this.allDestinations, this.allWarehouses);
-    await this.createDestinations();
-    this.gotoList();
   }
 
-  async fillAllDestinationsArray() {
+  fillAllDestinationsArray() {
     for(let i = 0; i < this.result.length; i++) {
       this.allDestinations[i] = [];
       this.allWarehouses[i] = [];
@@ -210,16 +205,21 @@ export class DestinationsCreateComponent implements OnInit {
           let warehouse = warehouses.find(warehouse => warehouse.id == this.result[i][j].idWarehouse);
           this.allDestinations[i].push({id: null, id_route: this.createdRoute.id, id_warehouse: warehouse.id, order: null});
           this.allWarehouses[i].push(warehouse);
+          if(i + 1 == this.result.length && j + 1 == this.result[i].length){
+            this.computeDestinations();
+          }
         }, error => console.log(error));
       }
     }
   }
 
-  createTransport() {
-    this.transportService.createTransport(this.transport).subscribe(error => console.log(error));
+  computeDestinations() {
+    this.destinations = this.computeOrderService.computeAllOrder(this.allDestinations, this.allWarehouses);
+    this.createDestinations();
+    this.gotoList();
   }
 
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  createTransport() {
+    this.transportService.createTransport(this.transport).subscribe(error => console.log(error));
   }
 }

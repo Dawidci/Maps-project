@@ -44,8 +44,7 @@ export class WarehouseUpdateComponent implements OnInit {
   }
 
   onMapClick(e) {
-    this.warehouse.latitude = Math.round(e.latlng.lat * 100) / 100;
-    this.warehouse.longitude = Math.round(e.latlng.lng * 100) / 100;
+    this.mapService.saveWarehouseLocation(e, this.warehouse);
     this.mapService.addWarehouse(this.warehouse);
   }
 
