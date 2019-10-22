@@ -2,19 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8db15ed5-43e2-4a13-bc4b-0cadc9930cd4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../Inżynierka/_Analysis.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Inżynierka/_Analysis.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../engineering-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/ResourceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/ResourceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/service/RouteService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/service/WarehouseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/DestinationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/DestinationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/ResourceTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/ResourceTypeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/RouteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/RouteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/WarehouseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/controller/WarehouseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/service/ResourceTypeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/service/ResourceTypeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/destinations-create/destinations-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/destinations-create/destinations-create.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/resource-type-list/resource-type-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/resource-type-list/resource-type-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/route-details/route-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/route-details/route-details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/warehouse-create/warehouse-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/warehouse-create/warehouse-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/warehouse-details/warehouse-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/components/warehouse-details/warehouse-details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/warehouse-details/warehouse-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/warehouse-details/warehouse-details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/warehouse-update/warehouse-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/warehouse-update/warehouse-update.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/map.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/map.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/route-list/route-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/route-list/route-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/warehouse-list/warehouse-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/warehouse-list/warehouse-list.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +131,8 @@
       <workItem from="1571295899244" duration="23169000" />
       <workItem from="1571381747190" duration="2297000" />
       <workItem from="1571401976912" duration="551000" />
-      <workItem from="1571655084301" duration="12356000" />
+      <workItem from="1571655084301" duration="12403000" />
+      <workItem from="1571723238662" duration="4288000" />
     </task>
     <servers />
   </component>

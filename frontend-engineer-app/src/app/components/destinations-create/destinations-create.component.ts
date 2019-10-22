@@ -188,7 +188,7 @@ export class DestinationsCreateComponent implements OnInit {
   async saveByResource() {
     await this.fillAllDestinationsArray();
     this.createTransport();
-    await this.delay(250);
+    await this.delay(500);
     this.destinations = await this.computeOrderService.computeAllOrder(this.allDestinations, this.allWarehouses);
     await this.createDestinations();
     this.gotoList();

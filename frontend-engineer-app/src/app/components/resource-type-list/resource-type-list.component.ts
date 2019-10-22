@@ -44,9 +44,7 @@ export class ResourceTypeListComponent implements OnInit {
   }
 
   sumResources(resources: Resource[], index: number) {
-    for(let j = 0; j < resources.length; j++) {
-      this.resourceTypeQuantity[index] += resources[j].quantity;
-    }
+    this.resourceTypeQuantity[index] = resources.reduce((prev, current) => prev + current.quantity, 0);
   }
 
   deleteResourceType(id: number) {

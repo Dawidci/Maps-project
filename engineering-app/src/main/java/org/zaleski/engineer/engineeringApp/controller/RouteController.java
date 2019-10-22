@@ -6,6 +6,7 @@ import org.zaleski.engineer.engineeringApp.repository.RouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.zaleski.engineer.engineeringApp.service.RouteService;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -19,6 +20,9 @@ public class RouteController {
 
     @Autowired
     private RouteRepository routeRepository;
+
+    @Autowired
+    private RouteService routeService;
 
     @GetMapping("")
     public List<Route> getAllRoutes() {
@@ -68,6 +72,9 @@ public class RouteController {
                 .orElseThrow(() -> new ResourceNotFoundException("Route not found for this id :: " + id));
 
         routeRepository.delete(route);
+        routeService.deleteDestinationsByRoute(id);
+        routeService.deleteTransportByRoute(id);
+
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
 

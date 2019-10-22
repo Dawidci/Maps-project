@@ -34,13 +34,13 @@ public class DestinationController {
     }
 
     @GetMapping("/route/{idRoute}")
-    public List<Destination> getDestinationsByRouteName(@PathVariable(value = "idRoute") int idRoute) {
+    public List<Destination> getDestinationsByIdRoute(@PathVariable(value = "idRoute") Long idRoute) {
         List<Destination> destinations = destinationRepository.findByIdRoute(idRoute);
         return destinations;
     }
 
     @GetMapping("/warehouse/{idWarehouse}")
-    public List<Destination> getDestinationsByIdWarehouse(@PathVariable(value = "idWarehouse") int idWarehouse) {
+    public List<Destination> getDestinationsByIdWarehouse(@PathVariable(value = "idWarehouse") Long idWarehouse) {
         List<Destination> destinations = destinationRepository.findByIdWarehouse(idWarehouse);
         return destinations;
     }

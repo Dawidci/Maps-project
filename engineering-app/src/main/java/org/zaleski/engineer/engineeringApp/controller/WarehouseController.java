@@ -6,6 +6,7 @@ import org.zaleski.engineer.engineeringApp.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.zaleski.engineer.engineeringApp.service.WarehouseService;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -16,8 +17,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/warehouses")
 public class WarehouseController {
+
     @Autowired
     private WarehouseRepository warehouseRepository;
+
+    @Autowired
+    private WarehouseService warehouseService;
 
     @GetMapping("")
     public List<Warehouse> getAllWarehouses() {
@@ -61,6 +66,10 @@ public class WarehouseController {
                 .orElseThrow(() -> new ResourceNotFoundException("Warehouse not found for this id :: " + id));
 
         warehouseRepository.delete(warehouse);
+        warehouseService.deleteDestinationsByWarehouse(id);
+        warehouseService.deleteResourcesByWarehouse(id);
+        warehouseService.deleteRoutesByWarehouse(id);
+
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
 

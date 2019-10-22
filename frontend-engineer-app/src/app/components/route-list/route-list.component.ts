@@ -44,28 +44,6 @@ export class RouteListComponent implements OnInit {
   }
 
   deleteRoute(id: number) {
-    this.deleteDestinationsByIdRoute(id);
-    this.deleteTransportByIdRoute(id);
-    this.deleteRouteById(id);
-  }
-
-  deleteDestinationsByIdRoute(id: number) {
-    this.destinationService.getDestinatonsByRoute(id)
-      .subscribe(destinations => {
-        for (let i = 0; i < destinations.length; i++) {
-          this.destinationService.deleteDestination(destinations[i].id).subscribe();
-        }
-      }, error => console.log(error));
-  }
-
-  deleteTransportByIdRoute(id: number) {
-    this.transportService.getTransportByIdRoute(id)
-      .subscribe(transport => {
-        this.transportService.deleteTransport(transport.id).subscribe();
-      },error => console.log(error));
-  }
-
-  deleteRouteById(id: number) {
     this.routeService.deleteRoute(id)
       .subscribe(() => this.ngOnInit(), error => console.log(error));
   }
