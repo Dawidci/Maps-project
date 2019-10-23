@@ -3,12 +3,12 @@ package org.zaleski.engineer.engineeringApp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import org.zaleski.engineer.engineeringApp.exception.ResourceNotFoundException;
 import org.zaleski.engineer.engineeringApp.model.Transport;
-import org.zaleski.engineer.engineeringApp.repository.TransportRepository;
+import org.zaleski.engineer.engineeringApp.service.TransportService;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,69 +17,42 @@ import java.util.Map;
 @RequestMapping("/transports")
 public class TransportController {
 
-    @Autowired
-    private TransportRepository transportRepository;
+    @Autowired private TransportService transportService;
 
     @GetMapping("")
     public List<Transport> getAllTransports() {
-        return transportRepository.findAll();
+        return transportService.getAllTransports();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Transport> getTransportById(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
-        Transport transport = transportRepository
-                .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Warehouse not found for this id :: " + id));
-
-        return ResponseEntity.ok().body(transport);
+    public ResponseEntity<Transport> getTransportById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
+        return transportService.getTransportById(id);
     }
 
     @GetMapping("/route/{idRoute}")
     public ResponseEntity<Transport> getTransportByIdRoute(@PathVariable(value = "idRoute") long idRoute) {
-        Transport transport = transportRepository.findByIdRoute(idRoute);
-        return ResponseEntity.ok().body(transport);
+        return transportService.getTransportByIdRoute(idRoute);
     }
 
     @GetMapping("/resource-type/{idResourceType}")
     public List<Transport> getTransportsByIdResourceType(@PathVariable(value = "idResourceType") long idResourceType) {
-        List<Transport> transports = transportRepository.findByIdResourceType(idResourceType);
-        return transports;
+        return transportService.getTransportsByIdResourceType(idResourceType);
     }
 
     @PostMapping("")
     public Transport createTransport(@Valid @RequestBody Transport transport) {
-        return transportRepository.save(transport);
+        return transportService.createTransport(transport);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Transport> updateTransport(@PathVariable(value = "id") Long id,
-                                                   @Valid @RequestBody Transport transportDetails)
+                                                     @Valid @RequestBody Transport transportDetails)
             throws ResourceNotFoundException {
-        Transport transport = transportRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Transport not found for this id :: " + id));
-
-        transport.setIdResourceType(transportDetails.getIdResourceType());
-        transport.setIdRoute(transportDetails.getIdRoute());
-        transport.setQuantity(transportDetails.getQuantity());
-
-        final Transport updatedTransport = transportRepository.save(transport);
-
-        return ResponseEntity.ok(updatedTransport);
+        return transportService.updateTransport(id, transportDetails);
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteTransport(@PathVariable(value = "id") Long id)
-            throws ResourceNotFoundException {
-
-        Transport transport = transportRepository
-                .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Transport not found for this id :: " + id));
-
-        transportRepository.delete(transport);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-
-        return response;
+    public Map<String, Boolean> deleteTransport(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
+        return transportService.deleteTransport(id);
     }
 }

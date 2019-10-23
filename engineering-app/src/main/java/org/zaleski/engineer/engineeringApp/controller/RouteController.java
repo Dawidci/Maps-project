@@ -2,14 +2,13 @@ package org.zaleski.engineer.engineeringApp.controller;
 
 import org.zaleski.engineer.engineeringApp.exception.ResourceNotFoundException;
 import org.zaleski.engineer.engineeringApp.model.Route;
-import org.zaleski.engineer.engineeringApp.repository.RouteRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.zaleski.engineer.engineeringApp.service.RouteService;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,66 +17,41 @@ import java.util.Map;
 @RequestMapping("/routes")
 public class RouteController {
 
-    @Autowired
-    private RouteRepository routeRepository;
-
-    @Autowired
-    private RouteService routeService;
+    @Autowired private RouteService routeService;
 
     @GetMapping("")
     public List<Route> getAllRoutes() {
-        return routeRepository.findAll();
+        return routeService.getAllRoutes();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Route> getRouteById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
-        Route route = routeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Route not found for this id :: " + id));
-
-        return ResponseEntity.ok().body(route);
+        return routeService.getRouteById(id);
     }
 
     @GetMapping("/name/{name}")
     public ResponseEntity<Route> getRouteByName(@PathVariable(value = "name") String name) {
-        Route route = routeRepository.findByName(name);
-        return ResponseEntity.ok().body(route);
+        return routeService.getRouteByName(name);
     }
 
     @GetMapping("/warehouse/{idFirstWarehouse}")
     public List<Route> getRoutesByIdFirstWarehouse(@PathVariable(value = "idFirstWarehouse") long idFirstWarehouse) {
-        List<Route> routes = routeRepository.findByIdFirstWarehouse(idFirstWarehouse);
-        return routes;
+        return routeService.getRoutesByIdFirstWarehouse(idFirstWarehouse);
     }
 
     @PostMapping("")
     public Route createRoute(@Valid @RequestBody Route route) {
-        return routeRepository.save(route);
+        return routeService.createRoute(route);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Route> updateRoute(@PathVariable(value = "id") Long id, @Valid @RequestBody Route routeDetails)
             throws ResourceNotFoundException {
-        Route route = routeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Route not found for this id :: " + id));
-
-        route.setName(routeDetails.getName());
-        final Route updatedRoute = routeRepository.save(route);
-        return ResponseEntity.ok(updatedRoute);
+        return routeService.updateRoute(id, routeDetails);
     }
 
     @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteRoute(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
-
-        Route route = routeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Route not found for this id :: " + id));
-
-        routeRepository.delete(route);
-        routeService.deleteDestinationsByRoute(id);
-        routeService.deleteTransportByRoute(id);
-
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-
-        return response;
+        return routeService.deleteRoute(id);
     }
 }

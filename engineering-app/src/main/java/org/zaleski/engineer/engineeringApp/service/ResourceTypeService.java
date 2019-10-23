@@ -1,42 +1,82 @@
 package org.zaleski.engineer.engineeringApp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.zaleski.engineer.engineeringApp.controller.ResourceController;
-import org.zaleski.engineer.engineeringApp.controller.TransportController;
+
 import org.zaleski.engineer.engineeringApp.exception.ResourceNotFoundException;
 import org.zaleski.engineer.engineeringApp.model.Resource;
+import org.zaleski.engineer.engineeringApp.model.ResourceType;
 import org.zaleski.engineer.engineeringApp.model.Transport;
+import org.zaleski.engineer.engineeringApp.repository.ResourceTypeRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ResourceTypeService {
 
-    @Autowired
-    private ResourceController resourceController;
+    @Autowired private ResourceTypeRepository resourceTypeRepository;
+    @Autowired private ResourceService resourceService;
+    @Autowired private TransportService transportService;
 
-    @Autowired
-    private TransportController transportController;
+    public List<ResourceType> getAllResourceTypes() {
+        return resourceTypeRepository.findAll();
+    }
 
-    public void deleteResourceByResourceType(Long idResourceType) {
-        List<Resource> resourcesToDelete = resourceController.getResourcesByIdResourceType(idResourceType);
+    public ResponseEntity<ResourceType> getResourceTypeById(Long id) throws ResourceNotFoundException {
+        ResourceType resourceType = resourceTypeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Resource Type not found for this id :: " + id));
+        return ResponseEntity.ok().body(resourceType);
+    }
+
+    public ResourceType createResourceType(ResourceType resourceType) {
+        return resourceTypeRepository.save(resourceType);
+    }
+
+    public ResponseEntity<ResourceType> updateResourceType(Long id, ResourceType resourceTypeDetails)
+            throws ResourceNotFoundException {
+
+        ResourceType resourceType = resourceTypeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Resource Type not found for this id :: " + id));
+
+        resourceType.setName(resourceTypeDetails.getName());
+        final ResourceType updatedResourceType = resourceTypeRepository.save(resourceType);
+        return ResponseEntity.ok(updatedResourceType);
+    }
+
+    public Map<String, Boolean> deleteResourceType(Long id) throws ResourceNotFoundException {
+        ResourceType resourceType = resourceTypeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Resource Type not found for this id :: " + id));
+
+        resourceTypeRepository.delete(resourceType);
+        this.deleteResourceByResourceType(id);
+        this.deleteTransportByResourceType(id);
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
+    }
+
+    private void deleteResourceByResourceType(Long idResourceType) {
+        List<Resource> resourcesToDelete = resourceService.getResourcesByIdResourceType(idResourceType);
 
         resourcesToDelete.forEach(resource -> {
             try {
-                resourceController.deleteResource(resource.getId());
+                resourceService.deleteResource(resource.getId());
             } catch (ResourceNotFoundException e) {
                 e.printStackTrace();
             }
         });
     }
 
-    public void deleteTransportByResourceType(Long idResourceType) {
-        List<Transport> transportsToDelete = transportController.getTransportsByIdResourceType(idResourceType);
+    private void deleteTransportByResourceType(Long idResourceType) {
+        List<Transport> transportsToDelete = transportService.getTransportsByIdResourceType(idResourceType);
 
         transportsToDelete.forEach(transport -> {
             try {
-                transportController.deleteTransport(transport.getId());
+                transportService.deleteTransport(transport.getId());
             } catch (ResourceNotFoundException e) {
                 e.printStackTrace();
             }

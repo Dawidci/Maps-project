@@ -1,63 +1,103 @@
 package org.zaleski.engineer.engineeringApp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.zaleski.engineer.engineeringApp.controller.DestinationController;
-import org.zaleski.engineer.engineeringApp.controller.ResourceController;
-import org.zaleski.engineer.engineeringApp.controller.RouteController;
+
 import org.zaleski.engineer.engineeringApp.exception.ResourceNotFoundException;
 import org.zaleski.engineer.engineeringApp.model.Destination;
 import org.zaleski.engineer.engineeringApp.model.Resource;
 import org.zaleski.engineer.engineeringApp.model.Route;
+import org.zaleski.engineer.engineeringApp.model.Warehouse;
+import org.zaleski.engineer.engineeringApp.repository.WarehouseRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class WarehouseService {
 
-    @Autowired
-    private ResourceController resourceController;
+    @Autowired private WarehouseRepository warehouseRepository;
+    @Autowired private ResourceService resourceService;
+    @Autowired private DestinationService destinationService;
+    @Autowired private RouteService routeService;
 
-    @Autowired
-    private DestinationController destinationController;
+    public List<Warehouse> getAllWarehouses() {
+        return warehouseRepository.findAll();
+    }
 
-    @Autowired
-    private RouteController routeController;
+    public ResponseEntity<Warehouse> getWarehouseById(Long id) throws ResourceNotFoundException {
+        Warehouse warehouse = warehouseRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Warehouse not found for this id :: " + id));
+        return ResponseEntity.ok().body(warehouse);
+    }
 
-    public void deleteResourcesByWarehouse(Long idWarehouse) {
-        List<Resource> resourcesToDelete = resourceController.getResourcesByIdWarehouse(idWarehouse);
+    public Warehouse createWarehouse(Warehouse warehouse) {
+        return warehouseRepository.save(warehouse);
+    }
+
+    public ResponseEntity<Warehouse> updateWarehouse(Long id, Warehouse warehouseDetails) throws ResourceNotFoundException {
+        Warehouse warehouse = warehouseRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Warehouse not found for this id :: " + id));
+
+        warehouse.setName(warehouseDetails.getName());
+        warehouse.setLatitude(warehouseDetails.getLatitude());
+        warehouse.setLongitude(warehouseDetails.getLongitude());
+        warehouse.setAirport(warehouseDetails.isAirport());
+        warehouse.setSeaport(warehouseDetails.isSeaport());
+
+        final Warehouse updatedWarehouse = warehouseRepository.save(warehouse);
+        return ResponseEntity.ok(updatedWarehouse);
+    }
+
+    public Map<String, Boolean> deleteWarehouse(Long id) throws ResourceNotFoundException {
+        Warehouse warehouse = warehouseRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Warehouse not found for this id :: " + id));
+
+        warehouseRepository.delete(warehouse);
+        this.deleteDestinationsByWarehouse(id);
+        this.deleteResourcesByWarehouse(id);
+        this.deleteRoutesByWarehouse(id);
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
+    }
+
+    private void deleteResourcesByWarehouse(Long idWarehouse) {
+        List<Resource> resourcesToDelete = resourceService.getResourcesByIdWarehouse(idWarehouse);
 
         resourcesToDelete.forEach(resource -> {
             try {
-                resourceController.deleteResource(resource.getId());
+                resourceService.deleteResource(resource.getId());
             } catch (ResourceNotFoundException e) {
                 e.printStackTrace();
             }
         });
     }
 
-    public void deleteDestinationsByWarehouse(Long idWarehouse) {
-        List<Destination> destinationsToDelete = destinationController.getDestinationsByIdWarehouse(idWarehouse);
+    private void deleteDestinationsByWarehouse(Long idWarehouse) {
+        List<Destination> destinationsToDelete = destinationService.getDestinationsByIdWarehouse(idWarehouse);
 
         destinationsToDelete.forEach(destination -> {
             try {
-                destinationController.deleteDestination(destination.getId());
+                destinationService.deleteDestination(destination.getId());
             } catch (ResourceNotFoundException e) {
                 e.printStackTrace();
             }
         });
     }
 
-    public void deleteRoutesByWarehouse(Long idWarehouse) {
-        List<Route> routesToDelete = routeController.getRoutesByIdFirstWarehouse(idWarehouse);
+    private void deleteRoutesByWarehouse(Long idWarehouse) {
+        List<Route> routesToDelete = routeService.getRoutesByIdFirstWarehouse(idWarehouse);
 
         routesToDelete.forEach(route -> {
             try {
-                routeController.deleteRoute(route.getId());
+                routeService.deleteRoute(route.getId());
             } catch (ResourceNotFoundException e) {
                 e.printStackTrace();
             }
         });
     }
-
 }

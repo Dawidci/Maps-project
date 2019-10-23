@@ -5,10 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.zaleski.engineer.engineeringApp.exception.ResourceNotFoundException;
 import org.zaleski.engineer.engineeringApp.model.Resource;
-import org.zaleski.engineer.engineeringApp.repository.ResourceRepository;
+import org.zaleski.engineer.engineeringApp.service.ResourceService;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,78 +16,51 @@ import java.util.Map;
 @RequestMapping("/resources")
 public class ResourceController {
 
-    @Autowired
-    private ResourceRepository resourceRepository;
+    @Autowired private ResourceService resourceService;
 
     @GetMapping("")
     public List<Resource> getAllResources() {
-        return resourceRepository.findAll();
+        return resourceService.getAllResources();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Resource> getResourceById(@PathVariable(value = "id") Long id)
             throws ResourceNotFoundException {
-        Resource resource = resourceRepository
-                .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Warehouse not found for this id :: " + id));
-
-        return ResponseEntity.ok().body(resource);
+        return resourceService.getResourceById(id);
     }
 
     @GetMapping("/warehouse/{idWarehouse}")
     public List<Resource> getResourcesByIdWarehouse(@PathVariable(value = "idWarehouse") Long idWarehouse) {
-        List<Resource> resources = resourceRepository.findByIdWarehouse(idWarehouse);
-        return resources;
+        return resourceService.getResourcesByIdWarehouse(idWarehouse);
     }
 
     @GetMapping("/resource-type/{idResourceType}")
     public List<Resource> getResourcesByIdResourceType(@PathVariable(value = "idResourceType") Long idResourceType) {
-        List<Resource> resources = resourceRepository.findByIdResourceType(idResourceType);
-        return resources;
+        return resourceService.getResourcesByIdResourceType(idResourceType);
     }
 
     @GetMapping("/warehouse/{idWarehouse}/resource-type/{idResourceType}")
     public ResponseEntity<Resource> getResourceByIdWarehouseAndIdResourceType(
             @PathVariable(value = "idWarehouse") int idWarehouse,
             @PathVariable(value = "idResourceType") int idResourceType) {
-
-        Resource resource = resourceRepository.findByIdWarehouseAndIdResourceType(idWarehouse, idResourceType);
-        return ResponseEntity.ok().body(resource);
+        return resourceService.getResourceByIdWarehouseAndIdResourceType(idWarehouse, idResourceType);
     }
 
     @PostMapping("")
     public Resource createResource(@Valid @RequestBody Resource resource) {
-        return resourceRepository.save(resource);
+        return resourceService.createResource(resource);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Resource> updateResource(@PathVariable(value = "id") Long id,
                                                      @Valid @RequestBody Resource resourceDetails)
             throws ResourceNotFoundException {
-        Resource resource = resourceRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Resource not found for this id :: " + id));
-
-        resource.setIdResourceType(resourceDetails.getIdResourceType());
-        resource.setIdWarehouse(resourceDetails.getIdWarehouse());
-        resource.setQuantity(resourceDetails.getQuantity());
-
-        final Resource updatedResource = resourceRepository.save(resource);
-
-        return ResponseEntity.ok(updatedResource);
+        return resourceService.updateResource(id, resourceDetails);
     }
 
     @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteResource(@PathVariable(value = "id") Long id)
             throws ResourceNotFoundException {
-
-        Resource resource = resourceRepository
-                .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Resource not found for this id :: " + id));
-
-        resourceRepository.delete(resource);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-
-        return response;
+        return resourceService.deleteResource(id);
     }
 }
