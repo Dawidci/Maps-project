@@ -13,10 +13,14 @@ public class ResourceType {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "volume", nullable = false)
+    private int volume;
+
     public ResourceType() {}
 
     public ResourceType(String name) {
         this.name = name;
+        this.volume = volume;
     }
 
     public long getId() {
@@ -35,11 +39,20 @@ public class ResourceType {
         this.name = name;
     }
 
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
     @Override
     public String toString() {
-        return "Route{" +
+        return "ResourceType{" +
                 "id=" + id +
-                ", name='" + name +
+                ", name='" + name + '\'' +
+                ", volume=" + volume +
                 '}';
     }
 }

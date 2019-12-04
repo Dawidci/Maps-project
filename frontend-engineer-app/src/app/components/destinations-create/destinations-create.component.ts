@@ -93,11 +93,26 @@ export class DestinationsCreateComponent implements OnInit {
       .subscribe(warehouse => this.deleteWarehouseFromSelectList(warehouse),error => console.log(error));
   }
 
-  onSubmit() {
-    this.computeOrderService.computeDistance(this.chosenWarehouses);
-    this.destinations = this.computeOrderService.computeOrder(this.destinations);
-    this.createDestinations();
-    this.gotoList();
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async onSubmit() {
+    this.resourceService.getResourceByIdWarehouseAndIdResourceType(this.chosenWarehouses[0].id, this.transport.idResourceType)
+      .subscribe(resource => {
+        let chosenResource: Resource = resource;
+        if(chosenResource.quantity >= this.transport.quantity) {
+          this.computeOrderService.computeDistance(this.chosenWarehouses);
+          this.destinations = this.computeOrderService.computeOrder(this.destinations);
+          this.createDestinations();
+          this.createTransport(this.transport);
+          this.gotoList();
+        } else {
+          alert("Not enough resources\n" +
+            "You need: " + this.transport.quantity + "\n" +
+            "Total quantity: " + chosenResource.quantity);
+        }
+    }, error => console.log(error));
   }
 
   createDestinations() {
@@ -186,7 +201,7 @@ export class DestinationsCreateComponent implements OnInit {
 
   saveByResource() {
     this.fillAllDestinationsArray();
-    this.createTransport();
+    this.createTransport(this.transport);
   }
 
   fillAllDestinationsArray() {
@@ -219,7 +234,14 @@ export class DestinationsCreateComponent implements OnInit {
     this.gotoList();
   }
 
-  createTransport() {
-    this.transportService.createTransport(this.transport).subscribe(error => console.log(error));
+  createTransport(transport) {
+    const truckVolume: number = 1000;
+
+    this.resourceTypeService.getResourceType(transport.idResourceType).subscribe(type => {
+      let resourceType: ResourceType;
+      resourceType = type;
+      transport.noTrucks = Math.ceil(resourceType.volume * transport.quantity / truckVolume);
+      this.transportService.createTransport(transport).subscribe(error => console.log(error));
+    },error => console.log(error));
   }
 }

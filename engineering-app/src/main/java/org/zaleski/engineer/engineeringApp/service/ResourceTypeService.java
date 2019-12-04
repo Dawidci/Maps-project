@@ -42,6 +42,7 @@ public class ResourceTypeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Resource Type not found for this id :: " + id));
 
         resourceType.setName(resourceTypeDetails.getName());
+        resourceType.setVolume(resourceTypeDetails.getVolume());
         final ResourceType updatedResourceType = resourceTypeRepository.save(resourceType);
         return ResponseEntity.ok(updatedResourceType);
     }

@@ -56,9 +56,7 @@ export class MapService {
     marker.bindPopup("ID: " + warehouse.id.toString() + "<br>" +
       "Name: " + warehouse.name + "<br>" +
       "Latitude: " + warehouse.latitude.toString() + "<br>" +
-      "Longitude: " + warehouse.longitude.toString() + "<br>" +
-      "Seaport: " + warehouse.airport.toString() + "<br>" +
-      "Airport: " + warehouse.seaport.toString() + "<br>");
+      "Longitude: " + warehouse.longitude.toString() + "<br>");
   }
 
   addWarehouse(warehouse: Warehouse) {

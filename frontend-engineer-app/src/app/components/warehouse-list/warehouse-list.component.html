@@ -15,8 +15,6 @@
         <th>Name</th>
         <th>Latitude</th>
         <th>Longitude</th>
-        <th>Airport</th>
-        <th>Seaport</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -27,8 +25,6 @@
         <td>{{warehouse.name}}</td>
         <td>{{warehouse.latitude}}</td>
         <td>{{warehouse.longitude}}</td>
-        <td>{{warehouse.airport}}</td>
-        <td>{{warehouse.seaport}}</td>
         <td>
           <button (click)="deleteWarehouse(warehouse.id)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
           <button (click)="updateWarehouse(warehouse.id)" class="btn btn-warning" style="margin-left: 5px">Update</button>

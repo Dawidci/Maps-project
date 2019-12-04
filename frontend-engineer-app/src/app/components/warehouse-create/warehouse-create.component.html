@@ -22,32 +22,6 @@
       <input type="text" formControlName="longitude" [(ngModel)]="warehouse.longitude" class="form-control" id="longitude">
     </div>
 
-    <div class="form-group">
-      <label>Airport: </label>
-      <div class="custom-control custom-radio">
-        <input id="trueAirport" type="radio" class="custom-control-input" name="airport" formControlName="airport" value="true" [(ngModel)]="warehouse.airport">
-        <label class="custom-control-label" for="trueAirport">Yes</label>
-      </div>
-
-      <div class="custom-control custom-radio">
-        <input id="falseAirport" type="radio" class="custom-control-input" name="airport" formControlName="airport" value="false" [(ngModel)]="warehouse.airport">
-        <label class="custom-control-label" for="falseAirport">No</label>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Seaport: </label>
-      <div class="custom-control custom-radio">
-        <input id="trueSeaport" type="radio" class="custom-control-input" name="seaport" formControlName="seaport" value="true" [(ngModel)]="warehouse.seaport">
-        <label class="custom-control-label" for="trueSeaport">Yes</label>
-      </div>
-
-      <div class="custom-control custom-radio">
-        <input id="falseSeaport" type="radio" class="custom-control-input" name="seaport" formControlName="seaport" value="false" [(ngModel)]="warehouse.seaport">
-        <label class="custom-control-label" for="falseSeaport">No</label>
-      </div>
-    </div>
-
     <button type="submit" [disabled]="!warehouseForm.valid" class="btn btn-success">Submit</button>
   </form>
 </div>

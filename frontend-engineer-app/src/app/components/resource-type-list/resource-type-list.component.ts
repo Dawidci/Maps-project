@@ -53,7 +53,7 @@ export class ResourceTypeListComponent implements OnInit {
   addResourceType() {
     this.resourceTypeService.createResourceType(this.newResourceType)
       .subscribe(() => {
-        this.newResourceType.name = '';
+        this.newResourceType = new ResourceType();
         this.ngOnInit();
       },error => console.log(error));
   }

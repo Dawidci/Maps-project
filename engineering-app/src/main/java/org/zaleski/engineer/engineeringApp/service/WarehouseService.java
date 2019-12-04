@@ -44,8 +44,6 @@ public class WarehouseService {
         warehouse.setName(warehouseDetails.getName());
         warehouse.setLatitude(warehouseDetails.getLatitude());
         warehouse.setLongitude(warehouseDetails.getLongitude());
-        warehouse.setAirport(warehouseDetails.isAirport());
-        warehouse.setSeaport(warehouseDetails.isSeaport());
 
         final Warehouse updatedWarehouse = warehouseRepository.save(warehouse);
         return ResponseEntity.ok(updatedWarehouse);

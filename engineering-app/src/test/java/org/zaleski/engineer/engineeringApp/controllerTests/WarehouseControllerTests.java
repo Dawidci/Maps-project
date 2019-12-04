@@ -34,7 +34,7 @@ public class WarehouseControllerTests {
 
     @Test
     public void getAllWarehouses() throws Exception {
-        Warehouse warehouse = new Warehouse("Warehouse", 14, 15, true, false);
+        Warehouse warehouse = new Warehouse("Warehouse", 14, 15);
         List<Warehouse> warehouses = Arrays.asList(warehouse);
         given(warehouseController.getAllWarehouses()).willReturn(warehouses);
 
@@ -49,7 +49,7 @@ public class WarehouseControllerTests {
     @Test
     public void createWarehouse() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        Warehouse warehouse = new Warehouse("Warehouse", 14, 15, true, false);
+        Warehouse warehouse = new Warehouse("Warehouse", 14, 15);
         String jsonString = mapper.writeValueAsString(warehouse);
 
         mvc.perform(post("/warehouses")
@@ -68,7 +68,7 @@ public class WarehouseControllerTests {
     @Test
     public void updateWarehouse() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        Warehouse warehouse = new Warehouse("Warehouse", 14, 15, true, false);
+        Warehouse warehouse = new Warehouse("Warehouse", 14, 15);
         String jsonString = mapper.writeValueAsString(warehouse);
 
         mvc.perform(put("/warehouses/0")

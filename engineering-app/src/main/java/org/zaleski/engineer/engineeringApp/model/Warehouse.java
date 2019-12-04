@@ -19,21 +19,12 @@ public class Warehouse {
     @Column(name = "longitude", nullable = false)
     private double longitude;
 
-    @Column(name = "airport", nullable = false)
-    private boolean airport;
-
-    @Column(name = "seaport", nullable = false )
-    private boolean seaport;
-
     public Warehouse() {}
 
-    public Warehouse(String name, double latitude, double longitude,
-                     boolean airport, boolean seaport) {
+    public Warehouse(String name, double latitude, double longitude) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.airport = airport;
-        this.seaport = seaport;
     }
 
     public long getId() {
@@ -68,22 +59,6 @@ public class Warehouse {
         this.longitude = longitude;
     }
 
-    public boolean isAirport() {
-        return airport;
-    }
-
-    public void setAirport(boolean airport) {
-        this.airport = airport;
-    }
-
-    public boolean isSeaport() {
-        return seaport;
-    }
-
-    public void setSeaport(boolean seaport) {
-        this.seaport = seaport;
-    }
-
     @Override
     public String toString() {
         return "Warehouse{" +
@@ -91,8 +66,6 @@ public class Warehouse {
                 ", name='" + name + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", airport=" + airport +
-                ", seaport=" + seaport +
                 '}';
     }
 }

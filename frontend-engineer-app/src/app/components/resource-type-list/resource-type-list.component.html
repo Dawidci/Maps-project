@@ -12,6 +12,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>New Name</th>
+        <th>Volume</th>
         <th>Quantity</th>
         <th>Actions</th>
       </tr>
@@ -22,6 +23,7 @@
         <td>{{resourceType.id}}</td>
         <td>{{resourceType.name}}</td>
         <td><input type="text" [(ngModel)]="newNameOfResourceType[index]" class="form-control"></td>
+        <td>{{resourceType.volume}}</td>
         <td>{{resourceTypeQuantity[index]}}</td>
         <td>
           <button (click)="deleteResourceType(resourceType.id)" class="btn btn-danger" style="margin-left: 5px">Delete</button>
@@ -31,8 +33,9 @@
 
       <tr>
         <td></td>
-        <td></td>
         <td><input type="text" [(ngModel)]="newResourceType.name" class="form-control"></td>
+        <td></td>
+        <td><input type="number" [(ngModel)]="newResourceType.volume" class="form-control"></td>
         <td></td>
         <td><button (click)="addResourceType()" class="btn btn-secondary" style="margin-left: 5px">Add Resource Type</button></td>
       </tr>

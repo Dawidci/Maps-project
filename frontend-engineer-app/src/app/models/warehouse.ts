@@ -3,6 +3,4 @@ export class Warehouse {
   name: string;
   latitude: number;
   longitude: number;
-  airport: boolean;
-  seaport: boolean;
 }

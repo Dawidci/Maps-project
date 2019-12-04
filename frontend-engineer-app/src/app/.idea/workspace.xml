@@ -63,7 +63,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -136,6 +136,13 @@
       <workItem from="1571723238662" duration="21327000" />
       <workItem from="1571751679968" duration="576000" />
       <workItem from="1571825403135" duration="2174000" />
+      <workItem from="1574107395278" duration="4285000" />
+      <workItem from="1574174087427" duration="75000" />
+      <workItem from="1574773667850" duration="43000" />
+      <workItem from="1574773766590" duration="1318000" />
+      <workItem from="1574793046512" duration="728000" />
+      <workItem from="1575061961995" duration="5152000" />
+      <workItem from="1575113626321" duration="5071000" />
     </task>
     <servers />
   </component>

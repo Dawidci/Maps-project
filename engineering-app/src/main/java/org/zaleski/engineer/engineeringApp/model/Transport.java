@@ -19,12 +19,16 @@ public class Transport {
     @Column(name = "quantity", nullable = false)
     private long quantity;
 
+    @Column(name = "no_trucks", nullable = false)
+    private int noTrucks;
+
     public Transport() {}
 
-    public Transport(long idRoute, long idResourceType, long quantity) {
+    public Transport(long idRoute, long idResourceType, long quantity, int noTrucks) {
         this.idRoute = idRoute;
         this.idResourceType = idResourceType;
         this.quantity = quantity;
+        this.noTrucks = noTrucks;
     }
 
     public long getId() {
@@ -59,13 +63,22 @@ public class Transport {
         this.quantity = quantity;
     }
 
+    public int getNoTrucks() {
+        return noTrucks;
+    }
+
+    public void setNoTrucks(int noTrucks) {
+        this.noTrucks = noTrucks;
+    }
+
     @Override
     public String toString() {
-        return "Resource{" +
+        return "Transport{" +
                 "id=" + id +
-                ", idResourceType=" + idResourceType +
                 ", idRoute=" + idRoute +
+                ", idResourceType=" + idResourceType +
                 ", quantity=" + quantity +
+                ", noTrucks=" + noTrucks +
                 '}';
     }
 }

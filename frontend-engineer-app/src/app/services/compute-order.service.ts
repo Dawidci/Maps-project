@@ -30,6 +30,8 @@ export class ComputeOrderService {
 
   computeDistance(warehouses) {
     warehouses = Array.from(warehouses);
+    console.log("WAREHOUSES INSIDE: ");
+    console.log(warehouses);
     for(let i = 0; i < warehouses.length; i++) {
       this.distance[i] = [];
       for (let j = 0; j < warehouses.length; j++) {
@@ -38,6 +40,11 @@ export class ComputeOrderService {
             warehouses[i].longitude, warehouses[j].latitude, warehouses[j].longitude);
         }
       }
+    }
+
+    for(let i = 0; i < this.distance.length; i++) {
+      console.log("DISTANCES");
+      console.log(this.distance[i]);
     }
   }
 
@@ -64,6 +71,7 @@ export class ComputeOrderService {
    computeOrder(destinations) {
     let start = 0;
     this.totalDistance = 0;
+    let newStart = 0;
 
     for(let i = 0; i < this.distance.length; i++) {
       let maxDistance = 1e8;
@@ -71,9 +79,11 @@ export class ComputeOrderService {
       this.distance.forEach(distance => delete distance[start]);
 
       for(let j = 0; j < this.distance.length; j++) {
+        console.log("START: " + start + " j: " + j);
+        console.log("MAX DISTANCE: " + this.distance[start][j]);
         if(this.distance[start][j] < maxDistance) {
           maxDistance = this.distance[start][j];
-          start = j;
+          newStart = j;
         }
       }
 
@@ -81,8 +91,11 @@ export class ComputeOrderService {
         maxDistance = 0;
       }
 
+      start = newStart;
       this.totalDistance += maxDistance;
     }
-     return destinations;
+    console.log("DESTINATIONS");
+    console.log(destinations);
+    return destinations;
   }
 }

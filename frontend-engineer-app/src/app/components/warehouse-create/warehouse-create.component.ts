@@ -17,9 +17,7 @@ export class WarehouseCreateComponent implements OnInit {
   warehouseForm = this.fb.group({
     name: ['', Validators.required],
     latitude: [{value: '', disabled: true}, [Validators.required, Validators.pattern("^[-]?[1-8]?[0-9]([.][0-9]+)?$")]],
-    longitude: [{value: '', disabled: true}, [Validators.required, Validators.pattern("^([-]?)(([1-9]?[0-9])|([1][0-7][0-9]))([.][0-9]+)?$")]], //180
-    airport: ['', Validators.required],
-    seaport: ['', Validators.required]
+    longitude: [{value: '', disabled: true}, [Validators.required, Validators.pattern("^([-]?)(([1-9]?[0-9])|([1][0-7][0-9]))([.][0-9]+)?$")]] //180
   });
 
   constructor(private warehouseService: WarehouseService,
