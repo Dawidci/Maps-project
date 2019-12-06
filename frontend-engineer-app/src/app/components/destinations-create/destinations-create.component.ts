@@ -97,7 +97,7 @@ export class DestinationsCreateComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  async onSubmit() {
+  async deliverResources() {
     this.resourceService.getResourceByIdWarehouseAndIdResourceType(this.chosenWarehouses[0].id, this.transport.idResourceType)
       .subscribe(resource => {
         let chosenResource: Resource = resource;
@@ -105,6 +105,7 @@ export class DestinationsCreateComponent implements OnInit {
           this.computeOrderService.computeDistance(this.chosenWarehouses);
           this.destinations = this.computeOrderService.computeOrder(this.destinations);
           this.createDestinations();
+          this.transport.type = "Deliver";
           this.createTransport(this.transport);
           this.gotoList();
         } else {
@@ -125,7 +126,7 @@ export class DestinationsCreateComponent implements OnInit {
     this.router.navigate(['/routes']);
   }
 
-  createRouteByResource() {
+  gatherResources() {
     this.resourceTypeService.getResourceType(this.transport.idResourceType)
       .subscribe(type => this.getResourcesByType(type),error => console.log(error));
   }
@@ -201,6 +202,7 @@ export class DestinationsCreateComponent implements OnInit {
 
   saveByResource() {
     this.fillAllDestinationsArray();
+    this.transport.type = "Gather";
     this.createTransport(this.transport);
   }
 

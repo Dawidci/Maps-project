@@ -13,7 +13,7 @@
     </div>
 
     <div class="form-group">
-      <label for="id_first_warehouse">First Warehouse: </label>
+      <label for="id_first_warehouse">Key warehouse: </label>
       <select formControlName="id_first_warehouse" [(ngModel)]="route.id_first_warehouse" class="form-control" id="id_first_warehouse">
         <option *ngFor="let warehouse of warehouses | async" [ngValue]="warehouse.id">{{warehouse.name}}</option>
       </select>

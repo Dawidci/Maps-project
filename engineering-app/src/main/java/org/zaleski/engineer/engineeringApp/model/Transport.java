@@ -22,13 +22,17 @@ public class Transport {
     @Column(name = "no_trucks", nullable = false)
     private int noTrucks;
 
+    @Column(name = "type", nullable = false)
+    private String type;
+
     public Transport() {}
 
-    public Transport(long idRoute, long idResourceType, long quantity, int noTrucks) {
+    public Transport(long idRoute, long idResourceType, long quantity, int noTrucks, String type) {
         this.idRoute = idRoute;
         this.idResourceType = idResourceType;
         this.quantity = quantity;
         this.noTrucks = noTrucks;
+        this.type = type;
     }
 
     public long getId() {
@@ -63,6 +67,14 @@ public class Transport {
         this.quantity = quantity;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public int getNoTrucks() {
         return noTrucks;
     }
@@ -79,6 +91,7 @@ public class Transport {
                 ", idResourceType=" + idResourceType +
                 ", quantity=" + quantity +
                 ", noTrucks=" + noTrucks +
+                ", type=" + type +
                 '}';
     }
 }

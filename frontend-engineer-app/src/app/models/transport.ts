@@ -4,4 +4,5 @@ export class Transport {
   idResourceType: number;
   quantity: number;
   noTrucks: number;
+  type: string;
 }

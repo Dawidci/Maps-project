@@ -48,6 +48,7 @@ public class TransportService {
         transport.setIdRoute(transportDetails.getIdRoute());
         transport.setQuantity(transportDetails.getQuantity());
         transport.setNoTrucks(transportDetails.getNoTrucks());
+        transport.setType(transportDetails.getType());
 
         final Transport updatedTransport = transportRepository.save(transport);
         return ResponseEntity.ok(updatedTransport);

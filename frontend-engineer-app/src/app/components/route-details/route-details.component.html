@@ -5,17 +5,18 @@
 <hr>
 
 <div *ngIf="routeName">
-  <div><label><b>Route Name: </b></label> {{routeName}}</div>
-  <div><label><b>First Warehouse: </b></label> {{firstWarehouseName}}</div>
+  <div><label><b>Route name:</b></label> {{routeName}}</div>
+  <div><label><b>Key warehouse:</b></label> {{firstWarehouseName}}</div>
 </div>
 
 <br>
 
 <div *ngIf="transport && resourceType">
   <div><h4>Transport</h4></div>
-  <div><label><b>Resource Type: </b></label> {{resourceType.name}}</div>
-  <div><label><b>Quantity: </b></label> {{transport.quantity}}</div>
-  <div><label><b>Number of trucks: </b></label> {{transport.noTrucks}}</div>
+  <div><label><b>Type:</b></label> {{transport.type}}</div>
+  <div><label><b>Resource Type:</b></label> {{resourceType.name}}</div>
+  <div><label><b>Quantity:</b></label> {{transport.quantity}}</div>
+  <div><label><b>Number of trucks:</b></label> {{transport.noTrucks}}</div>
 </div>
 
 <br>

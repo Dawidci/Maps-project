@@ -8,10 +8,10 @@
 </div>
 <hr>
 
-<h3>Choose resource and quantity</h3>
+<h3>Gather resources to chosen warehouse</h3>
 
 <div style="width: 400px;">
-  <form [formGroup]="destinationForm" (ngSubmit)="createRouteByResource()">
+  <form [formGroup]="destinationForm" (ngSubmit)="gatherResources()">
 
     <div class="form-group">
       <label for="resource">Pick resource: </label>
@@ -30,10 +30,10 @@
 </div>
 <hr>
 
-<h3>Choose destinations</h3>
+<h3>Deliver resources from chosen warehouse</h3>
 
 <div style="width: 400px;">
-  <form [formGroup]="destinationForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="destinationForm" (ngSubmit)="deliverResources()">
 
     <div class="form-group">
       <label>New Destination: </label>

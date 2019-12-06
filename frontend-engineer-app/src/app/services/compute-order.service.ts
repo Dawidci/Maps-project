@@ -13,6 +13,7 @@ export class ComputeOrderService {
   computeAllOrder(allDestinations, allWarehouses) {
     let maxTotalDistance = 1e8;
     let indexOfShortestRoute = 0;
+    let finalDestinationsList = null;
 
     for(let i = 0; i < allDestinations.length; i++) {
 
@@ -24,6 +25,12 @@ export class ComputeOrderService {
         indexOfShortestRoute = i;
       }
     }
+
+    finalDestinationsList = allDestinations[indexOfShortestRoute];
+
+    finalDestinationsList.forEach(destination => {
+      destination.order = finalDestinationsList.length - destination.order + 1;
+    });
 
     return allDestinations[indexOfShortestRoute];
   }
