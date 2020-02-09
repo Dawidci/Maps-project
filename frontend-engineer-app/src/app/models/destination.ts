@@ -3,4 +3,5 @@ export class Destination {
   id_route: number;
   id_warehouse: number;
   order: number;
+  quantity: number;
 }

@@ -41,7 +41,7 @@ export class RouteListComponent implements OnInit {
 
   deleteRoute(id: number) {
     this.routeService.deleteRoute(id)
-      .subscribe(() => this.ngOnInit(), error => console.log(error));
+      .subscribe(() => this.loadRoutes(), error => console.log(error));
   }
 
   routeDetails(id: number){

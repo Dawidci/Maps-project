@@ -2,58 +2,81 @@
 
 <div id="map"></div><br>
 
-<div style="width: 400px;">
-  <label>Chosen warehouse: </label>
-  <div>{{chosenWarehouses[0].name}}</div>
+<h2 class="text-center">Chosen warehouse: {{chosenWarehouses[0].name}}</h2>
+
+<div class="text-center" *ngIf="resourcesInKeyWarehouse[0] != null">
+  <label>Resources: </label>
+  <div *ngFor="let resource of resourcesInKeyWarehouse; index as i">
+    {{i+1}}. {{resourceNames[i].name}} - {{resource.quantity}}
+  </div>
 </div>
 <hr>
 
-<h3>Gather resources to chosen warehouse</h3>
-
-<div style="width: 400px;">
-  <form [formGroup]="destinationForm" (ngSubmit)="gatherResources()">
-
-    <div class="form-group">
-      <label for="resource">Pick resource: </label>
-      <select formControlName="resource" [(ngModel)]="transport.idResourceType" class="form-control" id="resource">
-        <option *ngFor="let type of resourceTypes | async" [ngValue]="type.id">{{type.name}}</option>
-      </select>
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <form [formGroup]="destinationForm">
+        <div class="form-group">
+          <label for="resource"><h3>Pick resource type: </h3></label>
+          <select formControlName="resource" [(ngModel)]="transport.idResourceType" class="form-control" id="resource">
+            <option *ngFor="let type of resourceTypes | async" [ngValue]="type.id">{{type.name}}</option>
+          </select>
+        </div>
+      </form>
     </div>
-
-    <div class="form-group">
-      <label for="quantity">Choose quantity: </label>
-      <input type="number" formControlName="quantity" [(ngModel)]="transport.quantity" class="form-control" id="quantity">
-    </div>
-
-    <button type="submit" class="btn btn-success">Submit</button>
-  </form>
+    <div class="col"></div>
+  </div>
 </div>
 <hr>
 
-<h3>Deliver resources from chosen warehouse</h3>
+<div class="container" *ngIf="transport.idResourceType != null">
+  <div class="row">
+    <div class="col">
+      <h3>Gather resources in chosen warehouse</h3>
 
-<div style="width: 400px;">
-  <form [formGroup]="destinationForm" (ngSubmit)="deliverResources()">
+      <form [formGroup]="destinationForm" (ngSubmit)="gatherResources()">
 
-    <div class="form-group">
-      <label>New Destination: </label>
-      <select formControlName="newDestination" [(ngModel)]="destinationToAdd.id_warehouse" class="form-control">
-        <option *ngFor="let warehouse of warehousesToSelect" [ngValue]="warehouse.id">{{warehouse.name}}</option>
-      </select>
+        <div class="form-group">
+          <label for="quantity">Choose quantity: </label>
+          <input type="number" formControlName="quantity" [(ngModel)]="transport.quantity" class="form-control" id="quantity">
+        </div>
+
+        <button type="submit" class="btn btn-success" *ngIf="transport.quantity > 0">Submit</button>
+      </form>
     </div>
 
-    <div class="form-group" *ngIf="destinationToAdd.id_warehouse != null && destinationToAdd.id_warehouse != 0">
-      <button (click)="addDestinationToList()" type="button" [disabled]="!destinationForm.valid" class="btn btn-primary">Add new destination</button>
-    </div>
+    <div class="col" *ngIf="resourcesInKeyWarehouse[0] != null">
+      <h3>Deliver resources from chosen warehouse</h3>
 
-    <div *ngIf="destinations.length > 0">
-      <label>Chosen destinations: </label>
-      <div *ngFor="let destination of destinations; index as i">
-        {{i+1}}. {{chosenWarehouses[i].name}}
-      </div>
-    </div>
-    <br>
+      <form [formGroup]="destinationForm" (ngSubmit)="deliverResources()">
 
-    <button type="submit" class="btn btn-success">Submit</button>
-  </form>
+        <div class="form-group">
+          <label>New Destination: </label>
+          <select formControlName="newDestination" [(ngModel)]="destinationToAdd.id_warehouse" class="form-control">
+            <option *ngFor="let warehouse of warehousesToSelect" [ngValue]="warehouse.id">{{warehouse.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="destinationQuantity">Choose quantity: </label>
+          <input type="number" formControlName="quantity" [(ngModel)]="destinationToAdd.quantity" class="form-control" id="destinationQuantity">
+        </div>
+
+        <div class="form-group" *ngIf="destinationToAdd.id_warehouse != null && destinationToAdd.id_warehouse != 0  && destinationToAdd.quantity > 0">
+          <button (click)="addDestinationToList()" type="button" [disabled]="!destinationForm.valid" class="btn btn-primary">Add new destination</button>
+        </div>
+
+        <div *ngIf="destinations.length > 0">
+          <label>Chosen destinations: </label>
+          <div *ngFor="let destination of destinations; index as i">
+            {{i+1}}. {{chosenWarehouses[i].name}} <span *ngIf="quantityMatrix[i] > 0">- quantity to deliver: {{quantityMatrix[i]}}</span>
+          </div>
+        </div>
+        <br>
+
+        <button type="submit" class="btn btn-success" *ngIf="destinations.length > 1">Submit</button>
+      </form>
+    </div>
+  </div>
 </div>

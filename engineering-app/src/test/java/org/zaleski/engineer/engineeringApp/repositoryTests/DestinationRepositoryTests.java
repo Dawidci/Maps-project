@@ -26,7 +26,7 @@ public class DestinationRepositoryTests {
     @Test
     public void repositoryFindByIdRoute() {
 
-        Destination first = new Destination(1, 1, 1);
+        Destination first = new Destination(1, 1, 1, 1);
         List<Destination> destinations = new ArrayList<>();
         destinations.add(first);
 

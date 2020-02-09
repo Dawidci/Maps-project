@@ -16,7 +16,6 @@
       <change beforePath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/service/WarehouseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../engineering-app/src/main/java/org/zaleski/engineer/engineeringApp/service/WarehouseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,6 +49,11 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -72,15 +76,15 @@
       <recent name="C:\Projekty\Fullstack\frontend-engineer-app\src\app\models" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="ServiceViewManager">
+    <option name="viewStates">
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
       </list>
     </option>
   </component>
@@ -144,6 +148,22 @@
       <workItem from="1575061961995" duration="5152000" />
       <workItem from="1575113626321" duration="5071000" />
       <workItem from="1575486500620" duration="4536000" />
+      <workItem from="1575675633929" duration="6295000" />
+      <workItem from="1575709039107" duration="3514000" />
+      <workItem from="1575805500429" duration="449000" />
+      <workItem from="1575806167712" duration="2569000" />
+      <workItem from="1576089600686" duration="5926000" />
+      <workItem from="1576407949363" duration="9546000" />
+      <workItem from="1576515173456" duration="1453000" />
+      <workItem from="1576589787495" duration="15000" />
+      <workItem from="1577116711407" duration="1037000" />
+      <workItem from="1577118354121" duration="5918000" />
+      <workItem from="1577630381816" duration="5000" />
+      <workItem from="1578428232309" duration="21000" />
+      <workItem from="1578428324452" duration="94000" />
+      <workItem from="1578433603203" duration="257000" />
+      <workItem from="1578434940229" duration="623000" />
+      <workItem from="1581256070746" duration="9000" />
     </task>
     <servers />
   </component>
@@ -176,5 +196,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="552" y="178" key="#Notifications" timestamp="1575806216373">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1575806216373" />
+    <state x="656" y="257" width="607" height="526" key="find.popup" timestamp="1576515604214">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="257" width="607" height="526" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1576515604214" />
   </component>
 </project>

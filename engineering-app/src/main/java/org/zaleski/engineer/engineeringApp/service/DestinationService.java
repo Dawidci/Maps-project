@@ -47,6 +47,7 @@ public class DestinationService {
         destination.setId_route(destinationDetails.getId_route());
         destination.setId_warehouse(destinationDetails.getId_warehouse());
         destination.setOrder(destinationDetails.getOrder());
+        destination.setQuantity(destinationDetails.getQuantity());
 
         final Destination updatedDestination = destinationRepository.save(destination);
         return ResponseEntity.ok(updatedDestination);

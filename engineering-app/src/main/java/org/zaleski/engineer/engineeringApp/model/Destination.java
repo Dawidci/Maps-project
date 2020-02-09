@@ -19,12 +19,16 @@ public class Destination {
     @Column(name = "destination_order", nullable = false)
     private long order;
 
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
+
     public Destination() {}
 
-    public Destination(long id_route, long id_warehouse, long order) {
+    public Destination(long id_route, long id_warehouse, long order, int quantity) {
         this.idRoute = id_route;
         this.idWarehouse = id_warehouse;
         this.order = order;
+        this.quantity = quantity;
     }
 
     public long getId() {
@@ -59,6 +63,14 @@ public class Destination {
         this.order = order;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return "Destination{" +
@@ -66,6 +78,7 @@ public class Destination {
                 ", id_route=" + idRoute +
                 ", id_warehouse=" + idWarehouse +
                 ", order=" + order +
+                ", quantity" + quantity +
                 '}';
     }
 }

@@ -40,7 +40,7 @@ export class RouteDetailsComponent implements OnInit {
     await this.reloadData();
     await this.loadRoute();
     await this.loadTransport();
-    await this.delay(250);
+    await this.delay(500);
     this.loadMap();
   }
 
@@ -50,7 +50,8 @@ export class RouteDetailsComponent implements OnInit {
           error => console.log(error));
   }
 
-  loadRoute() {
+  async loadRoute() {
+    await this.delay(100);
     this.routeService.getRoute(this.id)
       .subscribe(route => {
         this.routeName = route.name;

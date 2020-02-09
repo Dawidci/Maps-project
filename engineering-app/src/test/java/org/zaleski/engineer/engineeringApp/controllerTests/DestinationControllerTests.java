@@ -33,7 +33,7 @@ public class DestinationControllerTests {
 
     @Test
     public void getAllDestinations() throws Exception {
-        Destination destination = new Destination(1, 2, 3);
+        Destination destination = new Destination(1, 2, 3, 4);
         List<Destination> destinations = Arrays.asList(destination);
         given(destinationController.getAllDestinations()).willReturn(destinations);
 
@@ -47,7 +47,7 @@ public class DestinationControllerTests {
     @Test
     public void createDestination() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        Destination destination = new Destination(1, 2, 3);
+        Destination destination = new Destination(1, 2, 3, 4);
         String jsonString = mapper.writeValueAsString(destination);
 
         mvc.perform(post("/destinations")
@@ -66,7 +66,7 @@ public class DestinationControllerTests {
     @Test
     public void updateDestination() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        Destination destination = new Destination(1, 2, 3);
+        Destination destination = new Destination(1, 2, 3, 4);
         String jsonString = mapper.writeValueAsString(destination);
 
         mvc.perform(put("/destinations/0")
